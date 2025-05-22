@@ -10,6 +10,7 @@ import { submitContactForm } from "../actions"
 export default function ContactForm() {
   const [pending, setPending] = useState(false)
   const [message, setMessage] = useState("")
+  const [error, setError] = useState(false);
 
   async function handleSubmit(formData: FormData) {
     setPending(true)
