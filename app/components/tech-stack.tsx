@@ -1,41 +1,56 @@
-import { Card } from "@/components/ui/card"
-
-const technologies = [
-  {
-    category: "Frontend",
-    skills: ["React", "Next.js", "TypeScript", "TailwindCSS", "Redux", "GraphQL"],
-  },
-  {
-    category: "Backend",
-    skills: ["Node.js", "Express", "Python", "Django", "PostgreSQL", "MongoDB"],
-  },
-  {
-    category: "DevOps",
-    skills: ["Docker", "AWS", "CI/CD", "Git", "Linux", "Nginx"],
-  },
-  {
-    category: "Tools",
-    skills: ["VS Code", "Postman", "Figma", "Jest", "GitHub", "Vercel"],
-  },
-]
+import Image from 'next/image'
 
 export default function TechStack() {
+  const technologies = [
+    // First Row - Frontend & Core
+    [
+      { name: 'React', src: '/react.svg', darkMode: true },
+      { name: 'Next.js', src: '/next.svg', darkMode: true },
+      { name: 'TypeScript', src: '/typescript.svg', darkMode: true },
+      { name: 'TailwindCSS', src: '/tailwind.svg' },
+      { name: 'Git', src: '/git.svg', darkMode: true },
+      { name: 'Node.js', src: '/node.svg', darkMode: true }
+    ],
+    // Second Row - Backend & Languages
+    [
+      { name: 'MongoDB', src: '/mongodb.svg' },
+      { name: 'PostgreSQL', src: '/postgresql.svg' },
+      { name: 'Express.js', src: '/express.svg' },
+      { name: 'C++', src: '/cpp.svg' },
+      { name: 'Python', src: '/python.svg' },
+      { name: 'Firebase', src: '/firebase.svg' }
+    ]
+  ]
+
   return (
-    <div className="grid gap-6 md:grid-cols-2">
-      {technologies.map((tech) => (
-        <Card key={tech.category} className="p-6 bg-white dark:bg-background text-black dark:text-primary border border-border">
-          <h3 className="text-lg font-semibold mb-4 text-black dark:text-primary">{tech.category}</h3>
-          <div className="flex flex-wrap gap-2">
-            {tech.skills.map((skill) => (
-              <span
-                key={skill}
-                className="inline-flex items-center rounded-md bg-primary/10 dark:bg-primary/20 px-2 py-1 text-sm font-medium text-black dark:text-primary ring-1 ring-inset ring-primary/20"
-              >
-                {skill}
+    <div className="flex flex-col items-center gap-12">
+      {technologies.map((row, rowIndex) => (
+        <div 
+          key={rowIndex}
+          className="flex flex-wrap items-center justify-center gap-8 md:gap-16"
+        >
+          {row.map((tech) => (
+            <div
+              key={tech.name}
+              className="flex flex-col items-center gap-3 transition-transform hover:scale-110"
+            >
+              <div className="relative w-12 h-12 flex items-center justify-center">
+                <Image
+                  src={tech.src}
+                  alt={tech.name}
+                  width={48}
+                  height={48}
+                  className={`w-12 h-12 object-contain ${
+                    tech.darkMode ? 'dark:invert dark:brightness-175' : ''
+                  }`}
+                />
+              </div>
+              <span className="text-sm font-medium text-gray-800 dark:text-gray-200">
+                {tech.name}
               </span>
-            ))}
-          </div>
-        </Card>
+            </div>
+          ))}
+        </div>
       ))}
     </div>
   )

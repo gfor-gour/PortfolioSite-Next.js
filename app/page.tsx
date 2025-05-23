@@ -1,5 +1,7 @@
+'use client'
+
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, Twitter } from "lucide-react"
+import { Github, Linkedin, Mail, Twitter, MapPin, Phone, Facebook } from "lucide-react"
 import Link from "next/link"
 import ContactForm from "./components/contact-form"
 import ProjectCard from "./components/project-card"
@@ -8,7 +10,14 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import AnimatedBg from "@/components/animated-bg"
 import Image from "next/image" // For LeetCode logo
 
-export default function Page() {
+export default function Page(){
+  // Common style object to reuse across all contact cards
+  const glowingCardStyle = {
+    border: "2px solid rgba(139,92,246,1)",
+    boxShadow: "0 0 8px 2px rgba(139, 92, 246, 0.7), 0 0 4px 1px rgba(139, 92, 246, 0.5)",
+    background: "transparent",
+  }
+
   return (
     <div className="relative min-h-screen text-black dark:text-foreground">
       <AnimatedBg />
@@ -99,12 +108,17 @@ export default function Page() {
                     padding: "0.5rem 1rem",
                   }}
                 >
-                  <Link href="https://github.com" target="_blank">
-                    <Button variant="outline" size="lg" className="text-black dark:text-primary border-none bg-transparent shadow-none flex items-center justify-center">
+                  <Button 
+                    variant="outline" 
+                    size="lg" 
+                    className="text-black dark:text-primary border-none bg-transparent shadow-none flex items-center justify-center"
+                    asChild
+                  >
+                    <Link href="https://github.com/gfor-gour" target="_blank">
                       <Github className="h-7 w-7" />
                       <span className="sr-only">GitHub</span>
-                    </Button>
-                  </Link>
+                    </Link>
+                  </Button>
                   {/* <Link href="https://leetcode.com" target="_blank">
                     <Button variant="outline" size="lg" className="text-black dark:text-primary border-none bg-transparent shadow-none flex items-center justify-center">
                       <Image
@@ -117,19 +131,19 @@ export default function Page() {
                       <span className="sr-only">LeetCode</span>
                     </Button>
                   </Link> */}
-                  <Link href="https://linkedin.com" target="_blank">
+                  <Link href="https://www.linkedin.com/in/gour-gupal-talukder/" target="_blank">
                     <Button variant="outline" size="lg" className="text-black dark:text-primary border-none bg-transparent shadow-none flex items-center justify-center">
                       <Linkedin className="h-7 w-7" />
                       <span className="sr-only">LinkedIn</span>
                     </Button>
                   </Link>
-                  <Link href="https://twitter.com" target="_blank">
+                  <Link href="https://x.com/this_is_Gour" target="_blank">
                     <Button variant="outline" size="lg" className="text-black dark:text-primary border-none bg-transparent shadow-none flex items-center justify-center">
                       <Twitter className="h-7 w-7" />
                       <span className="sr-only">Twitter</span>
                     </Button>
                   </Link>
-                  <Link href="mailto:hello@example.com">
+                  <Link href="mailto:gourgupaltalukder@gmail.com">
                     <Button variant="outline" size="lg" className="text-black dark:text-primary border-none bg-transparent shadow-none flex items-center justify-center">
                       <Mail className="h-7 w-7" />
                       <span className="sr-only">Email</span>
@@ -198,9 +212,30 @@ export default function Page() {
                 </p>
               </div>
             </div>
-            {/* Right: Reserved for future picture (40%) */}
-            <div className="hidden md:flex w-full md:w-[40%] justify-end items-start pl-8 pt-2">
-              {/* Empty for now */}
+            {/* Right: Profile Picture (40%) */}
+            <div className="hidden md:flex w-full md:w-[40%] justify-end items-start pt-[4.5rem] pl-4">
+              <div className="relative w-[400px] h-[500px] mr-12">
+                <div
+                  className="absolute inset-0 rounded-2xl"
+                  style={{
+                    background: "radial-gradient(circle at center, rgba(139,92,246,0.15), transparent 70%)",
+                    filter: "blur(20px)",
+                    transform: "translateY(10px) scale(0.95)",
+                  }}
+                />
+                <Image
+                  src="/profile.png"
+                  alt="Gour Gupal Talukder"
+                  width={400}
+                  height={500}
+                  priority
+                  className="relative z-10 rounded-2xl object-cover"
+                  style={{
+                    boxShadow: "0 0 20px 4px rgba(139,92,246,0.5), 0 0 40px 8px rgba(139,92,246,0.3)", // Enhanced violet shadow
+                    objectPosition: "center 25%"
+                  }}
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -256,8 +291,8 @@ export default function Page() {
 
         <section className="py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter text-black dark:text-primary sm:text-4xl md:text-5xl mb-12 text-center">
-              Tech Stack
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
+              Technical <span className="text-violet-600 dark:text-violet-400">Skills</span>
             </h2>
             <div className="text-black dark:text-primary">
               <TechStack />
@@ -267,12 +302,136 @@ export default function Page() {
 
         <section id="contact" className="py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
-            <div className="mx-auto max-w-2xl">
+            <div className="mx-auto max-w-3xl">
               <h2 className="text-3xl font-bold tracking-tighter text-black dark:text-primary sm:text-4xl md:text-5xl mb-12 text-center">
-                Get in Touch
+                Let's <span className="text-violet-600 dark:text-violet-400">Connect</span>
               </h2>
-              <div className="text-black dark:text-primary">
-                <ContactForm />
+              
+              <div className="flex flex-col items-center space-y-8">
+                {/* Contact Info Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                  {/* Location Card */}
+                  <div 
+                    className="p-6 rounded-xl backdrop-blur transition-all duration-300 hover:scale-105"
+                    style={glowingCardStyle}
+                  >
+                    <div className="flex items-center gap-4">
+                      <MapPin className="w-6 h-6 text-violet-600 dark:text-violet-400" />
+                      <div>
+                        <h3 className="font-semibold text-black dark:text-primary">Location</h3>
+                        <p className="text-gray-600 dark:text-gray-300">Sylhet, Bangladesh</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Phone Card */}
+                  <a 
+                    href="tel:+8801746244930" 
+                    className="p-6 rounded-xl backdrop-blur transition-all duration-300 hover:scale-105"
+                    style={glowingCardStyle}
+                  >
+                    <div className="flex items-center gap-4">
+                      <Phone className="w-6 h-6 text-violet-600 dark:text-violet-400" />
+                      <div>
+                        <h3 className="font-semibold text-black dark:text-primary">Phone</h3>
+                        <p className="text-gray-600 dark:text-gray-300">+880 1746-244930</p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                {/* Email and Social Links */}
+                <div className="w-full space-y-4"> {/* Reduced gap from 6 to 4 */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> {/* Added grid for email row */}
+                    <a 
+                      href="mailto:gourgupaltalukder@gmail.com"
+                      className="flex items-center gap-4 p-6 rounded-xl backdrop-blur transition-all duration-300 hover:scale-105"
+                      style={glowingCardStyle}
+                    >
+                      <Mail className="w-6 h-6 text-violet-600 dark:text-violet-400" />
+                      <div>
+                        <h3 className="font-semibold text-black dark:text-primary">Email</h3>
+                        <p className="text-gray-600 dark:text-gray-300">gourgupaltalukder@gmail.com</p>
+                      </div>
+                    </a>
+
+                    
+                    <a 
+                      href="https://github.com/gfor-gour"
+                      className="flex items-center gap-4 p-6 rounded-xl backdrop-blur transition-all duration-300 hover:scale-105"
+                      style={glowingCardStyle}
+                    >
+                      <Github className="w-6 h-6 text-violet-600 dark:text-violet-400" />
+                      <div>
+                        <h3 className="font-semibold text-black dark:text-primary">GitHub</h3>
+                        <p className="text-gray-600 dark:text-gray-300">gfor-gour</p>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4"> 
+                    {[
+                      {
+                        name: 'LinkedIn',
+                        icon: <Linkedin className="w-6 h-6" />,
+                        href: 'https://www.linkedin.com/in/gour-gupal-talukder/',
+                        color: 'text-blue-600 dark:text-blue-400'
+                      },
+                      {
+                        name: 'LeetCode',
+                        icon: (
+                          <Image
+                            src="/leetcode.svg"
+                            alt="LeetCode"
+                            width={24}
+                            height={24}
+                            className="dark:invert brightness-0 dark:brightness-200" 
+                          />
+                        ),
+                        href: 'https://leetcode.com/u/g_for_gour/',
+                        color: 'text-gray-800 dark:text-gray-200'
+                      },
+                      {
+                        name: 'X (Twitter)',
+                        icon: <Twitter className="w-6 h-6" />,
+                        href: 'https://x.com/this_is_Gour',
+                        color: 'text-gray-800 dark:text-gray-200'
+                      },
+                      {
+                        name: 'Facebook',
+                        icon: <Facebook className="w-6 h-6" />,
+                        href: 'https://www.facebook.com/gour.talukder37/',
+                        color: 'text-blue-600 dark:text-blue-400'
+                      }
+                    ].map((social) => (
+                      <a
+                        key={social.name}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex items-center justify-center gap-3 p-4 rounded-xl backdrop-blur 
+                          transition-all duration-300 hover:scale-105 ${social.color}`}
+                        style={glowingCardStyle}
+                      >
+                        {social.icon}
+                        <span className="font-medium text-black dark:text-primary">{social.name}</span>
+                      </a>
+                    ))}
+                  </div>
+                  
+                  <div 
+                    className="mt-8 p-6 rounded-xl backdrop-blur"
+                    style={glowingCardStyle}
+                  > {/* Reduced top margin */}
+                    <p className="text-center text-lg md:text-xl font-medium text-violet-700 dark:text-violet-300">
+                      Feel free to reach out for collaborations or just to say hi!
+                      <br />
+                      <span className="text-base md:text-lg text-violet-600/90 dark:text-violet-400/90">
+                        I'm always open to discussing new projects and opportunities.
+                      </span>
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
