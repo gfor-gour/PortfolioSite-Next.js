@@ -142,7 +142,10 @@ export default function Page() {
                 id="about-name"
                 style={{ width: "fit-content" }}
               >
-                Gour Gupal Talukder Shawon
+                <span className="inline-block animate-name delay-1">Gour</span>{" "}
+                <span className="inline-block animate-name delay-2">Gupal</span>{" "}
+                <span className="inline-block animate-name delay-3">Talukder</span>{" "}
+                <span className="inline-block animate-name delay-4">Shawon</span>
               </h1>
               <div className="w-full md:w-auto flex flex-col items-start">
                 <span>
@@ -205,30 +208,51 @@ export default function Page() {
         <section id="projects" className="py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter text-black dark:text-primary sm:text-4xl md:text-5xl mb-12 text-center">
-            Projects
+              Projects
             </h2>
-          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <ProjectCard
-              title="E-commerce Platform"
-              description="A full-stack e-commerce platform built with Next.js, Prisma, and Stripe integration."
-              link="https://github.com"
-              tags={["Next.js", "Prisma", "Stripe"]}
-            />
-            <ProjectCard
-              title="Task Management App"
-              description="A real-time task management application with team collaboration features."
-              link="https://github.com"
-              tags={["React", "Node.js", "Socket.io"]}
-            />
-            <ProjectCard
-              title="AI Chat Interface"
-              description="An AI-powered chat interface with natural language processing capabilities."
-              link="https://github.com"
-              tags={["OpenAI", "Next.js", "TailwindCSS"]}
-            />
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* First row - existing cards */}
+              <ProjectCard
+                title="Local Household Service Provider"
+                description="Designed and developed a full-stack Local Household Service Provider platform with booking flows, API integration, payment gateway, Nodemailer notifications, and AI chatbot support."
+                link="https://github.com/gfor-gour/AI-Integrated-Local-Service-Provider-Platform-Project_350"
+                tags={["Next.js", "Express.js", "MongoDB", "TypeScript", "TailwindCSS"]}
+              />
+              <ProjectCard
+                title="IICT Library Management"
+                description="Developed a full-stack IICT Library Management system with catalog search, lending history, authentication, and real-time book tracking using React, TypeScript, Node.js, and Express."
+                link="https://github.com/mehedi-hasan-2302/IICT-Library-Management"
+                tags={["React", "Node.js", "Express.js", "MongoDB", "TypeScript"]}
+              />
+              <ProjectCard
+                title="Green Mind App"
+                description="Independently developed a Flutter-based mobile app for SUST psychiatric appointments with secure Firebase authentication, replacing manual booking with an intuitive scheduling system."
+                link="https://github.com/gfor-gour/Green-Mind-App"
+                tags={["Flutter", "Firebase", "Dart"]}
+              />
+              
+              {/* Second row - new cards */}
+              <ProjectCard
+                title="Run and Survive-2D C++ Game"
+                description="Developed a 2D side-scrolling survival game in C++ with smooth obstacle mechanics, custom rendering, and responsive jump logic as a first-year team project."
+                link="https://github.com/gfor-gour/GameProject-1-2/tree/master"
+                tags={["C++", "Igraphics"]}
+              />
+              <ProjectCard
+                title="Custome PhoneCover E-commerce"
+                description="Built a custom phone cover e-commerce site using Next.js, TypeScript, Stripe, and Prisma—with live design preview and payment integration—developed as a learning project based on a YouTube tutorial series."
+                link="https://github.com/gfor-gour/EcomProject-by-Gour"
+                tags={["Next.js", "TypeScript", "Stripe", "Prisma"]}
+              />
+              <ProjectCard
+                title="Fly and Live Forever- 2D Java Game"
+                description="Developed Fly and Live Forever, a 2D runner game using Java LibGDX, where a toy plane navigates dynamic obstacles to survive as long as possible."
+                link="https://github.com/gfor-gour/2-1-JavaGame-Project?tab=readme-ov-file"
+                tags={["java", "LibGDX"]}
+              />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
         <section className="py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">

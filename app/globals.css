@@ -121,3 +121,35 @@
     /* No background set here, so the animation shows through */
   }
 }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-name {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards; /* Increased from 0.5s to 0.8s */
+}
+
+.delay-1 {
+  animation-delay: 0.4s; /* Increased from 0.2s */
+}
+
+.delay-2 {
+  animation-delay: 0.8s; /* Increased from 0.4s */
+}
+
+.delay-3 {
+  animation-delay: 1.2s; /* Increased from 0.6s */
+}
+
+.delay-4 {
+  animation-delay: 1.6s; /* Increased from 0.8s */
+}
