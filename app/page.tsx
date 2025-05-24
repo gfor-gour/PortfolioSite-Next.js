@@ -8,10 +8,11 @@ import ProjectCard from "./components/project-card"
 import TechStack from "./components/tech-stack"
 import { ThemeToggle } from "@/components/theme-toggle"
 import AnimatedBg from "@/components/animated-bg"
-import Image from "next/image" // For LeetCode logo
+import Image from "next/image" 
+import CPProfile from './components/cp-profile'
 
 export default function Page(){
-  // Common style object to reuse across all contact cards
+  
   const glowingCardStyle = {
     border: "2px solid rgba(139,92,246,1)",
     boxShadow: "0 0 8px 2px rgba(139, 92, 246, 0.7), 0 0 4px 1px rgba(139, 92, 246, 0.5)",
@@ -23,7 +24,7 @@ export default function Page(){
       <AnimatedBg />
       <header className="sticky top-0 z-50 w-full border-b border-border bg-white dark:bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-14 items-center pl-2 md:pl-8 pr-2 md:pr-8">
-          {/* Left: Home Brand (now About link) */}
+          
           <Link
             href="#about"
             className="mr-4 flex items-center font-bold text-lg text-black dark:text-primary hover:underline underline-offset-4"
@@ -39,11 +40,11 @@ export default function Page(){
           >
             G_for_Gour
           </Link>
-          {/* Right: Navbar Buttons (About removed) */}
+          
           <nav className="flex items-center gap-3 ml-auto">
             <ThemeToggle />
             {[
-              // { href: "#about", label: "About" }, // Removed as requested
+              
               { href: "#cp-profile", label: "CP Profile" },
               { href: "#projects", label: "Projects" },
               { href: "#contact", label: "Contact" },
@@ -246,7 +247,7 @@ export default function Page(){
               Projects
             </h2>
             <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* First row - existing cards */}
+      
               <ProjectCard
                 title="Local Household Service Provider"
                 description="Designed and developed a full-stack Local Household Service Provider platform with booking flows, API integration, payment gateway, Nodemailer notifications, and AI chatbot support."
@@ -266,7 +267,7 @@ export default function Page(){
                 tags={["Flutter", "Firebase", "Dart"]}
               />
               
-              {/* Second row - new cards */}
+
               <ProjectCard
                 title="Run and Survive-2D C++ Game"
                 description="Developed a 2D side-scrolling survival game in C++ with smooth obstacle mechanics, custom rendering, and responsive jump logic as a first-year team project."
@@ -286,6 +287,15 @@ export default function Page(){
                 tags={["java", "LibGDX"]}
               />
             </div>
+          </div>
+        </section>
+
+        <section id="cp-profile" className="py-12 md:py-24 lg:py-32">
+          <div className="container px-4 md:px-6">
+            <h2 className="text-3xl font-bold tracking-tighter text-black dark:text-primary sm:text-4xl md:text-5xl mb-12 text-center">
+              CP <span className="text-violet-600 dark:text-violet-400">Profile</span>
+            </h2>
+            <CPProfile />
           </div>
         </section>
 
@@ -319,7 +329,7 @@ export default function Page(){
                       <MapPin className="w-6 h-6 text-violet-600 dark:text-violet-400" />
                       <div>
                         <h3 className="font-semibold text-black dark:text-primary">Location</h3>
-                        <p className="text-gray-600 dark:text-gray-300">Sylhet, Bangladesh</p>
+                        <p className="text-black dark:text-gray-300">Sylhet, Bangladesh</p>
                       </div>
                     </div>
                   </div>
@@ -334,15 +344,15 @@ export default function Page(){
                       <Phone className="w-6 h-6 text-violet-600 dark:text-violet-400" />
                       <div>
                         <h3 className="font-semibold text-black dark:text-primary">Phone</h3>
-                        <p className="text-gray-600 dark:text-gray-300">+880 1746-244930</p>
+                        <p className="text-black dark:text-gray-300">+880 1746-244930</p>
                       </div>
                     </div>
                   </a>
                 </div>
 
                 {/* Email and Social Links */}
-                <div className="w-full space-y-4"> {/* Reduced gap from 6 to 4 */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> {/* Added grid for email row */}
+                <div className="w-full space-y-4"> 
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> 
                     <a 
                       href="mailto:gourgupaltalukder@gmail.com"
                       className="flex items-center gap-4 p-6 rounded-xl backdrop-blur transition-all duration-300 hover:scale-105"
@@ -351,7 +361,7 @@ export default function Page(){
                       <Mail className="w-6 h-6 text-violet-600 dark:text-violet-400" />
                       <div>
                         <h3 className="font-semibold text-black dark:text-primary">Email</h3>
-                        <p className="text-gray-600 dark:text-gray-300">gourgupaltalukder@gmail.com</p>
+                        <p className="text-black dark:text-gray-300">gourgupaltalukder@gmail.com</p>
                       </div>
                     </a>
 
@@ -364,7 +374,7 @@ export default function Page(){
                       <Github className="w-6 h-6 text-violet-600 dark:text-violet-400" />
                       <div>
                         <h3 className="font-semibold text-black dark:text-primary">GitHub</h3>
-                        <p className="text-gray-600 dark:text-gray-300">gfor-gour</p>
+                        <p className="text-black dark:text-gray-300">gfor-gour</p>
                       </div>
                     </a>
                   </div>
@@ -422,7 +432,7 @@ export default function Page(){
                   <div 
                     className="mt-8 p-6 rounded-xl backdrop-blur"
                     style={glowingCardStyle}
-                  > {/* Reduced top margin */}
+                  > 
                     <p className="text-center text-lg md:text-xl font-medium text-violet-700 dark:text-violet-300">
                       Feel free to reach out for collaborations or just to say hi!
                       <br />
