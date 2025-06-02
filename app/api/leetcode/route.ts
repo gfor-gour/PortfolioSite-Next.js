@@ -1,85 +1,97 @@
 import { NextResponse } from 'next/server'
+import { LeetCodeDataSchema, LeetCodeData } from '@/types/leetcode'
 
-const CACHE_DURATION = 24 * 3600  // 24 hours in seconds
-const MAX_RETRIES = 3
-const INITIAL_RETRY_DELAY = 1000
+const CACHE_DURATION = 6 * 3600  // 6 hours
+const LEETCODE_API_URL = 'https://leetcode.com/graphql'
+const USERNAME = 'g_for_gour'
 
-async function fetchWithRetry(url: string, retries = MAX_RETRIES, delay = INITIAL_RETRY_DELAY) {
-  try {
-    const response = await fetch(url, {
-      headers: {
-        'Accept': '*/*',
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36'
-      }
-    })
-    
-    // Handle rate limiting
-    if (response.status === 429) {
-      const responseText = await response.text()
-      console.log(`Rate limit response: ${responseText}`)
-      
-      if (retries > 0) {
-        console.log(`Rate limited, retrying in ${delay/1000} seconds...`)
-        await new Promise(resolve => setTimeout(resolve, delay))
-        return fetchWithRetry(url, retries - 1, delay * 2)
-      } else {
-        throw new Error('Rate limit exceeded after all retries')
+const profileQuery = `
+  query userProfile($username: String!) {
+    matchedUser(username: $username) {
+      submitStats {
+        acSubmissionNum {
+          difficulty
+          count
+        }
+        totalSubmissionNum {
+          difficulty
+          count
+        }
       }
     }
-
-    // Only try to parse JSON for successful responses
-    if (!response.ok) {
-      const errorText = await response.text()
-      throw new Error(`API error (${response.status}): ${errorText}`)
+    allQuestionsCount {
+      difficulty
+      count
     }
-    
-    const data = await response.json()
-    return data
-  } catch (error) {
-    if (retries > 0) {
-      await new Promise(resolve => setTimeout(resolve, delay))
-      return fetchWithRetry(url, retries - 1, delay * 2)
+    userContestRanking(username: $username) {
+      rating
+      topPercentage
     }
-    throw error
   }
-}
+`
 
-type CombinedData = {
-  userInfo: any
-  recentSubmissions: any
-  contestInfo: any
-  calendarData: any
-  lastUpdated: string
-}
-
+// Update cache type definition
 let cache: {
-  data: CombinedData | null,
-  lastFetched: number
+  data: LeetCodeData | null;
+  lastFetched: number;
 } = {
   data: null,
   lastFetched: 0
 }
 
-// Add mock data for development
-const mockData: CombinedData = {
-  userInfo: {
-    totalSolved: 450,
-    totalQuestions: 2500,
-    easySolved: 150,
-    totalEasy: 600,
-    mediumSolved: 250,
-    totalMedium: 1300,
-    hardSolved: 50,
-    totalHard: 600,
-    acceptanceRate: 67.8
-  },
-  recentSubmissions: [],
-  contestInfo: {
-    rating: 1567,
-    topPercentage: 15.5
-  },
-  calendarData: {},
-  lastUpdated: new Date().toISOString()
+async function fetchLeetCodeData() {
+  const response = await fetch(LEETCODE_API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Referer': 'https://leetcode.com',
+    },
+    body: JSON.stringify({
+      query: profileQuery,
+      variables: { 
+        username: USERNAME
+      }
+    })
+  })
+
+  if (!response.ok) {
+    throw new Error(`LeetCode API error: ${response.status}`)
+  }
+
+  const { data, errors } = await response.json()
+  if (errors) {
+    throw new Error(errors[0].message)
+  }
+
+  // Get problem counts by difficulty
+  const problemCounts = data.allQuestionsCount.reduce((acc: any, item: any) => {
+    acc[item.difficulty.toUpperCase()] = item.count
+    return acc
+  }, {})
+
+  // Get solved counts by difficulty
+  const solvedCounts = data.matchedUser.submitStats.acSubmissionNum.reduce((acc: any, item: any) => {
+    acc[item.difficulty] = item.count
+    return acc
+  }, {})
+
+  return {
+    userInfo: {
+      totalSolved: solvedCounts.All || 0,
+      totalQuestions: problemCounts.ALL || 0,
+      easySolved: solvedCounts.EASY || 0,
+      totalEasy: problemCounts.EASY || 0,
+      mediumSolved: solvedCounts.MEDIUM || 0,
+      totalMedium: problemCounts.MEDIUM || 0,
+      hardSolved: solvedCounts.HARD || 0,
+      totalHard: problemCounts.HARD || 0
+    },
+    contestInfo: {
+      rating: data.userContestRanking?.rating || 0,
+      topPercentage: data.userContestRanking?.topPercentage || 0
+    },
+    lastUpdated: new Date().toISOString()
+  }
 }
 
 export async function GET() {
@@ -89,46 +101,24 @@ export async function GET() {
       return NextResponse.json(cache.data)
     }
 
-    const username = 'g_for_gour'
-    const baseUrl = 'https://alfa-leetcode-api.onrender.com'
-    
-    // Updated endpoints to match the API's actual routes
-    const [userData, recentData, contestData, calendarData] = await Promise.all([
-      fetchWithRetry(`${baseUrl}/userProfile/${username}`),
-      fetchWithRetry(`${baseUrl}/${username}/submission`),
-      fetchWithRetry(`${baseUrl}/${username}/contest`),
-      fetchWithRetry(`${baseUrl}/userProfileCalendar?username=${username}&year=2024`)
-    ])
-
-    const combinedData = {
-      userInfo: userData,
-      recentSubmissions: recentData,
-      contestInfo: contestData,
-      calendarData: calendarData,
-      lastUpdated: new Date().toISOString()
-    }
+    const leetcodeData = await fetchLeetCodeData()
+    const validatedData = LeetCodeDataSchema.parse(leetcodeData)
 
     cache = {
-      data: combinedData,
+      data: validatedData,
       lastFetched: now
     }
 
-    return NextResponse.json(combinedData)
-
+    return NextResponse.json(validatedData)
   } catch (error) {
     console.error('Error fetching LeetCode data:', error)
     
-    // Return mock data in case of error during development
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Returning mock data for development')
-      return NextResponse.json(mockData)
+    if (cache.data) {
+      return NextResponse.json(cache.data)
     }
 
     return NextResponse.json(
-      { 
-        error: 'Failed to fetch LeetCode data',
-        details: error instanceof Error ? error.message : 'Unknown error'
-      },
+      { error: 'Failed to fetch LeetCode data' },
       { status: 500 }
     )
   }

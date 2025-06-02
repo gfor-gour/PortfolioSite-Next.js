@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Skeleton } from "@/components/ui/skeleton"
 import { StatCard } from './stat-card'
 import { DifficultyBar } from './difficulty-bar'
@@ -13,24 +13,34 @@ export default function CPProfile() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    fetchLeetCodeData()
-  }, [])
-
   const fetchLeetCodeData = async () => {
     try {
-      const response = await fetch('/api/leetcode')
-      if (!response.ok) throw new Error('Failed to fetch data')
+      setLoading(true)
+      const response = await fetch('/api/leetcode', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch LeetCode data')
+      }
+
       const data = await response.json()
       setData(data)
       setError(null)
     } catch (err) {
-      setError('Failed to load LeetCode data')
-      console.error(err)
+      setError(err instanceof Error ? err.message : 'An error occurred')
+      console.error('Error fetching LeetCode data:', err)
     } finally {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    fetchLeetCodeData()
+  }, [])
 
   if (loading) {
     return <LoadingSkeleton />
@@ -42,30 +52,43 @@ export default function CPProfile() {
 
   return (
     <div className="w-full space-y-8">
-      {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <StatCard
-          title="Problems Solved"
-          value={data?.userInfo?.totalSolved || 0}
-          total={data?.userInfo?.totalQuestions || 0}
-        />
-        <StatCard
-          title="Acceptance Rate"
-          value={`${data?.userInfo?.acceptanceRate?.toFixed(1) || 0}%`}
-        />
-        <StatCard
-          title="Contest Rating"
-          value={data?.contestInfo?.rating || 0}
-          subtitle={`Top ${data?.contestInfo?.topPercentage?.toFixed(1) || 0}%`}
-        />
+      {/* Hero Stats */}
+      <div className="p-6 rounded-xl backdrop-blur bg-white/10 dark:bg-black/10">
+        <h2 className="text-2xl font-bold mb-6 text-violet-600 dark:text-violet-400">
+          LeetCode Progress
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+              Problems Solved
+            </h3>
+            <div className="text-4xl font-bold text-violet-600 dark:text-violet-400">
+              {data?.userInfo?.totalSolved || 0}
+              <span className="text-lg text-gray-500 dark:text-gray-400">
+                /{data?.userInfo?.totalQuestions || 0}
+              </span>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+              Contest Rating
+            </h3>
+            <div className="text-4xl font-bold text-violet-600 dark:text-violet-400">
+              {data?.contestInfo?.rating || 0}
+              <span className="text-lg text-gray-500 dark:text-gray-400">
+                {` (Top ${(data?.contestInfo?.topPercentage || 0).toFixed(1)}%)`}
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Difficulty Distribution */}
-      <div className="p-6 rounded-xl backdrop-blur" style={glowingCardStyle}>
-        <h3 className="text-xl font-semibold text-black dark:text-primary mb-4">
+      {/* Problem Solving Distribution */}
+      <div className="p-6 rounded-xl backdrop-blur bg-white/10 dark:bg-black/10">
+        <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-6">
           Problem Solving Distribution
         </h3>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="space-y-6">
           <DifficultyBar
             label="Easy"
             solved={data?.userInfo?.easySolved || 0}
@@ -86,16 +109,6 @@ export default function CPProfile() {
           />
         </div>
       </div>
-
-      {/* Submission Calendar */}
-      <div className="p-6 rounded-xl backdrop-blur" style={glowingCardStyle}>
-        <h3 className="text-xl font-semibold text-black dark:text-primary mb-4">
-          Submission Activity
-        </h3>
-        <div className="h-64">
-          <SubmissionChart data={data?.calendarData} />
-        </div>
-      </div>
     </div>
   )
 }
@@ -109,7 +122,6 @@ function LoadingSkeleton() {
           <Skeleton key={i} className="h-32 rounded-xl" />
         ))}
       </div>
-      <Skeleton className="h-64 rounded-xl" />
       <Skeleton className="h-64 rounded-xl" />
     </div>
   )
