@@ -5,7 +5,11 @@ import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
 
-export function ThemeToggle() {
+interface ThemeToggleProps extends React.HTMLAttributes<HTMLButtonElement> {
+  className?: string;
+}
+
+export function ThemeToggle({ className, ...props }: ThemeToggleProps) {
   const { setTheme, theme } = useTheme()
 
   return (
@@ -17,7 +21,8 @@ export function ThemeToggle() {
       theme === "dark"
         ? "bg-violet-700 text-white hover:bg-violet-800"
         : "bg-background text-foreground hover:bg-muted"
-      }`}
+      } ${className}`}
+      {...props}
     >
       <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
       <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />

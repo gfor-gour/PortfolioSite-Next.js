@@ -51,40 +51,42 @@ export default function CPProfile() {
   }
 
   return (
-    <div className="w-full space-y-8">
-      {/* Hero Stats */}
-      <div className="p-6 rounded-xl backdrop-blur bg-white/10 dark:bg-black/10">
-        <h2 className="text-2xl font-bold mb-6 text-violet-600 dark:text-violet-400">
-          LeetCode Progress
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
-              Problems Solved
-            </h3>
-            <div className="text-4xl font-bold text-violet-600 dark:text-violet-400">
-              {data?.userInfo?.totalSolved || 0}
-              <span className="text-lg text-gray-500 dark:text-gray-400">
-                /{data?.userInfo?.totalQuestions || 0}
-              </span>
+    <div className="w-full space-y-6 sm:space-y-8">
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <div className="p-4 sm:p-6 rounded-xl backdrop-blur bg-white/10 dark:bg-black/10">
+          <h2 className="text-2xl font-bold mb-6 text-violet-600 dark:text-violet-400">
+            LeetCode Progress
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+                Problems Solved
+              </h3>
+              <div className="text-4xl font-bold text-violet-600 dark:text-violet-400">
+                {data?.userInfo?.totalSolved || 0}
+                <span className="text-lg text-gray-500 dark:text-gray-400">
+                  /{data?.userInfo?.totalQuestions || 0}
+                </span>
+              </div>
             </div>
-          </div>
-          <div className="space-y-2">
-            <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
-              Contest Rating
-            </h3>
-            <div className="text-4xl font-bold text-violet-600 dark:text-violet-400">
-              {data?.contestInfo?.rating || 0}
-              <span className="text-lg text-gray-500 dark:text-gray-400">
-                {` (Top ${(data?.contestInfo?.topPercentage || 0).toFixed(1)}%)`}
-              </span>
+            <div className="space-y-2">
+              <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+                Contest Rating
+              </h3>
+              <div className="text-4xl font-bold text-violet-600 dark:text-violet-400">
+                {data?.contestInfo?.rating || 0}
+                <span className="text-lg text-gray-500 dark:text-gray-400">
+                  {` (Top ${(data?.contestInfo?.topPercentage || 0).toFixed(1)}%)`}
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Problem Solving Distribution */}
-      <div className="p-6 rounded-xl backdrop-blur bg-white/10 dark:bg-black/10">
+      {/* Distribution Chart */}
+      <div className="p-4 sm:p-6 rounded-xl backdrop-blur bg-white/10 dark:bg-black/10">
         <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-6">
           Problem Solving Distribution
         </h3>

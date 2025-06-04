@@ -13,7 +13,7 @@ interface ProjectCardProps {
 export default function ProjectCard({ title, description, link, tags }: ProjectCardProps) {
   return (
     <Card
-      className="bg-white dark:bg-background text-black dark:text-primary border-none transition-transform duration-200 hover:scale-[1.025] hover:shadow-xl"
+      className="w-full max-w-[450px] mx-auto transition-transform duration-200 hover:scale-[1.02]"
       style={{
         border: "2px solid rgba(139,92,246,1)",
         boxShadow:
@@ -26,14 +26,14 @@ export default function ProjectCard({ title, description, link, tags }: ProjectC
         margin: "0 auto",
       }}
     >
-      <CardContent className="p-4">
-        <h3 className="font-semibold text-xl mb-2 text-black dark:text-primary">{title}</h3>
-        <p className="text-sm mb-4 text-black dark:text-primary">{description}</p>
-        <div className="flex flex-wrap gap-2 mb-4">
+      <CardContent className="p-4 sm:p-6">
+        <h3 className="font-semibold text-lg sm:text-xl mb-2">{title}</h3>
+        <p className="text-sm mb-4 line-clamp-3">{description}</p>
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4">
           {tags.map((tag) => (
             <span
               key={tag}
-              className="inline-flex items-center rounded-md bg-primary/10 dark:bg-primary/20 px-2 py-1 text-xs font-medium text-black dark:text-primary ring-1 ring-inset ring-primary/20"
+              className="text-[10px] sm:text-xs px-1.5 py-0.5 sm:px-2 sm:py-1"
             >
               {tag}
             </span>
