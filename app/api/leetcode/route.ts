@@ -69,15 +69,15 @@ async function fetchLeetCodeData() {
     return acc
   }, {})
 
-  // Get solved counts by difficulty
+  // Get solved counts by difficulty (normalize to uppercase)
   const solvedCounts = data.matchedUser.submitStats.acSubmissionNum.reduce((acc: any, item: any) => {
-    acc[item.difficulty] = item.count
+    acc[item.difficulty.toUpperCase()] = item.count
     return acc
   }, {})
 
   return {
     userInfo: {
-      totalSolved: solvedCounts.All || 0,
+      totalSolved: solvedCounts.ALL || 0,
       totalQuestions: problemCounts.ALL || 0,
       easySolved: solvedCounts.EASY || 0,
       totalEasy: problemCounts.EASY || 0,

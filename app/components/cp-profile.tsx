@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import { Skeleton } from "@/components/ui/skeleton"
 import { StatCard } from './stat-card'
-import { DifficultyBar } from './difficulty-bar'
 import { glowingCardStyle } from '../utils/styles'
 import { SubmissionChart } from './submission-chart'
 import { LeetCodeData } from '@/types/leetcode'
@@ -51,64 +50,78 @@ export default function CPProfile() {
   }
 
   return (
-    <div className="w-full space-y-6 sm:space-y-8">
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-        <div className="p-4 sm:p-6 rounded-xl backdrop-blur bg-white/10 dark:bg-black/10">
-          <h2 className="text-2xl font-bold mb-6 text-violet-600 dark:text-violet-400">
+    <div className="flex flex-col items-center justify-center w-full min-h-[60vh]">
+      <div className="flex flex-col md:flex-row items-stretch justify-center gap-8 w-full max-w-5xl mx-auto">
+        {/* LeetCode Progress */}
+        <div
+          className="flex-1 w-full min-h-[220px] p-4 sm:p-6 rounded-xl shadow-lg flex flex-col justify-center"
+          style={{
+            ...glowingCardStyle,
+            background: "linear-gradient(135deg, rgba(139,92,246,0.12) 0%, rgba(255,255,255,0.08) 100%)",
+            border: "1.5px solid #a78bfa",
+          }}
+        >
+          <h2 className="text-xl font-bold mb-4 text-violet-600 dark:text-violet-400 text-center">
             LeetCode Progress
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-1 text-center">
+              <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Problems Solved
               </h3>
-              <div className="text-4xl font-bold text-violet-600 dark:text-violet-400">
+              <div className="text-2xl font-bold text-violet-600 dark:text-violet-400">
                 {data?.userInfo?.totalSolved || 0}
-                <span className="text-lg text-gray-500 dark:text-gray-400">
+                <span className="text-base text-gray-500 dark:text-gray-400">
                   /{data?.userInfo?.totalQuestions || 0}
                 </span>
               </div>
             </div>
-            <div className="space-y-2">
-              <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+            <div className="space-y-1 text-center">
+              <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Contest Rating
               </h3>
-              <div className="text-4xl font-bold text-violet-600 dark:text-violet-400">
-                {data?.contestInfo?.rating || 0}
-                <span className="text-lg text-gray-500 dark:text-gray-400">
+              <div className="text-2xl font-bold text-violet-600 dark:text-violet-400">
+                {Math.round(data?.contestInfo?.rating || 0)}
+                <span className="text-base text-gray-500 dark:text-gray-400">
                   {` (Top ${(data?.contestInfo?.topPercentage || 0).toFixed(1)}%)`}
                 </span>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Distribution Chart */}
-      <div className="p-4 sm:p-6 rounded-xl backdrop-blur bg-white/10 dark:bg-black/10">
-        <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-6">
-          Problem Solving Distribution
-        </h3>
-        <div className="space-y-6">
-          <DifficultyBar
-            label="Easy"
-            solved={data?.userInfo?.easySolved || 0}
-            total={data?.userInfo?.totalEasy || 0}
-            color="emerald"
-          />
-          <DifficultyBar
-            label="Medium"
-            solved={data?.userInfo?.mediumSolved || 0}
-            total={data?.userInfo?.totalMedium || 0}
-            color="yellow"
-          />
-          <DifficultyBar
-            label="Hard"
-            solved={data?.userInfo?.hardSolved || 0}
-            total={data?.userInfo?.totalHard || 0}
-            color="red"
-          />
+        {/* Problem Solving Distribution */}
+        <div
+          className="flex-1 w-full min-h-[220px] p-4 sm:p-6 rounded-xl shadow-lg flex flex-col justify-center"
+          style={{
+            ...glowingCardStyle,
+            background: "linear-gradient(135deg, rgba(139,92,246,0.10) 0%, rgba(255,255,255,0.06) 100%)",
+            border: "1.5px solid #a78bfa",
+          }}
+        >
+          <h3 className="text-lg font-semibold text-violet-700 dark:text-violet-300 mb-4 text-center">
+            Problem Solving Distribution
+          </h3>
+          <div className="space-y-4">
+            <DifficultyBar
+              label="Easy"
+              solved={data?.userInfo?.easySolved || 0}
+              total={data?.userInfo?.totalEasy || 0}
+              color="violet"
+            />
+            <DifficultyBar
+              label="Medium"
+              solved={data?.userInfo?.mediumSolved || 0}
+              total={data?.userInfo?.totalMedium || 0}
+              color="violet"
+            />
+            <DifficultyBar
+              label="Hard"
+              solved={data?.userInfo?.hardSolved || 0}
+              total={data?.userInfo?.totalHard || 0}
+              color="violet"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -139,6 +152,38 @@ function ErrorState({ error, retry }: { error: string; retry: () => void }) {
       >
         Retry
       </button>
+    </div>
+  )
+}
+
+// Inline DifficultyBar for demonstration
+function DifficultyBar({
+  label,
+  solved,
+  total,
+  color = "violet",
+}: {
+  label: string
+  solved: number
+  total: number
+  color?: string
+}) {
+  const percent = total > 0 ? Math.min(100, Math.round((solved / total) * 100)) : 0
+  return (
+    <div>
+      <div className="flex justify-between mb-1">
+        <span className="text-sm font-medium">{label}</span>
+        <span className="text-sm font-semibold">{solved} / {total}</span>
+      </div>
+      <div
+        className="w-full rounded-full h-4 border border-gray-300 dark:border-gray-700"
+        style={{ background: "transparent" }}
+      >
+        <div
+          className="h-4 rounded-full bg-green-500 transition-all duration-700"
+          style={{ width: `${percent}%` }}
+        />
+      </div>
     </div>
   )
 }
