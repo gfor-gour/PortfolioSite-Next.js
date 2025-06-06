@@ -11,13 +11,18 @@ export const LeetCodeUserSchema = z.object({
   totalHard: z.number()
 })
 
+export const LeetCodeCalendarSchema = z.object({
+  submissionCalendar: z.record(z.number())
+})
+
 export const LeetCodeDataSchema = z.object({
   userInfo: LeetCodeUserSchema,
   contestInfo: z.object({
     rating: z.number(),
     topPercentage: z.number()
   }),
-  lastUpdated: z.string()
+  lastUpdated: z.string(),
+  calendar: LeetCodeCalendarSchema
 })
 
 export type LeetCodeData = z.infer<typeof LeetCodeDataSchema>

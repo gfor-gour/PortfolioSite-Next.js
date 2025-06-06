@@ -1,124 +1,82 @@
-import { NextResponse } from 'next/server'
-import { LeetCodeDataSchema, LeetCodeData } from '@/types/leetcode'
-
-const CACHE_DURATION = 6 * 3600  // 6 hours
-const LEETCODE_API_URL = 'https://leetcode.com/graphql'
-const USERNAME = 'g_for_gour'
-
-const profileQuery = `
-  query userProfile($username: String!) {
-    matchedUser(username: $username) {
-      submitStats {
-        acSubmissionNum {
-          difficulty
-          count
-        }
-        totalSubmissionNum {
-          difficulty
-          count
-        }
-      }
-    }
-    allQuestionsCount {
-      difficulty
-      count
-    }
-    userContestRanking(username: $username) {
-      rating
-      topPercentage
-    }
-  }
-`
-
-// Update cache type definition
-let cache: {
-  data: LeetCodeData | null;
-  lastFetched: number;
-} = {
-  data: null,
-  lastFetched: 0
-}
-
-async function fetchLeetCodeData() {
-  const response = await fetch(LEETCODE_API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Referer': 'https://leetcode.com',
-    },
-    body: JSON.stringify({
-      query: profileQuery,
-      variables: { 
-        username: USERNAME
-      }
-    })
-  })
-
-  if (!response.ok) {
-    throw new Error(`LeetCode API error: ${response.status}`)
-  }
-
-  const { data, errors } = await response.json()
-  if (errors) {
-    throw new Error(errors[0].message)
-  }
-
-  // Get problem counts by difficulty
-  const problemCounts = data.allQuestionsCount.reduce((acc: any, item: any) => {
-    acc[item.difficulty.toUpperCase()] = item.count
-    return acc
-  }, {})
-
-  // Get solved counts by difficulty (normalize to uppercase)
-  const solvedCounts = data.matchedUser.submitStats.acSubmissionNum.reduce((acc: any, item: any) => {
-    acc[item.difficulty.toUpperCase()] = item.count
-    return acc
-  }, {})
-
-  return {
-    userInfo: {
-      totalSolved: solvedCounts.ALL || 0,
-      totalQuestions: problemCounts.ALL || 0,
-      easySolved: solvedCounts.EASY || 0,
-      totalEasy: problemCounts.EASY || 0,
-      mediumSolved: solvedCounts.MEDIUM || 0,
-      totalMedium: problemCounts.MEDIUM || 0,
-      hardSolved: solvedCounts.HARD || 0,
-      totalHard: problemCounts.HARD || 0
-    },
-    contestInfo: {
-      rating: data.userContestRanking?.rating || 0,
-      topPercentage: data.userContestRanking?.topPercentage || 0
-    },
-    lastUpdated: new Date().toISOString()
-  }
-}
+import { NextResponse } from "next/server"
 
 export async function GET() {
   try {
-    const now = Date.now()
-    if (cache.data && (now - cache.lastFetched) / 1000 < CACHE_DURATION) {
-      return NextResponse.json(cache.data)
+    const username = process.env.LEETCODE_USERNAME
+    if (!username) {
+      throw new Error("LeetCode username not configured")
     }
 
-    const leetcodeData = await fetchLeetCodeData()
-    const validatedData = LeetCodeDataSchema.parse(leetcodeData)
+    const query = `
+      {
+        userInfo: matchedUser(username: "${username}") {
+          userCalendar {
+            activeYears
+            submissionCalendar
+            totalActiveDays
+            streak
+          }
+          submitStats: submitStatsGlobal {
+            acSubmissionNum {
+              difficulty
+              count
+            }
+          }
+          problemsSolved: submitStats {
+            acSubmissionNum {
+              difficulty
+              count
+            }
+          }
+          profile {
+            ranking
+          }
+        }
+        contestInfo: userContestRanking(username: "${username}") {
+          rating
+          topPercentage
+        }
+      }
+    `
 
-    cache = {
-      data: validatedData,
-      lastFetched: now
+    const response = await fetch("https://leetcode.com/graphql", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query }),
+    })
+
+    const data = await response.json()
+
+    if (!data.data?.userInfo) {
+      throw new Error("Failed to fetch LeetCode data")
     }
 
-    return NextResponse.json(validatedData)
+    const { userInfo, contestInfo } = data.data
+
+    // Transform data to match your schema
+    return NextResponse.json({
+      userInfo: {
+        totalSolved: userInfo.problemsSolved.acSubmissionNum[0].count,
+        totalQuestions: userInfo.submitStats.acSubmissionNum[0].count,
+        easySolved: userInfo.problemsSolved.acSubmissionNum[1].count,
+        totalEasy: userInfo.submitStats.acSubmissionNum[1].count,
+        mediumSolved: userInfo.problemsSolved.acSubmissionNum[2].count,
+        totalMedium: userInfo.submitStats.acSubmissionNum[2].count,
+        hardSolved: userInfo.problemsSolved.acSubmissionNum[3].count,
+        totalHard: userInfo.submitStats.acSubmissionNum[3].count,
+      },
+      contestInfo: {
+        rating: contestInfo?.rating || 0,
+        topPercentage: contestInfo?.topPercentage || 0,
+      },
+      calendar: {
+        submissionCalendar: userInfo.userCalendar.submissionCalendar,
+      },
+    })
   } catch (error) {
-    console.error('Error fetching LeetCode data:', error)
-    
-    if (cache.data) {
-      return NextResponse.json(cache.data)
-    }
-
+    console.error("LeetCode API Error:", error)
     return NextResponse.json(
-      { error: 'Failed to fetch LeetCode data' },
+      { error: "Failed to fetch LeetCode data" },
       { status: 500 }
     )
   }

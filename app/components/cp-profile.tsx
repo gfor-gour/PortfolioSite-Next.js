@@ -6,6 +6,7 @@ import { StatCard } from './stat-card'
 import { glowingCardStyle } from '../utils/styles'
 import { SubmissionChart } from './submission-chart'
 import { LeetCodeData } from '@/types/leetcode'
+import { LeetCodeHeatmap } from "./leetcode-heatmap"
 
 export default function CPProfile() {
   const [data, setData] = useState<LeetCodeData | null>(null)
@@ -107,22 +108,28 @@ export default function CPProfile() {
               label="Easy"
               solved={data?.userInfo?.easySolved || 0}
               total={data?.userInfo?.totalEasy || 0}
-              color="violet"
             />
             <DifficultyBar
               label="Medium"
               solved={data?.userInfo?.mediumSolved || 0}
               total={data?.userInfo?.totalMedium || 0}
-              color="violet"
             />
             <DifficultyBar
               label="Hard"
               solved={data?.userInfo?.hardSolved || 0}
               total={data?.userInfo?.totalHard || 0}
-              color="violet"
             />
           </div>
         </div>
+      </div>
+
+      {/* LeetCode Heatmap */}
+      <div className="w-full mt-8 flex justify-center">
+        {data?.calendar?.submissionCalendar && (
+          <LeetCodeHeatmap 
+            submissionCalendar={data.calendar.submissionCalendar} 
+          />
+        )}
       </div>
     </div>
   )
@@ -161,26 +168,29 @@ function DifficultyBar({
   label,
   solved,
   total,
-  color = "violet",
 }: {
   label: string
   solved: number
   total: number
-  color?: string
 }) {
   const percent = total > 0 ? Math.min(100, Math.round((solved / total) * 100)) : 0
+  // Use a fixed violet color for all bars, or set per label if you want
+  const barColor =
+    label === "Easy"
+      ? "bg-violet-400"
+      : label === "Medium"
+      ? "bg-violet-500"
+      : "bg-violet-700"
+
   return (
     <div>
       <div className="flex justify-between mb-1">
-        <span className="text-sm font-medium">{label}</span>
-        <span className="text-sm font-semibold">{solved} / {total}</span>
+        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{label}</span>
+        <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">{solved} / {total}</span>
       </div>
-      <div
-        className="w-full rounded-full h-4 border border-gray-300 dark:border-gray-700"
-        style={{ background: "transparent" }}
-      >
+      <div className="w-full h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
         <div
-          className="h-4 rounded-full bg-green-500 transition-all duration-700"
+          className={`h-4 rounded-full transition-all duration-700 ${barColor}`}
           style={{ width: `${percent}%` }}
         />
       </div>
