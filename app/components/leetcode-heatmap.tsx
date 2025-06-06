@@ -62,7 +62,8 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
         d <= today;
         d.setDate(d.getDate() + 1)
       ) {
-        const timestamp = Math.floor(d.getTime() / 1000).toString()
+        // Use UTC midnight timestamp to match LeetCode keys
+        const timestamp = Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 1000).toString()
         const count = calendar[timestamp] || 0
 
         const level =
@@ -139,10 +140,10 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
   const getLevelColor = (level: number): string => {
     const colors = {
       0: "bg-gray-800/30",
-      1: "bg-violet-900/90",
-      2: "bg-violet-700/90",
-      3: "bg-violet-500/90",
-      4: "bg-violet-400/90",
+      1: "bg-green-900/90",
+      2: "bg-green-700/90",
+      3: "bg-green-500/90",
+      4: "bg-green-400/90",
     }
     return colors[level as keyof typeof colors]
   }
@@ -172,9 +173,12 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
 
   return (
     <div
-      className="bg-gray-900/20 backdrop-blur-sm border border-violet-500/20 text-white p-6 rounded-lg mx-auto" // Reduced padding from p-8 to p-6
+      className="backdrop-blur-sm border border-violet-500/20 text-white p-6 rounded-lg mx-auto"
       style={{
-        width: "min(100%, 920px)", // Adjusted width to fit all months
+        width: "min(100%, 920px)",
+        border: "2px solid rgba(139,92,246,1)",
+        boxShadow: "0 0 16px 2px rgba(139,92,246,0.7), 0 0 8px 2px rgba(139,92,246,0.5)",
+        background: "transparent",
       }}
     >
       {/* Header */}

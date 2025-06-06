@@ -50,75 +50,80 @@ export default function CPProfile() {
     return <ErrorState error={error} retry={fetchLeetCodeData} />
   }
 
+
+  const boxStyle = {
+    ...glowingCardStyle,
+    background: "linear-gradient(135deg, rgba(139,92,246,0.10) 0%, rgba(255,255,255,0.06) 100%)",
+    border: "1.5px solid #a78bfa",
+    width: "min(100%, 920px)",
+    minHeight: "296px", // 370px * 0.8 = 296px
+    maxWidth: "920px",
+    margin: "0 auto",
+  }
+
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-[60vh]">
-      <div className="flex flex-col md:flex-row items-stretch justify-center gap-8 w-full max-w-5xl mx-auto">
-        {/* LeetCode Progress */}
+      <div className="w-full flex justify-center">
         <div
-          className="flex-1 w-full min-h-[220px] p-4 sm:p-6 rounded-xl shadow-lg flex flex-col justify-center"
-          style={{
-            ...glowingCardStyle,
-            background: "linear-gradient(135deg, rgba(139,92,246,0.12) 0%, rgba(255,255,255,0.08) 100%)",
-            border: "1.5px solid #a78bfa",
-          }}
+          className="rounded-xl shadow-lg flex flex-col justify-between bg-transparent p-8"
+          style={{ ...boxStyle, minHeight: "266px", background: "transparent" }}
         >
-          <h2 className="text-xl font-bold mb-4 text-violet-600 dark:text-violet-400 text-center">
-            LeetCode Progress
-          </h2>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-1 text-center">
-              <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Problems Solved
-              </h3>
-              <div className="text-2xl font-bold text-violet-600 dark:text-violet-400">
-                {data?.userInfo?.totalSolved || 0}
-                <span className="text-base text-gray-500 dark:text-gray-400">
-                  /{data?.userInfo?.totalQuestions || 0}
-                </span>
-              </div>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-10 w-full">
+        {/* Problem Solved & Contest Rating */}
+        <div className="flex-1 flex flex-col items-center gap-8 w-full max-w-xs">
+          <div className="w-full flex flex-col items-center">
+            <span className="text-lg font-semibold text-violet-700 dark:text-violet-300">
+          Problem Solved
+            </span>
+            <div className="flex items-end gap-2 mt-1">
+          <span className="text-4xl font-extrabold text-violet-600 dark:text-violet-400">
+            {data?.userInfo?.totalSolved || 0}
+          </span>
+          <span className="text-base text-gray-500 dark:text-gray-400 mb-1">
+            / {data?.userInfo?.totalQuestions || 0}
+          </span>
             </div>
-            <div className="space-y-1 text-center">
-              <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Contest Rating
-              </h3>
-              <div className="text-2xl font-bold text-violet-600 dark:text-violet-400">
-                {Math.round(data?.contestInfo?.rating || 0)}
-                <span className="text-base text-gray-500 dark:text-gray-400">
-                  {` (Top ${(data?.contestInfo?.topPercentage || 0).toFixed(1)}%)`}
-                </span>
-              </div>
+          </div>
+          <div className="w-full flex flex-col items-center mt-2">
+            <span className="text-lg font-bold text-violet-700 dark:text-violet-300">
+          Contest Rating
+            </span>
+            <div className="flex flex-col mt-1 items-center">
+          <span className="text-2xl font-semibold text-violet-600 dark:text-violet-400">
+            {Math.round(data?.contestInfo?.rating || 0)}
+          </span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">
+            Top {(data?.contestInfo?.topPercentage || 0).toFixed(1)}%
+          </span>
             </div>
           </div>
         </div>
-
         {/* Problem Solving Distribution */}
-        <div
-          className="flex-1 w-full min-h-[220px] p-4 sm:p-6 rounded-xl shadow-lg flex flex-col justify-center"
-          style={{
-            ...glowingCardStyle,
-            background: "linear-gradient(135deg, rgba(139,92,246,0.10) 0%, rgba(255,255,255,0.06) 100%)",
-            border: "1.5px solid #a78bfa",
-          }}
-        >
-          <h3 className="text-lg font-semibold text-violet-700 dark:text-violet-300 mb-4 text-center">
+        <div className="flex-1 flex flex-col items-center gap-4 w-full max-w-xs">
+          <h3 className="text-lg font-semibold text-violet-700 dark:text-violet-300 mb-2 text-center">
             Problem Solving Distribution
           </h3>
-          <div className="space-y-4">
+          <div className="w-full min-w-[220px] max-w-xs space-y-3">
             <DifficultyBar
-              label="Easy"
-              solved={data?.userInfo?.easySolved || 0}
-              total={data?.userInfo?.totalEasy || 0}
+          label="Easy"
+          solved={data?.userInfo?.easySolved || 0}
+          total={data?.userInfo?.totalEasy || 0}
+          color="bg-green-400"
             />
             <DifficultyBar
-              label="Medium"
-              solved={data?.userInfo?.mediumSolved || 0}
-              total={data?.userInfo?.totalMedium || 0}
+          label="Medium"
+          solved={data?.userInfo?.mediumSolved || 0}
+          total={data?.userInfo?.totalMedium || 0}
+          color="bg-yellow-400"
             />
             <DifficultyBar
-              label="Hard"
-              solved={data?.userInfo?.hardSolved || 0}
-              total={data?.userInfo?.totalHard || 0}
+          label="Hard"
+          solved={data?.userInfo?.hardSolved || 0}
+          total={data?.userInfo?.totalHard || 0}
+          color="bg-red-400"
             />
+          </div>
+        </div>
           </div>
         </div>
       </div>
@@ -127,7 +132,11 @@ export default function CPProfile() {
       <div className="w-full mt-8 flex justify-center">
         {data?.calendar?.submissionCalendar && (
           <LeetCodeHeatmap 
-            submissionCalendar={data.calendar.submissionCalendar} 
+            submissionCalendar={
+              typeof data.calendar.submissionCalendar === "string"
+                ? JSON.parse(data.calendar.submissionCalendar)
+                : data.calendar.submissionCalendar
+            }
           />
         )}
       </div>
@@ -163,24 +172,19 @@ function ErrorState({ error, retry }: { error: string; retry: () => void }) {
   )
 }
 
-// Inline DifficultyBar for demonstration
+// Updated DifficultyBar to accept color prop
 function DifficultyBar({
   label,
   solved,
   total,
+  color = "bg-violet-500",
 }: {
   label: string
   solved: number
   total: number
+  color?: string
 }) {
   const percent = total > 0 ? Math.min(100, Math.round((solved / total) * 100)) : 0
-  // Use a fixed violet color for all bars, or set per label if you want
-  const barColor =
-    label === "Easy"
-      ? "bg-violet-400"
-      : label === "Medium"
-      ? "bg-violet-500"
-      : "bg-violet-700"
 
   return (
     <div>
@@ -190,7 +194,7 @@ function DifficultyBar({
       </div>
       <div className="w-full h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
         <div
-          className={`h-4 rounded-full transition-all duration-700 ${barColor}`}
+          className={`h-4 rounded-full transition-all duration-700 ${color}`}
           style={{ width: `${percent}%` }}
         />
       </div>

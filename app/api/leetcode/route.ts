@@ -32,6 +32,10 @@ export async function GET() {
             ranking
           }
         }
+        allQuestionsCount {
+          difficulty
+          count
+        }
         contestInfo: userContestRanking(username: "${username}") {
           rating
           topPercentage
@@ -51,26 +55,38 @@ export async function GET() {
       throw new Error("Failed to fetch LeetCode data")
     }
 
-    const { userInfo, contestInfo } = data.data
+    const { userInfo, contestInfo, allQuestionsCount } = data.data
 
-    // Transform data to match your schema
+    // Defensive checks for all nested properties
+    const problemsSolved = userInfo?.problemsSolved?.acSubmissionNum || []
+    const submitStats = userInfo?.submitStats?.acSubmissionNum || []
+    // Get total questions from allQuestionsCount
+    const totalQuestions =
+      allQuestionsCount?.find((q: any) => q.difficulty === "All")?.count ?? 0
+    const totalEasy =
+      allQuestionsCount?.find((q: any) => q.difficulty === "Easy")?.count ?? 0
+    const totalMedium =
+      allQuestionsCount?.find((q: any) => q.difficulty === "Medium")?.count ?? 0
+    const totalHard =
+      allQuestionsCount?.find((q: any) => q.difficulty === "Hard")?.count ?? 0
+
     return NextResponse.json({
       userInfo: {
-        totalSolved: userInfo.problemsSolved.acSubmissionNum[0].count,
-        totalQuestions: userInfo.submitStats.acSubmissionNum[0].count,
-        easySolved: userInfo.problemsSolved.acSubmissionNum[1].count,
-        totalEasy: userInfo.submitStats.acSubmissionNum[1].count,
-        mediumSolved: userInfo.problemsSolved.acSubmissionNum[2].count,
-        totalMedium: userInfo.submitStats.acSubmissionNum[2].count,
-        hardSolved: userInfo.problemsSolved.acSubmissionNum[3].count,
-        totalHard: userInfo.submitStats.acSubmissionNum[3].count,
+        totalSolved: problemsSolved[0]?.count ?? 0,
+        totalQuestions,
+        easySolved: problemsSolved[1]?.count ?? 0,
+        totalEasy,
+        mediumSolved: problemsSolved[2]?.count ?? 0,
+        totalMedium,
+        hardSolved: problemsSolved[3]?.count ?? 0,
+        totalHard,
       },
       contestInfo: {
         rating: contestInfo?.rating || 0,
         topPercentage: contestInfo?.topPercentage || 0,
       },
       calendar: {
-        submissionCalendar: userInfo.userCalendar.submissionCalendar,
+        submissionCalendar: userInfo?.userCalendar?.submissionCalendar || "{}",
       },
     })
   } catch (error) {
