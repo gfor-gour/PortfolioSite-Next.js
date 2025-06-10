@@ -69,13 +69,17 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
         const level =
           count === 0
             ? 0
-            : count <= 2
+            : count === 1
             ? 1
-            : count <= 4
+            : count === 2
             ? 2
-            : count <= 6
+            : count === 3
             ? 3
-            : 4
+            : count === 4
+            ? 4
+            : count === 5
+            ? 5
+            : 6
 
         currentWeek.push({
           date: d.toISOString().split("T")[0],
@@ -137,15 +141,21 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
 
   const monthGroups = getMonthGroups()
 
+  // Assign a brighter green for each increasing submission count
   const getLevelColor = (level: number): string => {
-    const colors = {
-      0: "bg-gray-800/30",
-      1: "bg-green-900/90",
-      2: "bg-green-700/90",
-      3: "bg-green-500/90",
-      4: "bg-green-400/90",
-    }
-    return colors[level as keyof typeof colors]
+    // 0 = no submission, 1 = 1, 2 = 2, 3 = 3, 4 = 4, 5 = 5, 6+ = 6
+    const colors = [
+      "bg-gray-950/50",   // 0 submissions
+      "bg-green-900",     // 1 submission (darkest green)
+      "bg-green-700",     // 2 submissions
+      "bg-green-500",     // 3 submissions
+      "bg-green-400",     // 4 submissions
+      "bg-green-300",     // 5 submissions
+      "bg-green-200",     // 6+ submissions (brightest green)
+    ]
+    // Clamp level between 0 and 6
+    const idx = Math.max(0, Math.min(level, 6))
+    return colors[idx]
   }
 
   // Calculate statistics
