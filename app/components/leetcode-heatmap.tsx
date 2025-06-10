@@ -194,10 +194,10 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
       {/* Header */}
       <div className="flex items-center justify-between mb-8"> {/* Increased margin */}
         <div className="flex items-center gap-3"> {/* Increased gap */}
-          <span className="text-3xl font-bold text-violet-400"> {/* Increased text size, added violet color */}
+          <span className="text-3xl font-extrabold text-violet-700 dark:text-violet-300">
             {stats.totalSubmissions}
           </span>
-          <span className="text-lg text-violet-300/80"> {/* Increased text size, added transparent violet */}
+          <span className="text-lg text-gray-800 dark:text-violet-300">
             submissions in the past one year
           </span>
           <TooltipProvider>
@@ -213,19 +213,21 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
         </div>
 
         <div className="flex items-center gap-8"> {/* Increased gap */}
-          <span className="text-lg text-violet-300/80"> {/* Increased text size, added transparent violet */}
+          {/* Total active days */}
+          <span className="text-lg text-gray-900 dark:text-violet-300 font-semibold">
             Total active days:{" "}
-            <span className="text-violet-400 font-semibold">{stats.activeDays}</span>
+            <span className="text-violet-700 dark:text-violet-300 font-extrabold">{stats.activeDays}</span>
           </span>
 
+          {/* Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="outline"
-                className="bg-violet-950/30 border-violet-500/30 hover:bg-violet-900/20 text-violet-300"
+                className="bg-violet-950/30 border-violet-500/30 hover:bg-violet-900/20 text-gray-800 dark:text-violet-300"
               >
                 {selectedPeriod}
-                <ChevronDown className="ml-2 h-5 w-5" /> {/* Increased icon size */}
+                <ChevronDown className="ml-2 h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-gray-900/95 border-violet-500/30">
@@ -249,7 +251,7 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
           {/* Remove the day labels div and start directly with month groups */}
           {monthGroups.map((monthGroup, monthIndex) => (
             <div key={monthIndex} className="flex flex-col">
-              <div className="text-xs text-violet-400/80 mb-1 text-center"> {/* Reduced text size and margin */}
+              <div className="text-xs text-gray-800 dark:text-violet-400/80 mb-1 text-center">
                 {monthGroup.month}
               </div>
               <div className="flex gap-[2px]"> {/* Reduced gap */}
@@ -285,7 +287,7 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
 
       {/* Legend */}
       <div className="flex items-center justify-end mt-4"> {/* Reduced margin */}
-        <div className="flex items-center gap-2 text-xs text-violet-300/80"> {/* Reduced text size and gap */}
+        <div className="flex items-center gap-2 text-xs text-gray-800 dark:text-violet-300/80">
           <span>Less</span>
           <div className="flex gap-[2px]"> {/* Reduced gap */}
             {[0, 1, 2, 3, 4].map((level: number) => (

@@ -143,18 +143,16 @@ export default function Page() {
               </div>
 
               {/* About text container */}
-              <div className="rounded-xl mt-2 w-full sm:w-fit max-w-full p-4 sm:p-6"
+              <div
+                className="rounded-xl mt-2 w-full sm:w-fit max-w-full p-4 sm:p-6"
                 style={{
                   border: "2px solid rgba(139,92,246,1)",
                   boxShadow: "0 0 8px 2px rgba(139, 92, 246, 0.7), 0 0 4px 1px rgba(139, 92, 246, 0.5)",
                   background: "transparent",
-                  color: "rgba(221, 214, 254, 0.95)", // violet-100 + white blend
                 }}
               >
-                <p className="text-sm sm:text-base md:text-lg pb-2 text-left" style={{ color: "rgba(221, 214, 254, 0.95)" }}>
+                <p className="text-gray-800 dark:text-violet-100">
                   Throughout my coding journey, I’ve demonstrated rigorous problem‑solving acumen by completing over 600 algorithmic challenges across diverse platforms—450+ of which are on LeetCode using C++, Python, and SQL—and earning 16 badges. In parallel, I’ve architected and deployed full‑stack solutions with Next.js, React, Tailwind CSS, Node.js, and both MongoDB and PostgreSQL.
-                </p>
-                <p className="text-sm sm:text-base md:text-lg pt-0 text-left" style={{ color: "rgba(221, 214, 254, 0.95)" }}>
                   Academically, I’ve consistently performed well, especially in core subjects such as Data Structures & Algorithms, Software Design Patterns, Database Systems, Operating Systems, Computer Networks, and Software Testing. I’m also diving into AI and large‑language models, building a tool to generate clear, context‑aware Git commit messages using LLMs. I’m looking for challenging opportunities that let me push these ideas further.
                 </p>
               </div>
@@ -289,7 +287,7 @@ export default function Page() {
         <section id="cp-profile" className="py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter text-black dark:text-primary sm:text-4xl md:text-5xl mb-12 text-center">
-              CP <span className="text-violet-600 dark:text-violet-400">Profile</span>
+              CP <span className="text-black dark:text-violet-400">Profile</span>
             </h2>
             <CPProfile />
           </div>

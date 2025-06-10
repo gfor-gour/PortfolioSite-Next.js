@@ -7,11 +7,13 @@ import { glowingCardStyle } from '../utils/styles'
 import { SubmissionChart } from './submission-chart'
 import { LeetCodeData } from '@/types/leetcode'
 import { LeetCodeHeatmap } from "./leetcode-heatmap"
+import { ChevronDown, ChevronUp } from "lucide-react"
 
 export default function CPProfile() {
   const [data, setData] = useState<LeetCodeData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [expanded, setExpanded] = useState(false)
 
   const fetchLeetCodeData = async () => {
     try {
@@ -61,69 +63,116 @@ export default function CPProfile() {
     margin: "0 auto",
   }
 
+  // The full paragraph text
+  const paragraph = `I embarked on my coding journey in 2022, initially honing my problem-solving skills on platforms such as Codeforces, CodeChef, UVA, and v.judge. For a significant period now, I've dedicated myself to consistent practice on LeetCode, actively participating in live contests to further refine my abilities. This consistent engagement has been instrumental in overcoming past challenges with inconsistency and self-doubt, transforming my approach to complex problems.
+  This portfolio goes beyond a traditional static display. I've integrated API routes to fetch real-time data from LeetCode using its GraphQL API. This dynamic approach allowed me to develop a data-driven heatmap, providing a live and visual representation of my coding activity and progress.`
+
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-[60vh]">
-      <div className="w-full flex justify-center">
+      <div className="w-full flex flex-col items-start max-w-[920px] mx-auto">
+        {/* CP Profile Description with dropdown */}
+        <div className="w-full flex flex-col items-center mb-8">
+          <div
+            className={`w-full relative transition-all duration-500`}
+            style={{
+              maxHeight: expanded ? 500 : 64, // ~2 lines
+              overflow: "hidden",
+            }}
+          >
+            <p className="w-full text-[1.18rem] sm:text-lg md:text-xl text-gray-900 dark:text-gray-100 text-center font-medium leading-relaxed transition-all duration-500">
+              {paragraph}
+            </p>
+            {/* Gradient fade effect when collapsed */}
+            {!expanded && (
+              <div className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-white dark:from-[#18102b] to-transparent pointer-events-none transition-all duration-500" />
+            )}
+          </div>
+          <button
+            className="flex items-center gap-1 mt-2 text-violet-700 dark:text-violet-300 font-semibold hover:underline focus:outline-none transition-colors"
+            onClick={() => setExpanded((v) => !v)}
+            aria-expanded={expanded}
+          >
+            {expanded ? "Show less" : "Read more"}
+            {expanded ? (
+              <ChevronUp className="w-5 h-5" />
+            ) : (
+              <ChevronDown className="w-5 h-5" />
+            )}
+          </button>
+          <div className="w-full flex justify-center mt-6">
+            <hr className="w-full h-1 rounded border-0 bg-gradient-to-r from-violet-400 via-violet-500 to-violet-400 shadow-[0_0_16px_2px_rgba(139,92,246,0.7)]" />
+          </div>
+        </div>
+
+        {/* LeetCode Data Title */}
+        <h3 className="text-xl sm:text-2xl font-bold mb-4 text-[#7c3aed] dark:text-[#c4b5fd] text-left">
+          LeetCode Statistics:
+        </h3>
+        
         <div
-          className="rounded-xl shadow-lg flex flex-col justify-between bg-transparent p-8"
-          style={{ ...boxStyle, minHeight: "266px", background: "transparent" }}
+          className="rounded-xl shadow-lg flex flex-col justify-between bg-transparent p-8 w-full"
+          style={{
+            ...boxStyle,
+            background: "transparent", // Make background fully transparent
+            // Keep the glowing border from boxStyle
+          }}
         >
           <div className="flex flex-col md:flex-row items-center justify-center gap-10 w-full">
-        {/* Problem Solved & Contest Rating */}
-        <div className="flex-1 flex flex-col items-center gap-8 w-full max-w-xs">
-          <div className="w-full flex flex-col items-center">
-            <span className="text-lg font-semibold text-violet-700 dark:text-violet-300">
-          Problem Solved
-            </span>
-            <div className="flex items-end gap-2 mt-1">
-          <span className="text-4xl font-extrabold text-violet-600 dark:text-violet-400">
-            {data?.userInfo?.totalSolved || 0}
-          </span>
-          <span className="text-base text-gray-500 dark:text-gray-400 mb-1">
-            / {data?.userInfo?.totalQuestions || 0}
-          </span>
+            {/* Problem Solved & Contest Rating */}
+            <div className="flex-1 flex flex-col items-center gap-8 w-full max-w-xs">
+              <div className="w-full flex flex-col items-center">
+                <span className="text-lg font-semibold text-violet-700 dark:text-violet-300">
+                  Problem Solved
+                </span>
+                <div className="flex items-end gap-2 mt-1">
+                  <span className="text-4xl font-extrabold text-violet-600 dark:text-violet-400">
+                    {data?.userInfo?.totalSolved || 0}
+                  </span>
+                  <span className="text-base text-gray-500 dark:text-gray-400 mb-1">
+                    / {data?.userInfo?.totalQuestions || 0}
+                  </span>
+                </div>
+              </div>
+              <div className="w-full flex flex-col items-center mt-2">
+                <span className="text-lg font-bold text-violet-700 dark:text-violet-300">
+                  Contest Rating
+                </span>
+                <div className="flex flex-col mt-1 items-center">
+                  <span className="text-3xl font-semibold text-violet-600 dark:text-violet-400">
+                    {Math.round(data?.contestInfo?.rating || 0)}
+                  </span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    Top {(data?.contestInfo?.topPercentage || 0).toFixed(1)}%
+                  </span>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="w-full flex flex-col items-center mt-2">
-            <span className="text-lg font-bold text-violet-700 dark:text-violet-300">
-          Contest Rating
-            </span>
-            <div className="flex flex-col mt-1 items-center">
-          <span className="text-2xl font-semibold text-violet-600 dark:text-violet-400">
-            {Math.round(data?.contestInfo?.rating || 0)}
-          </span>
-          <span className="text-sm text-gray-500 dark:text-gray-400">
-            Top {(data?.contestInfo?.topPercentage || 0).toFixed(1)}%
-          </span>
+            {/* Problem Solving Distribution */}
+            <div className="flex-1 flex flex-col items-center gap-4 w-full max-w-xs">
+              <h3 className="text-lg font-semibold text-violet-700 dark:text-violet-300 mb-2 text-center">
+                Problem Solving Distribution
+              </h3>
+              <div className="w-full min-w-[220px] max-w-xs space-y-3">
+                <DifficultyBar
+                  label="Easy"
+                  solved={data?.userInfo?.easySolved || 0}
+                  total={data?.userInfo?.totalEasy || 0}
+                  color="bg-green-400"
+                />
+                <DifficultyBar
+                  label="Medium"
+                  solved={data?.userInfo?.mediumSolved || 0}
+                  total={data?.userInfo?.totalMedium || 0}
+                  color="bg-yellow-400"
+                />
+                <DifficultyBar
+                  label="Hard"
+                  solved={data?.userInfo?.hardSolved || 0}
+                  total={data?.userInfo?.totalHard || 0}
+                  color="bg-red-400"
+                />
+              </div>
             </div>
-          </div>
-        </div>
-        {/* Problem Solving Distribution */}
-        <div className="flex-1 flex flex-col items-center gap-4 w-full max-w-xs">
-          <h3 className="text-lg font-semibold text-violet-700 dark:text-violet-300 mb-2 text-center">
-            Problem Solving Distribution
-          </h3>
-          <div className="w-full min-w-[220px] max-w-xs space-y-3">
-            <DifficultyBar
-          label="Easy"
-          solved={data?.userInfo?.easySolved || 0}
-          total={data?.userInfo?.totalEasy || 0}
-          color="bg-green-400"
-            />
-            <DifficultyBar
-          label="Medium"
-          solved={data?.userInfo?.mediumSolved || 0}
-          total={data?.userInfo?.totalMedium || 0}
-          color="bg-yellow-400"
-            />
-            <DifficultyBar
-          label="Hard"
-          solved={data?.userInfo?.hardSolved || 0}
-          total={data?.userInfo?.totalHard || 0}
-          color="bg-red-400"
-            />
-          </div>
-        </div>
           </div>
         </div>
       </div>
