@@ -45,7 +45,6 @@ export function SubmissionChart({ data }: SubmissionChartProps) {
     return acc
   }, {} as Record<string, number>)
 
-  // Convert to sorted array for chart
   const sortedMonths = Object.entries(groupedByMonth)
     .sort(([aMonth], [bMonth]) => {
       const [aDate, bDate] = [new Date(aMonth + ' 1'), new Date(bMonth + ' 1')]

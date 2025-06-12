@@ -14,8 +14,8 @@ export default function CPProfile() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [expanded, setExpanded] = useState(false)
-
-  const fetchLeetCodeData = async () => {
+ 
+  const fetchLeetCodeData = async () => { 
     try {
       setLoading(true)
       const response = await fetch('/api/leetcode', {
@@ -58,7 +58,7 @@ export default function CPProfile() {
     background: "linear-gradient(135deg, rgba(139,92,246,0.10) 0%, rgba(255,255,255,0.06) 100%)",
     border: "1.5px solid #a78bfa",
     width: "min(100%, 920px)",
-    minHeight: "296px", // 370px * 0.8 = 296px
+    minHeight: "296px", 
     maxWidth: "920px",
     margin: "0 auto",
   }
@@ -70,19 +70,19 @@ export default function CPProfile() {
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-[60vh]">
       <div className="w-full flex flex-col items-start max-w-[920px] mx-auto">
-        {/* CP Profile Description with dropdown */}
+        
         <div className="w-full flex flex-col items-center mb-8">
           <div
             className={`w-full relative transition-all duration-500`}
             style={{
-              maxHeight: expanded ? 500 : 64, // ~2 lines
+              maxHeight: expanded ? 500 : 64, 
               overflow: "hidden",
             }}
           >
             <p className="w-full text-[1.18rem] sm:text-lg md:text-xl text-gray-900 dark:text-gray-100 text-center font-medium leading-relaxed transition-all duration-500">
               {paragraph}
             </p>
-            {/* Gradient fade effect when collapsed */}
+            
             {!expanded && (
               <div className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-white dark:from-[#18102b] to-transparent pointer-events-none transition-all duration-500" />
             )}
@@ -105,7 +105,7 @@ export default function CPProfile() {
         </div>
 
         {/* LeetCode Data Title */}
-        <h3 className="text-xl sm:text-2xl font-bold mb-4 text-[#7c3aed] dark:text-[#c4b5fd] text-left">
+        <h3 className="text-xl sm:text-2xl font-bold mb-4 text-violet-600 dark:text-violet-400 text-left">
           LeetCode Statistics:
         </h3>
         
@@ -113,8 +113,7 @@ export default function CPProfile() {
           className="rounded-xl shadow-lg flex flex-col justify-between bg-transparent p-8 w-full"
           style={{
             ...boxStyle,
-            background: "transparent", // Make background fully transparent
-            // Keep the glowing border from boxStyle
+            background: "transparent", 
           }}
         >
           <div className="flex flex-col md:flex-row items-center justify-center gap-10 w-full">

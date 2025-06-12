@@ -62,7 +62,7 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
         d <= today;
         d.setDate(d.getDate() + 1)
       ) {
-        // Use UTC midnight timestamp to match LeetCode keys
+
         const timestamp = Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 1000).toString()
         const count = calendar[timestamp] || 0
 
@@ -87,14 +87,12 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
           level,
         })
 
-        // Start new week on Sunday
         if (currentWeek.length === 7) {
           weeks.push([...currentWeek])
           currentWeek = []
         }
       }
 
-      // Add remaining days if any
       if (currentWeek.length > 0) {
         weeks.push([...currentWeek])
       }
@@ -141,9 +139,8 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
 
   const monthGroups = getMonthGroups()
 
-  // Assign a brighter green for each increasing submission count
   const getLevelColor = (level: number): string => {
-    // 0 = no submission, 1 = 1, 2 = 2, 3 = 3, 4 = 4, 5 = 5, 6+ = 6
+
     const colors = [
       "bg-gray-950/50",   // 0 submissions
       "bg-green-900",     // 1 submission (darkest green)
@@ -153,7 +150,6 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
       "bg-green-300",     // 5 submissions
       "bg-green-200",     // 6+ submissions (brightest green)
     ]
-    // Clamp level between 0 and 6
     const idx = Math.max(0, Math.min(level, 6))
     return colors[idx]
   }
@@ -161,7 +157,7 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
   // Calculate statistics
   const stats = contributionWeeks
     .flat()
-    .flat() // Double flat to get array of ContributionDay
+    .flat() 
     .reduce(
       (acc, day: ContributionDay) => {
         if (day.count > 0) {
@@ -203,7 +199,7 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
-                <Info className="w-5 h-5 text-violet-400" /> {/* Increased icon size, added violet color */}
+                <Info className="w-5 h-5 text-violet-400" />
               </TooltipTrigger>
               <TooltipContent>
                 <p className="text-violet-100">GitHub-style contribution graph showing your coding activity</p>
@@ -212,7 +208,7 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
           </TooltipProvider>
         </div>
 
-        <div className="flex items-center gap-8"> {/* Increased gap */}
+        <div className="flex items-center gap-8"> 
           {/* Total active days */}
           <span className="text-lg text-gray-900 dark:text-violet-300 font-semibold">
             Total active days:{" "}
@@ -247,22 +243,20 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
 
       {/* Heatmap Grid */}
       <div className="relative">
-        <div className="flex gap-2"> {/* Reduced gap from 3 to 2 */}
-          {/* Remove the day labels div and start directly with month groups */}
+        <div className="flex gap-2"> 
           {monthGroups.map((monthGroup, monthIndex) => (
             <div key={monthIndex} className="flex flex-col">
               <div className="text-xs text-gray-800 dark:text-violet-400/80 mb-1 text-center">
                 {monthGroup.month}
               </div>
-              <div className="flex gap-[2px]"> {/* Reduced gap */}
+              <div className="flex gap-[2px]"> 
                 {monthGroup.weeks.map((week, weekIndex) => (
-                  <div key={weekIndex} className="flex flex-col gap-[2px]"> {/* Reduced gap */}
+                  <div key={weekIndex} className="flex flex-col gap-[2px]"> 
                     {week.map((day, dayIndex) => (
                       <TooltipProvider key={dayIndex}>
                         <Tooltip>
                           <TooltipTrigger>
                             <div
-                              // Reduced size from w-4/h-4 to w-3/h-3
                               className={`w-3 h-3 rounded-sm ${getLevelColor(
                                 day.level
                               )} hover:ring-1 hover:ring-violet-400`}
@@ -286,10 +280,10 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
       </div>
 
       {/* Legend */}
-      <div className="flex items-center justify-end mt-4"> {/* Reduced margin */}
+      <div className="flex items-center justify-end mt-4"> 
         <div className="flex items-center gap-2 text-xs text-gray-800 dark:text-violet-300/80">
           <span>Less</span>
-          <div className="flex gap-[2px]"> {/* Reduced gap */}
+          <div className="flex gap-[2px]"> 
             {[0, 1, 2, 3, 4].map((level: number) => (
               <div
                 key={level}

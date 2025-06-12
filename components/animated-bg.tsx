@@ -53,8 +53,8 @@ export default function AnimatedBg() {
         if (!ctx) return
         ctx.fillStyle =
           theme === "dark"
-            ? "rgba(235, 232, 239, 0.5)" // violet for dark
-            : "rgba(0,0,0,0.25)" // more visible black for light
+            ? "rgba(235, 232, 239, 0.5)" 
+            : "rgba(0,0,0,0.25)" 
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
         ctx.fill()
@@ -67,7 +67,6 @@ export default function AnimatedBg() {
 
     function animate() {
       if (!ctx) return
-      // Use transparent background so content is visible
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       for (const particle of particles) {
         particle.update()
@@ -84,7 +83,7 @@ export default function AnimatedBg() {
 
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
-    // eslint-disable-next-line
+  
   }, [theme])
 
   return (
@@ -101,7 +100,7 @@ function App() {
     <div className="relative min-h-screen">
       <AnimatedBg />
       <div className="fixed inset-0 z-0 bg-white/80 dark:bg-background/80 pointer-events-none" aria-hidden="true" />
-      {/* ...rest of your content... */}
+      
     </div>
   )
 }

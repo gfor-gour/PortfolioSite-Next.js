@@ -179,7 +179,7 @@ export default function Page() {
                   className="relative z-10 rounded-2xl object-cover w-full h-full"
                   style={{
                     boxShadow: "0 0 20px 4px rgba(139,92,246,0.5), 0 0 40px 8px rgba(139,92,246,0.3)",
-                    objectPosition: "center 15%" // Adjusted to keep face visible in square format
+                    objectPosition: "center 15%" 
                   }} />
               </div>
 
@@ -191,7 +191,7 @@ export default function Page() {
                   background: "transparent",
                 }}
               >
-                {/* Social buttons with responsive sizing */}
+                
                 <Button 
                   variant="outline" 
                   size="lg" 
@@ -243,8 +243,9 @@ export default function Page() {
 
         <section id="projects" className="py-8 sm:py-12 md:py-24 lg:py-32">
           <div className="container px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter text-black dark:text-primary mb-8 sm:mb-12 text-center">
-              Projects
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter text-center mb-8 sm:mb-12">
+              <span className="text-black dark:text-white">Development </span>
+              <span className="text-violet-600 dark:text-violet-400">Archive</span>
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
 
@@ -286,8 +287,8 @@ export default function Page() {
 
         <section id="cp-profile" className="py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter text-black dark:text-primary sm:text-4xl md:text-5xl mb-12 text-center">
-              CP <span className="text-black dark:text-violet-400">Profile</span>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
+              CP <span className="text-violet-600 dark:text-violet-400">Profile</span>
             </h2>
             <CPProfile />
           </div>
@@ -440,7 +441,7 @@ export default function Page() {
         </section>
       </main><footer className="border-t border-border bg-white dark:bg-background">
           <div className="container flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6">
-            <p className="text-xs text-gray-500 dark:text-muted-foreground">© 2024 gourgupal.dev. All rights reserved.</p>
+            <p className="text-xs text-gray-500 dark:text-muted-foreground">© 2024 g_for_gour.dev. All rights reserved.</p>
             <nav className="sm:ml-auto flex gap-4 sm:gap-6">
               <Link className="text-xs text-gray-500 dark:text-muted-foreground hover:text-black dark:hover:text-primary hover:underline underline-offset-4" href="#">
                 Terms of Service

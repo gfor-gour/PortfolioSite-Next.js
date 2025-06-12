@@ -8,7 +8,6 @@ export async function submitContactForm(formData: FormData) {
   const email = formData.get("email")
   const message = formData.get("message")
 
-  // Here you would typically send an email or save to a database
   console.log("Form submission:", { name, email, message })
 
   return {

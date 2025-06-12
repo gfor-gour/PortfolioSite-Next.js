@@ -135,23 +135,23 @@
 
 .animate-name {
   opacity: 0;
-  animation: fadeIn 0.8s ease-out forwards; /* Increased from 0.5s to 0.8s */
+  animation: fadeIn 0.8s ease-out forwards; 
 }
 
 .delay-1 {
-  animation-delay: 0.4s; /* Increased from 0.2s */
+  animation-delay: 0.4s; 
 }
 
 .delay-2 {
-  animation-delay: 0.8s; /* Increased from 0.4s */
+  animation-delay: 0.8s;
 }
 
 .delay-3 {
-  animation-delay: 1.2s; /* Increased from 0.6s */
+  animation-delay: 1.2s;
 }
 
 .delay-4 {
-  animation-delay: 1.6s; /* Increased from 0.8s */
+  animation-delay: 1.6s;
 }
 
 @layer utilities {
@@ -175,7 +175,6 @@
     @apply text-sm sm:text-base md:text-lg;
   }
 
-  /* Add these responsive utilities */
   .responsive-text {
     @apply text-base sm:text-lg md:text-xl lg:text-2xl;
   }
@@ -192,7 +191,7 @@
     @apply w-[280px] sm:w-[320px] md:w-[360px] lg:w-[400px];
   }
 
-  /* Improved scrollbar hiding */
+
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -201,7 +200,7 @@
     }
   }
 
-  /* Responsive navbar styles */
+
   @screen sm {
     .nav-button {
       padding: 0.1rem 0.75rem;
@@ -215,7 +214,6 @@
   filter: invert(1) brightness(1.75);
 }
 
-/* Update animations for mobile */
 @media (max-width: 640px) {
   .animate-name {
     animation-duration: 0.6s;
