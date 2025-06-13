@@ -11,7 +11,6 @@ import {
   FacebookIcon 
 } from "lucide-react"
 import Link from "next/link"
-import ContactForm from "./components/contact-form"
 import ProjectCard from "./components/project-card"
 import TechStack from "./components/tech-stack"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -430,7 +429,7 @@ export default function Page() {
                       Feel free to reach out for collaborations or just to say hi!
                       <br />
                       <span className="text-base md:text-lg text-violet-600/90 dark:text-violet-400/90">
-                        I'm always open to discussing new projects and opportunities.
+                        I&apos;m always open to discussing new projects and opportunities.
                       </span>
                     </p>
                   </div>

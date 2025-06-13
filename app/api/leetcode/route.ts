@@ -61,14 +61,19 @@ export async function GET() {
     const problemsSolved = userInfo?.problemsSolved?.acSubmissionNum || []
     const submitStats = userInfo?.submitStats?.acSubmissionNum || []
     // Get total questions from allQuestionsCount
+    type QuestionCount = { difficulty: string; count: number }
     const totalQuestions =
-      allQuestionsCount?.find((q: any) => q.difficulty === "All")?.count ?? 0
+      allQuestionsCount?.find((q: QuestionCount) => q.difficulty === "All")
+        ?.count ?? 0
     const totalEasy =
-      allQuestionsCount?.find((q: any) => q.difficulty === "Easy")?.count ?? 0
+      allQuestionsCount?.find((q: QuestionCount) => q.difficulty === "Easy")
+        ?.count ?? 0
     const totalMedium =
-      allQuestionsCount?.find((q: any) => q.difficulty === "Medium")?.count ?? 0
+      allQuestionsCount?.find((q: QuestionCount) => q.difficulty === "Medium")
+        ?.count ?? 0
     const totalHard =
-      allQuestionsCount?.find((q: any) => q.difficulty === "Hard")?.count ?? 0
+      allQuestionsCount?.find((q: QuestionCount) => q.difficulty === "Hard")
+        ?.count ?? 0
 
     return NextResponse.json({
       userInfo: {

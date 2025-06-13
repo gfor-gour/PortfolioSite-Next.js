@@ -94,13 +94,3 @@ export default function AnimatedBg() {
     />
   )
 }
-
-function App() {
-  return (
-    <div className="relative min-h-screen">
-      <AnimatedBg />
-      <div className="fixed inset-0 z-0 bg-white/80 dark:bg-background/80 pointer-events-none" aria-hidden="true" />
-      
-    </div>
-  )
-}

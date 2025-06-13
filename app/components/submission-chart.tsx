@@ -100,8 +100,8 @@ export function SubmissionChart({ data }: SubmissionChartProps) {
       },
       tooltip: {
         callbacks: {
-          title: (items: any) => `${items[0].label}`,
-          label: (context: any) => `${context.parsed.y} submissions`
+          title: (items: { label: string }[]) => `${items[0].label}`,
+          label: (context: { parsed: { y: number } }) => `${context.parsed.y} submissions`
         }
       }
     },

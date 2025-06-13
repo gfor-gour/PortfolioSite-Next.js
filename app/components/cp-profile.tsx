@@ -2,9 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { Skeleton } from "@/components/ui/skeleton"
-import { StatCard } from './stat-card'
 import { glowingCardStyle } from '../utils/styles'
-import { SubmissionChart } from './submission-chart'
 import { LeetCodeData } from '@/types/leetcode'
 import { LeetCodeHeatmap } from "./leetcode-heatmap"
 import { ChevronDown, ChevronUp } from "lucide-react"
@@ -52,7 +50,6 @@ export default function CPProfile() {
     return <ErrorState error={error} retry={fetchLeetCodeData} />
   }
 
-
   const boxStyle = {
     ...glowingCardStyle,
     background: "linear-gradient(135deg, rgba(139,92,246,0.10) 0%, rgba(255,255,255,0.06) 100%)",
@@ -70,7 +67,7 @@ export default function CPProfile() {
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-[60vh]">
       <div className="w-full flex flex-col items-start max-w-[920px] mx-auto">
-        
+        {/* CP Profile Description with dropdown */}
         <div className="w-full flex flex-col items-center mb-8">
           <div
             className={`w-full relative transition-all duration-500`}
@@ -82,7 +79,6 @@ export default function CPProfile() {
             <p className="w-full text-[1.18rem] sm:text-lg md:text-xl text-gray-900 dark:text-gray-100 text-center font-medium leading-relaxed transition-all duration-500">
               {paragraph}
             </p>
-            
             {!expanded && (
               <div className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-white dark:from-[#18102b] to-transparent pointer-events-none transition-all duration-500" />
             )}
@@ -232,17 +228,18 @@ function DifficultyBar({
   total: number
   color?: string
 }) {
-  const percent = total > 0 ? Math.min(100, Math.round((solved / total) * 100)) : 0
-
+  const percent = total > 0 ? Math.round((solved / total) * 100) : 0
   return (
-    <div>
+    <div className="w-full">
       <div className="flex justify-between mb-1">
-        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{label}</span>
-        <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">{solved} / {total}</span>
+        <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{label}</span>
+        <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
+          {solved} / {total}
+        </span>
       </div>
-      <div className="w-full h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+      <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-3">
         <div
-          className={`h-4 rounded-full transition-all duration-700 ${color}`}
+          className={`${color} h-3 rounded-full transition-all`}
           style={{ width: `${percent}%` }}
         />
       </div>
