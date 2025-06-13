@@ -107,7 +107,7 @@ export default function Page() {
               {/* Hi, I'm section - Remove mobile social icons */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center w-full">
                 <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-violet-600 dark:text-white">
-                  Hi, I'm
+                  Hi, I&apos;m
                 </span>
               </div>
 
@@ -308,7 +308,7 @@ export default function Page() {
           <div className="container px-4 md:px-6">
             <div className="mx-auto max-w-3xl">
               <h2 className="text-3xl font-bold tracking-tighter text-black dark:text-primary sm:text-4xl md:text-5xl mb-12 text-center">
-                Let's <span className="text-violet-600 dark:text-violet-400">Connect</span>
+                Let&apos;s <span className="text-violet-600 dark:text-violet-400">Connect</span>
               </h2>
 
               <div className="flex flex-col items-center space-y-8">

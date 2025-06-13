@@ -55,24 +55,21 @@ export async function GET() {
       throw new Error("Failed to fetch LeetCode data")
     }
 
-    const { userInfo, contestInfo, allQuestionsCount } = data.data
-
     // Defensive checks for all nested properties
-    const problemsSolved = userInfo?.problemsSolved?.acSubmissionNum || []
-    const submitStats = userInfo?.submitStats?.acSubmissionNum || []
+    const problemsSolved = data.data.userInfo?.problemsSolved?.acSubmissionNum || []
     // Get total questions from allQuestionsCount
     type QuestionCount = { difficulty: string; count: number }
     const totalQuestions =
-      allQuestionsCount?.find((q: QuestionCount) => q.difficulty === "All")
+      data.data.allQuestionsCount?.find((q: QuestionCount) => q.difficulty === "All")
         ?.count ?? 0
     const totalEasy =
-      allQuestionsCount?.find((q: QuestionCount) => q.difficulty === "Easy")
+      data.data.allQuestionsCount?.find((q: QuestionCount) => q.difficulty === "Easy")
         ?.count ?? 0
     const totalMedium =
-      allQuestionsCount?.find((q: QuestionCount) => q.difficulty === "Medium")
+      data.data.allQuestionsCount?.find((q: QuestionCount) => q.difficulty === "Medium")
         ?.count ?? 0
     const totalHard =
-      allQuestionsCount?.find((q: QuestionCount) => q.difficulty === "Hard")
+      data.data.allQuestionsCount?.find((q: QuestionCount) => q.difficulty === "Hard")
         ?.count ?? 0
 
     return NextResponse.json({
@@ -87,11 +84,11 @@ export async function GET() {
         totalHard,
       },
       contestInfo: {
-        rating: contestInfo?.rating || 0,
-        topPercentage: contestInfo?.topPercentage || 0,
+        rating: data.data.contestInfo?.rating || 0,
+        topPercentage: data.data.contestInfo?.topPercentage || 0,
       },
       calendar: {
-        submissionCalendar: userInfo?.userCalendar?.submissionCalendar || "{}",
+        submissionCalendar: data.data.userInfo?.userCalendar?.submissionCalendar || "{}",
       },
     })
   } catch (error) {
