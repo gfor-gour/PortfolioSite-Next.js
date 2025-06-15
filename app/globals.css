@@ -160,7 +160,7 @@
   }
 
   .responsive-container {
-    @apply px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl;
+    @apply max-w-[1440px] mx-auto w-full px-4 sm:px-6 lg:px-8;
   }
 
   .responsive-padding {
@@ -168,7 +168,7 @@
   }
 
   .responsive-grid {
-    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8;
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto;
   }
 
   .responsive-text {
@@ -191,6 +191,43 @@
     @apply w-[280px] sm:w-[320px] md:w-[360px] lg:w-[400px];
   }
 
+  /* Update existing .max-container utility */
+  .max-container {
+    max-width: min(100%, 1680px); /* Increased from 1280px */
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
+  /* Add new container utilities */
+  .container-fluid {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1920px; /* Larger max-width for wider screens */
+  }
+
+  /* Update responsive breakpoints */
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1680px; /* Increased from 1440px */
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .container-fluid {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  .content-container {
+    @apply max-w-[1280px] mx-auto w-full;
+  }
+  
+  .content-section {
+    @apply px-4 sm:px-6 lg:px-8 w-full;
+  }
 
   .scrollbar-hide {
     -ms-overflow-style: none;
@@ -200,12 +237,38 @@
     }
   }
 
+  /* Responsive text sizes */
+  .text-responsive {
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl;
+  }
+
+  /* Responsive spacing */
+  .section-spacing {
+    @apply gap-8 md:gap-16 lg:gap-32;
+  }
 
   @screen sm {
     .nav-button {
       padding: 0.1rem 0.75rem;
       height: 2.2rem;
       font-size: 0.875rem;
+    }
+  }
+
+  .name-text {
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    line-height: 1.2;
+  }
+
+  @media (max-width: 768px) {
+    .name-text {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .name-text {
+      font-size: clamp(3rem, 6vw, 5rem);
     }
   }
 }
@@ -223,4 +286,30 @@
   .delay-2 { animation-delay: 0.4s; }
   .delay-3 { animation-delay: 0.6s; }
   .delay-4 { animation-delay: 0.8s; }
+}
+
+/* For larger screens */
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+
+/* Screen-specific adjustments */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .name-heading {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1440px;
+  }
+}
+
+/* Prevent text overflow */
+.break-words {
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
