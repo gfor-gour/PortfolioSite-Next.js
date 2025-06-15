@@ -58,8 +58,13 @@ export default function Page() {
             { href: "#cp-profile", label: "CP Profile" },
             { href: "#projects", label: "Projects" },
             { href: "#contact", label: "Contact" },
-            { href: "/resume.pdf", label: "Resume", external: true },
-            ].map(({ href, label, external }) => (
+            { 
+              href: "/resume.pdf", 
+              label: "Resume", 
+              external: true,
+              download: true  
+            },
+            ].map(({ href, label, external, download }) => (
             <span
               key={label}
               className="rounded-xl flex items-center flex-shrink-0"
@@ -82,6 +87,7 @@ export default function Page() {
                 href={href}
                 target={external ? "_blank" : undefined}
                 rel={external ? "noopener noreferrer" : undefined}
+                download={download ? "Gour_Gupal_Talukder.pdf" : undefined}  // Add download attribute
               >
                 {label}
               </Link>
