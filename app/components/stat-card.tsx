@@ -13,10 +13,10 @@ export function StatCard({ title, value, total, subtitle }: StatCardProps) {
   }
 
   return (
-    <div className="p-6 rounded-xl backdrop-blur" style={glowingCardStyle}>
+    <div className="p-4 sm:p-6 rounded-xl backdrop-blur" style={glowingCardStyle}>
       <h3 className="text-lg font-semibold text-black dark:text-primary mb-2">{title}</h3>
       <div className="flex items-end gap-2">
-        <span className="text-3xl font-bold text-violet-600 dark:text-violet-400">
+        <span className="text-2xl sm:text-3xl font-bold text-violet-600 dark:text-violet-400">
           {value}
         </span>
         {total && (

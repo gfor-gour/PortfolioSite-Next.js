@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { ChevronDown, Info } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -30,6 +30,8 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
   const [selectedPeriod, setSelectedPeriod] = useState<
     "Current" | "Last Year" | "All Time"
   >("Current")
+  
+  const containerRef = useRef<HTMLDivElement>(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -179,7 +181,7 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
 
   return (
     <div
-      className="backdrop-blur-sm border border-violet-500/20 text-white p-6 rounded-lg mx-auto"
+      className="backdrop-blur-sm border border-violet-500/20 text-white p-3 sm:p-4 md:p-6 rounded-lg mx-auto w-full overflow-x-auto"
       style={{
         width: "min(100%, 920px)",
         border: "2px solid rgba(139,92,246,1)",
@@ -188,7 +190,7 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
       }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between mb-8"> {/* Increased margin */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 md:mb-8 gap-4 sm:gap-0">
         <div className="flex items-center gap-3"> {/* Increased gap */}
           <span className="text-3xl font-extrabold text-violet-700 dark:text-violet-300">
             {stats.totalSubmissions}

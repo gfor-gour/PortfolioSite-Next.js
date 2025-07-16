@@ -65,7 +65,7 @@ export default function CPProfile() {
   This portfolio goes beyond a traditional static display. I've integrated API routes to fetch real-time data from LeetCode using its GraphQL API. This dynamic approach allowed me to develop a data-driven heatmap, providing a live and visual representation of my coding activity and progress.`
 
   return (
-    <div className="flex flex-col items-center justify-center w-full min-h-[60vh]">
+    <div className="flex flex-col items-center justify-center w-full min-h-[60vh] px-4 sm:px-6">
       <div className="w-full flex flex-col items-start max-w-[920px] mx-auto">
         {/* CP Profile Description with dropdown */}
         <div className="w-full flex flex-col items-center mb-8">
@@ -106,13 +106,13 @@ export default function CPProfile() {
         </h3>
         
         <div
-          className="rounded-xl shadow-lg flex flex-col justify-between bg-transparent p-8 w-full"
+          className="rounded-xl shadow-lg flex flex-col justify-between bg-transparent p-4 sm:p-6 md:p-8 w-full"
           style={{
             ...boxStyle,
             background: "transparent", 
           }}
         >
-          <div className="flex flex-col md:flex-row items-center justify-center gap-10 w-full">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 w-full">
             {/* Problem Solved & Contest Rating */}
             <div className="flex-1 flex flex-col items-center gap-8 w-full max-w-xs">
               <div className="w-full flex flex-col items-center">

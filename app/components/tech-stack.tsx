@@ -27,20 +27,20 @@ export default function TechStack() {
       {technologies.map((row, rowIndex) => (
         <div 
           key={rowIndex}
-          className="flex flex-wrap items-center justify-center gap-8 md:gap-16"
+          className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-16"
         >
           {row.map((tech) => (
             <div
               key={tech.name}
               className="flex flex-col items-center gap-3 transition-transform hover:scale-110"
             >
-              <div className="relative w-12 h-12 flex items-center justify-center">
+              <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center">
                 <Image
                   src={tech.src}
                   alt={tech.name}
                   width={48}
                   height={48}
-                  className={`w-12 h-12 object-contain ${
+                  className={`w-10 h-10 sm:w-12 sm:h-12 object-contain ${
                     tech.darkMode ? 'dark:invert dark:brightness-175' : ''
                   }`}
                 />

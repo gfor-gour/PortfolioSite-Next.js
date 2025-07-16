@@ -15,6 +15,7 @@ import ProjectCard from "./components/project-card"
 import TechStack from "./components/tech-stack"
 import { ThemeToggle } from "@/components/theme-toggle"
 import AnimatedBg from "@/components/animated-bg"
+import { MobileMenu } from "@/components/mobile-menu"
 import Image from "next/image" 
 import CPProfile from './components/cp-profile'
 
@@ -28,12 +29,12 @@ export default function Page() {
 
   return (
     <div className="relative min-h-screen text-black dark:text-foreground flex justify-center">
-      <div className="w-full max-w-[1440px]">
+      <div className="w-full max-w-[1440px] px-4 sm:px-6 lg:px-8">
       <AnimatedBg />
 
       {/* Fix navbar scrolling */}
       <header className="sticky top-0 z-50 w-full border-b border-border bg-white dark:bg-background/95 backdrop-blur">
-        <div className="container flex h-14 items-center justify-between">
+        <div className="container flex h-14 items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo - Left side */}
           <Link
           href="#about"
@@ -51,54 +52,54 @@ export default function Page() {
           </Link>
 
         {/* Navigation container - Right side */}
-        <div className="flex-1 flex justify-end">
-          <nav className="flex items-center">
-          <div className="flex items-center gap-2 sm:gap-4 overflow-x-auto scrollbar-hide py-2 px-1">
-            {[
-            { href: "#cp-profile", label: "CP Profile" },
-            { href: "#projects", label: "Projects" },
-            { href: "#contact", label: "Contact" },
-            { 
-              href: "/resume.pdf", 
-              label: "Resume", 
-              external: true,
-              download: true  
-            },
-            ].map(({ href, label, external, download }) => (
-            <span
-              key={label}
-              className="rounded-xl flex items-center flex-shrink-0"
-              style={{
-              border: "2px solid rgba(139,92,246,1)",
-              boxShadow: "0 0 8px 2px rgba(139, 92, 246, 0.7), 0 0 4px 1px rgba(139, 92, 246, 0.5)",
-              background: "transparent",
-              padding: "0.1rem 0.5rem",
-              height: "1.8rem",
-              minHeight: "unset",
-              }}
-            >
-              <Button
-              asChild
-              size="sm"
-              variant="outline"
-              className="text-black dark:text-primary border-none bg-transparent shadow-none px-0 h-auto min-h-0 text-xs sm:text-sm"
-              >
-              <Link
-                href={href}
-                target={external ? "_blank" : undefined}
-                rel={external ? "noopener noreferrer" : undefined}
-                download={download ? "Gour_Gupal_Talukder.pdf" : undefined}  // Add download attribute
-              >
-                {label}
-              </Link>
-              </Button>
-            </span>
-            ))}
-            <ThemeToggle 
-            className="flex-shrink-0 h-7 w-7 sm:h-9 sm:w-9 ml-2"
-            />
-          </div>
+        <div className="flex items-center gap-2">
+          {/* Desktop Navigation */}
+          <nav className="hidden sm:flex items-center">
+            <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide py-2">
+              {[
+                { href: "#cp-profile", label: "CP Profile" },
+                { href: "#projects", label: "Projects" },
+                { href: "#contact", label: "Contact" },
+                { href: "/resume.pdf", label: "Resume", external: true },
+              ].map(({ href, label, external }) => (
+                <span
+                  key={label}
+                  className="rounded-xl flex items-center flex-shrink-0"
+                  style={{
+                    border: "2px solid rgba(139,92,246,1)",
+                    boxShadow: "0 0 8px 2px rgba(139, 92, 246, 0.7), 0 0 4px 1px rgba(139, 92, 246, 0.5)",
+                    background: "transparent",
+                    padding: "0.1rem 0.5rem",
+                    height: "1.8rem",
+                    minHeight: "unset",
+                  }}
+                >
+                  <Button
+                    asChild
+                    size="sm"
+                    variant="outline"
+                    className="text-black dark:text-primary border-none bg-transparent shadow-none px-0 h-auto min-h-0 text-xs sm:text-sm"
+                  >
+                    <Link
+                      href={href}
+                      target={external ? "_blank" : undefined}
+                      rel={external ? "noopener noreferrer" : undefined}
+                    >
+                      {label}
+                    </Link>
+                  </Button>
+                </span>
+              ))}
+            </div>
           </nav>
+
+          {/* Theme Toggle and Mobile Menu */}
+          <div className="flex items-center gap-2">
+            <ThemeToggle 
+              className="flex-shrink-0 h-7 w-7 sm:h-9 sm:w-9"
+            />
+            <MobileMenu />
+          </div>
         </div>
         </div>
       </header>
@@ -112,14 +113,14 @@ export default function Page() {
           {/* Left Content */}
           <div className="w-full md:w-[60%] flex flex-col items-start justify-center space-y-4 sm:space-y-6">
           {/* Hi, I'm section - Remove mobile social icons */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center w-full">
-            <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-violet-600 dark:text-white">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center w-full gap-2 sm:gap-4">
+            <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-violet-600 dark:text-white">
             Hi, I&apos;m
             </span>
           </div>
 
           {/* Name with animations */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-black dark:text-primary break-words sm:whitespace-nowrap">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-black dark:text-primary break-words sm:whitespace-nowrap">
             <span className="inline-block animate-name delay-1">Gour</span>{" "}
             <span className="inline-block animate-name delay-2">Gupal</span>{" "}
             <span className="inline-block animate-name delay-3">Talukder</span>{" "}
@@ -128,14 +129,13 @@ export default function Page() {
 
           {/* Bio section */}
           <div className="w-full md:w-auto flex flex-col items-start">
-            <span className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
-            <span className="text-base md:text-lg font-semibold text-violet-700 dark:text-violet-200">
-              A Software Engineering student at SUST, Sylhet, Bangladesh.
-            </span>
-            <span className="hidden sm:inline text-violet-700 dark:text-violet-200">|</span>
-            <span className="text-sm md:text-base text-violet-600 dark:text-violet-300">
-              7th semester of the Final Year
-            </span>
+            <span className="flex flex-col items-start gap-1">
+              <span className="text-base md:text-lg font-semibold text-violet-700 dark:text-violet-200">
+                A Software Engineering student at SUST, Sylhet, Bangladesh.
+              </span>
+              <span className="text-sm md:text-base text-violet-600 dark:text-violet-300">
+                7th semester, Final Year
+              </span>
             </span>
             <span
             className="block mt-2"

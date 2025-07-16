@@ -24,7 +24,7 @@ export default function ContactForm() {
   }
 
   return (
-    <Card className="p-6">
+    <Card className="p-4 sm:p-6 w-[90%] sm:w-[450px] mx-auto">
       <form action={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="name" className="block text-sm font-medium mb-2">
