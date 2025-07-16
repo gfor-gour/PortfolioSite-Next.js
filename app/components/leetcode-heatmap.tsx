@@ -31,7 +31,6 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
     "Current" | "Last Year" | "All Time"
   >("Current")
   
-  const containerRef = useRef<HTMLDivElement>(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
