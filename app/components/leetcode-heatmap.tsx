@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { ChevronDown, Info } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
