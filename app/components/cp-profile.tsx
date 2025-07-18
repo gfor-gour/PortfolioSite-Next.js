@@ -52,8 +52,8 @@ export default function CPProfile() {
 
   const boxStyle = {
     ...glowingCardStyle,
-    background: "linear-gradient(135deg, rgba(139,92,246,0.10) 0%, rgba(255,255,255,0.06) 100%)",
-    border: "1.5px solid #a78bfa",
+    background: "var(--card)",
+    border: "1.5px solid var(--glow)",
     width: "min(100%, 920px)",
     minHeight: "296px", 
     maxWidth: "920px",
@@ -76,32 +76,32 @@ export default function CPProfile() {
               overflow: "hidden",
             }}
           >
-            <p className="w-full text-[1.18rem] sm:text-lg md:text-xl text-gray-900 dark:text-gray-100 text-center font-medium leading-relaxed transition-all duration-500">
+            <p className="w-full text-[1.18rem] sm:text-lg md:text-xl text-[#2F4F4F] dark:text-gray-100 text-center font-medium leading-relaxed transition-all duration-500">
               {paragraph}
             </p>
             {!expanded && (
-              <div className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-white dark:from-[#18102b] to-transparent pointer-events-none transition-all duration-500" />
+              <div className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-[#2F4F4F] dark:from-[#18102b] to-transparent pointer-events-none transition-all duration-500" />
             )}
           </div>
           <button
-            className="flex items-center gap-1 mt-2 text-violet-700 dark:text-violet-300 font-semibold hover:underline focus:outline-none transition-colors"
+            className="flex items-center gap-1 mt-2 text-[#2F4F4F] dark:text-violet-300 font-bold hover:underline focus:outline-none transition-colors"
             onClick={() => setExpanded((v) => !v)}
             aria-expanded={expanded}
           >
             {expanded ? "Show less" : "Read more"}
             {expanded ? (
-              <ChevronUp className="w-5 h-5" />
+              <ChevronUp className="w-5 h-5 text-[#2F4F4F] dark:text-violet-300" />
             ) : (
-              <ChevronDown className="w-5 h-5" />
+              <ChevronDown className="w-5 h-5 text-[#2F4F4F] dark:text-violet-300" />
             )}
           </button>
           <div className="w-full flex justify-center mt-6">
-            <hr className="w-full h-1 rounded border-0 bg-gradient-to-r from-violet-400 via-violet-500 to-violet-400 shadow-[0_0_16px_2px_rgba(139,92,246,0.7)]" />
+            <hr className="w-full h-1 rounded border-0 bg-[#2F4F4F] dark:bg-violet-400 shadow-[0_0_16px_2px_#2F4F4F] dark:shadow-[0_0_16px_2px_rgba(139,92,246,0.7)]" />
           </div>
         </div>
 
         {/* LeetCode Data Title */}
-        <h3 className="text-xl sm:text-2xl font-bold mb-4 text-violet-600 dark:text-violet-400 text-left">
+        <h3 className="text-xl sm:text-2xl font-bold mb-4 text-[#2F4F4F] dark:text-violet-400 text-left">
           LeetCode Statistics:
         </h3>
         
@@ -116,27 +116,27 @@ export default function CPProfile() {
             {/* Problem Solved & Contest Rating */}
             <div className="flex-1 flex flex-col items-center gap-8 w-full max-w-xs">
               <div className="w-full flex flex-col items-center">
-                <span className="text-lg font-semibold text-violet-700 dark:text-violet-300">
+                <span className="text-lg font-semibold text-[#2F4F4F] dark:text-violet-300">
                   Problem Solved
                 </span>
                 <div className="flex items-end gap-2 mt-1">
-                  <span className="text-4xl font-extrabold text-violet-600 dark:text-violet-400">
+                  <span className="text-4xl font-extrabold text-[#2F4F4F] dark:text-violet-400">
                     {data?.userInfo?.totalSolved || 0}
                   </span>
-                  <span className="text-base text-gray-500 dark:text-gray-400 mb-1">
+                  <span className="text-base text-[#2F4F4F] dark:text-gray-400 mb-1">
                     / {data?.userInfo?.totalQuestions || 0}
                   </span>
                 </div>
               </div>
               <div className="w-full flex flex-col items-center mt-2">
-                <span className="text-lg font-bold text-violet-700 dark:text-violet-300">
+                <span className="text-lg font-bold text-[#2F4F4F] dark:text-violet-300">
                   Contest Rating
                 </span>
                 <div className="flex flex-col mt-1 items-center">
-                  <span className="text-3xl font-semibold text-violet-600 dark:text-violet-400">
+                  <span className="text-3xl font-semibold text-[#2F4F4F] dark:text-violet-400">
                     {Math.round(data?.contestInfo?.rating || 0)}
                   </span>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                  <span className="text-sm text-[#2F4F4F] dark:text-gray-400">
                     Top {(data?.contestInfo?.topPercentage || 0).toFixed(1)}%
                   </span>
                 </div>
@@ -144,7 +144,7 @@ export default function CPProfile() {
             </div>
             {/* Problem Solving Distribution */}
             <div className="flex-1 flex flex-col items-center gap-4 w-full max-w-xs">
-              <h3 className="text-lg font-semibold text-violet-700 dark:text-violet-300 mb-2 text-center">
+              <h3 className="text-lg font-semibold text-[#2F4F4F] dark:text-violet-300 mb-2 text-center">
                 Problem Solving Distribution
               </h3>
               <div className="w-full min-w-[220px] max-w-xs space-y-3">

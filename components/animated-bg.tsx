@@ -53,8 +53,8 @@ export default function AnimatedBg() {
         if (!ctx) return
         ctx.fillStyle =
           theme === "dark"
-            ? "rgba(235, 232, 239, 0.5)" 
-            : "rgba(0,0,0,0.25)" 
+            ? "rgba(235, 232, 239, 0.5)"
+            : "#000"
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
         ctx.fill()

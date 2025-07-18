@@ -180,30 +180,30 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
 
   return (
     <div
-      className="backdrop-blur-sm border border-violet-500/20 text-white p-3 sm:p-4 md:p-6 rounded-lg mx-auto w-full overflow-x-auto"
+      className="backdrop-blur-sm border text-foreground p-3 sm:p-4 md:p-6 rounded-lg mx-auto w-full overflow-x-auto"
       style={{
         width: "min(100%, 920px)",
-        border: "2px solid rgba(139,92,246,1)",
-        boxShadow: "0 0 16px 2px rgba(139,92,246,0.7), 0 0 8px 2px rgba(139,92,246,0.5)",
+        border: "2px solid var(--glow)",
+        boxShadow: "0 0 16px 2px var(--glow), 0 0 8px 2px var(--glow)",
         background: "transparent",
       }}
     >
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 md:mb-8 gap-4 sm:gap-0">
         <div className="flex items-center gap-3"> {/* Increased gap */}
-          <span className="text-3xl font-extrabold text-violet-700 dark:text-violet-300">
+          <span className="text-3xl font-extrabold text-foreground">
             {stats.totalSubmissions}
           </span>
-          <span className="text-lg text-gray-800 dark:text-violet-300">
+          <span className="text-lg text-foreground">
             submissions in the past one year
           </span>
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
-                <Info className="w-5 h-5 text-violet-400" />
+                <Info className="w-5 h-5 text-foreground" />
               </TooltipTrigger>
               <TooltipContent>
-                <p className="text-violet-100">GitHub-style contribution graph showing your coding activity</p>
+                <p className="text-foreground">GitHub-style contribution graph showing your coding activity</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
@@ -211,34 +211,15 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
 
         <div className="flex items-center gap-8"> 
           {/* Total active days */}
-          <span className="text-lg text-gray-900 dark:text-violet-300 font-semibold">
-            Total active days:{" "}
-            <span className="text-violet-700 dark:text-violet-300 font-extrabold">{stats.activeDays}</span>
+          <span className="text-lg font-semibold text-foreground">
+            Total active days: <span className="font-extrabold text-foreground">{stats.activeDays}</span>
           </span>
-
-          {/* Dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                className="bg-violet-950/30 border-violet-500/30 hover:bg-violet-900/20 text-gray-800 dark:text-violet-300"
-              >
-                {selectedPeriod}
-                <ChevronDown className="ml-2 h-5 w-5" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-gray-900/95 border-violet-500/30">
-              {["Current", "Last Year", "All Time"].map((period) => (
-                <DropdownMenuItem
-                  key={period}
-                  onClick={() => setSelectedPeriod(period as "Current" | "Last Year" | "All Time")}
-                  className="text-violet-300 hover:bg-violet-950/50 hover:text-violet-200"
-                >
-                  {period}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <button
+            className="px-4 py-2 rounded-md border border-[var(--glow)] shadow-[0_0_8px_2px_var(--glow)] text-foreground font-bold bg-transparent cursor-default"
+            disabled
+          >
+            Current
+          </button>
         </div>
       </div>
 

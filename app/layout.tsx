@@ -17,7 +17,7 @@ export default function RootLayout({
   const [queryClient] = useState(() => new QueryClient())
 
   return (
-    <html lang="en" suppressHydrationWarning className="dark">
+    <html lang="en" suppressHydrationWarning>
       <body className={cn("min-h-screen bg-background font-sans antialiased", inter.className)}>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider 
