@@ -31,6 +31,12 @@ export async function GET() {
           profile {
             ranking
           }
+          badges {
+            id
+            displayName
+            icon
+            category
+          }
         }
         allQuestionsCount {
           difficulty
@@ -82,6 +88,7 @@ export async function GET() {
         totalMedium,
         hardSolved: problemsSolved[3]?.count ?? 0,
         totalHard,
+        badges: data.data.userInfo?.badges || [],
       },
       contestInfo: {
         rating: data.data.contestInfo?.rating || 0,

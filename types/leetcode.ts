@@ -8,7 +8,13 @@ export const LeetCodeUserSchema = z.object({
   mediumSolved: z.number(),
   totalMedium: z.number(),
   hardSolved: z.number(),
-  totalHard: z.number()
+  totalHard: z.number(),
+  badges: z.array(z.object({
+    id: z.string(),
+    displayName: z.string(),
+    icon: z.string(),
+    category: z.string()
+  })).optional()
 })
 
 export const LeetCodeCalendarSchema = z.object({

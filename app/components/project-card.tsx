@@ -18,7 +18,7 @@ export default function ProjectCard({ title, description, link, tags }: ProjectC
         border: "2px solid var(--glow)",
         boxShadow:
           "0 0 8px 2px var(--glow), 0 0 4px 1px var(--glow)",
-        background: "var(--card)",
+        background: "transparent",
         borderRadius: "0.75rem",
         margin: "0 auto",
       }}
@@ -30,7 +30,7 @@ export default function ProjectCard({ title, description, link, tags }: ProjectC
           {tags.map((tag) => (
             <span
               key={tag}
-              className="border border-[#2F4F4F] shadow-[0_0_8px_2px_#2F4F4F] rounded-full px-2 py-0.5 text-xs sm:text-sm font-semibold text-[#2F4F4F] bg-transparent dark:bg-transparent"
+              className="border rounded-full px-2 py-0.5 text-xs sm:text-sm font-semibold bg-transparent border-[#2F4F4F] text-[#2F4F4F] shadow-[0_0_8px_2px_#2F4F4F] dark:border-violet-500/50 dark:text-violet-400 dark:shadow-[0_0_8px_2px_rgba(139,92,246,0.5)]"
             >
               {tag}
             </span>
@@ -40,7 +40,7 @@ export default function ProjectCard({ title, description, link, tags }: ProjectC
           <Link
             href={link}
             target="_blank"
-            className="inline-flex items-center gap-2 text-sm border border-[#2F4F4F] shadow-[0_0_8px_2px_#2F4F4F] rounded-md px-4 py-2 text-[#2F4F4F] font-bold dark:text-primary hover:bg-[#bfc7b9] dark:hover:bg-violet-900/30 transition-colors"
+            className="inline-flex items-center gap-2 text-sm border rounded-md px-4 py-2 font-bold transition-colors border-[#2F4F4F] text-[#2F4F4F] shadow-[0_0_8px_2px_#2F4F4F] hover:bg-[#bfc7b9] dark:border-violet-500/50 dark:text-violet-400 dark:shadow-[0_0_8px_2px_rgba(139,92,246,0.5)] dark:hover:bg-violet-900/30"
           >
             <Github className="h-4 w-4 text-[#2F4F4F] dark:text-violet-400" />
             View on GitHub

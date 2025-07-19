@@ -57,9 +57,9 @@ export function MobileMenu() {
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noopener noreferrer" : undefined}
                     onClick={() => handleLinkClick(href, isExternal)}
-                    className="block w-full rounded-lg border-2 border-violet-500/50 bg-background/50 px-4 py-3 text-left text-lg font-medium text-foreground transition-all duration-200 hover:border-violet-500 hover:bg-violet-500/10 hover:shadow-lg hover:shadow-violet-500/20 active:scale-95"
+                    className="block w-full rounded-lg border-2 bg-background/50 px-4 py-3 text-left text-lg font-medium text-foreground transition-all duration-200 active:scale-95 dark:border-violet-500/50 dark:hover:border-violet-500 dark:hover:bg-violet-500/10 dark:hover:shadow-lg dark:hover:shadow-violet-500/20 border-[#2F4F4F]/50 hover:border-[#2F4F4F] hover:bg-[#2F4F4F]/10 hover:shadow-lg hover:shadow-[#2F4F4F]/20"
                     style={{
-                      boxShadow: "0 0 8px 1px rgba(139, 92, 246, 0.3)",
+                      boxShadow: "0 0 8px 1px var(--glow)",
                     }}
                   >
                     {label}

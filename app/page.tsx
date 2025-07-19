@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { 
   GithubIcon, 
@@ -18,8 +19,11 @@ import AnimatedBg from "@/components/animated-bg"
 import { MobileMenu } from "@/components/mobile-menu"
 import Image from "next/image" 
 import CPProfile from './components/cp-profile'
+import { LeetCodeData } from '@/types/leetcode'
 
 export default function Page() {
+  const [leetCodeData, setLeetCodeData] = useState<LeetCodeData | null>(null)
+  const [loading, setLoading] = useState(true)
   
   const glowingCardStyle = {
     border: "2px solid var(--glow)",
@@ -27,18 +31,45 @@ export default function Page() {
     background: "var(--card)",
   }
 
+  const fetchLeetCodeData = async () => {
+    try {
+      setLoading(true)
+      const response = await fetch('/api/leetcode', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch LeetCode data')
+      }
+
+      const data = await response.json()
+      setLeetCodeData(data)
+    } catch (err) {
+      console.error('Error fetching LeetCode data:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchLeetCodeData()
+  }, [])
+
   return (
     <div className="relative min-h-screen text-black dark:text-foreground flex justify-center">
       <div className="w-full max-w-[1440px] px-4 sm:px-6 lg:px-8">
       <AnimatedBg />
 
-      {/* Fix navbar scrolling */}
-      <header className="sticky top-0 z-50 w-full border-b border-[var(--glow)] bg-[#A6B0A6] dark:bg-background/95 backdrop-blur">
+      {/* Static navbar */}
+      <header className="w-full border-b border-[var(--glow)] bg-[#A6B0A6] dark:bg-background/95 backdrop-blur">
         <div className="container flex h-14 items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo - Left side */}
           <Link
           href="#about"
-          className="flex-shrink-0 flex items-center font-bold text-lg ml-2 sm:ml-4"
+          className="flex-shrink-0 flex items-center font-bold text-lg ml-2 sm:ml-4 text-[#2F4F4F] dark:text-white"
           style={{
           minWidth: "max-content",
           border: "2px solid var(--glow)",
@@ -55,7 +86,7 @@ export default function Page() {
         <div className="flex items-center gap-2">
           {/* Desktop Navigation */}
           <nav className="hidden sm:flex items-center">
-            <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide py-2">
+            <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide py-2 px-2">
               {[
                 { href: "#cp-profile", label: "CP Profile" },
                 { href: "#projects", label: "Projects" },
@@ -67,27 +98,21 @@ export default function Page() {
                   className="rounded-xl flex items-center flex-shrink-0"
                   style={{
                     border: "2px solid var(--glow)",
-                    boxShadow: "0 0 8px 2px var(--glow), 0 0 4px 1px var(--glow)",
+                    boxShadow: "0 0 6px 1.6px var(--glow), 0 0 3.2px 0.8px var(--glow)",
                     background: "var(--card)",
                     padding: "0.1rem 0.5rem",
                     height: "1.8rem",
                     minHeight: "unset",
                   }}
                 >
-                  <Button
-                    asChild
-                    size="sm"
-                    variant="outline"
-                    className="text-[#2F4F4F] dark:text-primary border-none bg-transparent shadow-none px-0 h-auto min-h-0 text-xs sm:text-sm"
+                  <Link
+                    href={href}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    className="text-[#2F4F4F] dark:text-white text-xs sm:text-sm font-semibold dark:font-medium hover:no-underline hover:text-[#2F4F4F] dark:hover:text-white transition-none"
                   >
-                    <Link
-                      href={href}
-                      target={external ? "_blank" : undefined}
-                      rel={external ? "noopener noreferrer" : undefined}
-                    >
-                      {label}
-                    </Link>
-                  </Button>
+                    {label}
+                  </Link>
                 </span>
               ))}
             </div>
@@ -143,8 +168,8 @@ export default function Page() {
               width: "100%",
               height: "1px", // Thinner line
               borderRadius: "0.5px",
-              background: "linear-gradient(90deg, #2F4F4F 0%, #2F4F4F 50%, #2F4F4F 100%)",
-              boxShadow: "0 0 8px 2px #2F4F4F, 0 0 4px 1px #2F4F4F",
+              background: "var(--glow)",
+              boxShadow: "0 0 8px 2px var(--glow), 0 0 4px 1px var(--glow)",
             }} />
           </div>
 
@@ -158,8 +183,8 @@ export default function Page() {
             }}
           >
             <p className="text-gray-800 dark:text-violet-100">
-            Throughout my coding journey, I’ve demonstrated rigorous problem‑solving acumen by completing over 600 algorithmic challenges across diverse platforms—450+ of which are on LeetCode using C++, Python, and SQL—and earning 16 badges. In parallel, I’ve architected and deployed full‑stack solutions with Next.js, React, Tailwind CSS, Node.js, and both MongoDB and PostgreSQL.
-            Academically, I’ve consistently performed well, especially in core subjects such as Data Structures & Algorithms, Software Design Patterns, Database Systems, Operating Systems, Computer Networks, and Software Testing. I’m also diving into AI and large‑language models, building a tool to generate clear, context‑aware Git commit messages using LLMs. I’m looking for challenging opportunities that let me push these ideas further.
+            Throughout my coding journey, I've demonstrated rigorous problem‑solving acumen by completing over 750+ algorithmic challenges across diverse platforms—{loading ? "..." : `${leetCodeData?.userInfo?.totalSolved || 500}`} of which are on LeetCode using C++, Python, and SQL—and earning {loading ? "..." : leetCodeData?.userInfo?.badges?.length || 16} badges. In parallel, I've architected and deployed full‑stack solutions with Next.js, React, Tailwind CSS, Node.js, and both MongoDB and PostgreSQL.
+            Academically, I've consistently performed well, especially in core subjects such as Data Structures & Algorithms, Software Design Patterns, Database Systems, Operating Systems, Computer Networks, and Software Testing. I'm also diving into AI and large‑language models, building a tool to generate clear, context‑aware Git commit messages using LLMs. I'm looking for challenging opportunities that let me push these ideas further.
             </p>
           </div>
           </div>
@@ -184,7 +209,7 @@ export default function Page() {
             priority
             className="relative z-10 rounded-2xl object-cover w-full h-full"
             style={{
-              boxShadow: "0 0 20px 4px #2F4F4F, 0 0 40px 8px #2F4F4F",
+              boxShadow: "0 0 20px 4px var(--glow), 0 0 40px 8px var(--glow)",
               objectPosition: "center 15%" 
             }} />
           </div>
@@ -356,7 +381,7 @@ export default function Page() {
               <a
               href="mailto:gourgupaltalukder@gmail.com"
               className="flex items-center gap-4 p-6 rounded-xl backdrop-blur transition-all duration-300 hover:scale-105"
-              style={glowingCardStyle}
+              style={{ ...glowingCardStyle, background: "transparent" }}
               >
               <MailIcon className="w-6 h-6 text-[#2F4F4F] dark:text-violet-400" />
               <div>
@@ -369,7 +394,7 @@ export default function Page() {
               <a
               href="https://github.com/gfor-gour"
               className="flex items-center gap-4 p-6 rounded-xl backdrop-blur transition-all duration-300 hover:scale-105"
-              style={glowingCardStyle}
+              style={{ ...glowingCardStyle, background: "transparent" }}
               >
               <GithubIcon className="w-6 h-6 text-[#2F4F4F] dark:text-violet-400" />
               <div>
@@ -431,7 +456,7 @@ export default function Page() {
 
             <div
               className="mt-8 p-6 rounded-xl backdrop-blur"
-              style={glowingCardStyle}
+              style={{ ...glowingCardStyle, background: "transparent" }}
             >
               <p className="text-center text-lg md:text-xl font-medium text-[#2F4F4F] dark:text-violet-700">
               Feel free to reach out for collaborations or just to say hi!
