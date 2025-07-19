@@ -22,8 +22,8 @@ export default function RootLayout({
         <QueryClientProvider client={queryClient}>
           <ThemeProvider 
             attribute="class" 
-            defaultTheme="system" 
-            enableSystem 
+            defaultTheme="light" 
+            enableSystem={false}
             disableTransitionOnChange
           >
             {children}
