@@ -1,14 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ChevronDown, Info } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { Info } from "lucide-react"
 import {
   Tooltip,
   TooltipContent,
@@ -27,10 +20,6 @@ interface LeetCodeHeatmapProps {
 }
 
 export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
-  const [selectedPeriod, setSelectedPeriod] = useState<
-    "Current" | "Last Year" | "All Time"
-  >("Current")
-  
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {

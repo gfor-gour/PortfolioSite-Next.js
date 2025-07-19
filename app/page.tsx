@@ -183,8 +183,8 @@ export default function Page() {
             }}
           >
             <p className="text-gray-800 dark:text-violet-100">
-            Throughout my coding journey, I've demonstrated rigorous problem‑solving acumen by completing over 750+ algorithmic challenges across diverse platforms—{loading ? "..." : `${leetCodeData?.userInfo?.totalSolved || 500}`} of which are on LeetCode using C++, Python, and SQL—and earning {loading ? "..." : leetCodeData?.userInfo?.badges?.length || 16} badges. In parallel, I've architected and deployed full‑stack solutions with Next.js, React, Tailwind CSS, Node.js, and both MongoDB and PostgreSQL.
-            Academically, I've consistently performed well, especially in core subjects such as Data Structures & Algorithms, Software Design Patterns, Database Systems, Operating Systems, Computer Networks, and Software Testing. I'm also diving into AI and large‑language models, building a tool to generate clear, context‑aware Git commit messages using LLMs. I'm looking for challenging opportunities that let me push these ideas further.
+            Throughout my coding journey, I&apos;ve demonstrated rigorous problem‑solving acumen by completing over 750+ algorithmic challenges across diverse platforms—{loading ? "..." : `${leetCodeData?.userInfo?.totalSolved || 500}`} of which are on LeetCode using C++, Python, and SQL—and earning {loading ? "..." : leetCodeData?.userInfo?.badges?.length || 16} badges. In parallel, I&apos;ve architected and deployed full‑stack solutions with Next.js, React, Tailwind CSS, Node.js, and both MongoDB and PostgreSQL.
+            Academically, I&apos;ve consistently performed well, especially in core subjects such as Data Structures & Algorithms, Software Design Patterns, Database Systems, Operating Systems, Computer Networks, and Software Testing. I&apos;m also diving into AI and large‑language models, building a tool to generate clear, context‑aware Git commit messages using LLMs. I&apos;m looking for challenging opportunities that let me push these ideas further.
             </p>
           </div>
           </div>
@@ -340,7 +340,7 @@ export default function Page() {
         <div className="container px-4 md:px-6">
           <div className="mx-auto max-w-3xl">
           <h2 className="text-3xl font-bold tracking-tighter text-black dark:text-primary sm:text-4xl md:text-5xl mb-12 text-center">
-            <span className="text-[#2F4F4F] dark:text-violet-400">Let's Connect</span>
+            <span className="text-[#2F4F4F] dark:text-violet-400">Let&apos;s Connect</span>
           </h2>
 
           <div className="flex flex-col items-center space-y-8">
