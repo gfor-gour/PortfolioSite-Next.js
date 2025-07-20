@@ -13,12 +13,12 @@ interface ProjectCardProps {
 export default function ProjectCard({ title, description, link, tags }: ProjectCardProps) {
   return (
     <Card
-      className="w-[90%] sm:w-[340px] md:w-[370px] mx-auto transition-transform duration-200 hover:scale-[1.02]"
+      className="w-[90%] sm:w-[340px] md:w-[370px] mx-auto transition-transform duration-200 hover:scale-[1.02] backdrop-blur"
       style={{
         border: "2px solid var(--glow)",
         boxShadow:
           "0 0 8px 2px var(--glow), 0 0 4px 1px var(--glow)",
-        background: "transparent",
+        background: "rgba(255, 255, 255, 0.05)",
         borderRadius: "0.75rem",
         margin: "0 auto",
       }}

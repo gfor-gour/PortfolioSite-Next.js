@@ -156,10 +156,10 @@ export default function Page() {
           <div className="w-full md:w-auto flex flex-col items-start">
             <span className="flex flex-col items-start gap-1">
               <span className="text-base md:text-lg font-semibold text-[#2F4F4F] dark:text-violet-200">
-                A Software Engineering student at SUST, Sylhet, Bangladesh.
+                A Software Engineering student <span className="font-normal">7th semester, Final Year</span>
               </span>
-              <span className="text-sm md:text-base text-[#2F4F4F] dark:text-violet-300">
-                7th semester, Final Year
+              <span className="text-lg md:text-xl font-semibold text-[#2F4F4F] dark:text-violet-300">
+                Shahjalal University of Science and Technology, Sylhet, Bangladesh
               </span>
             </span>
             <span
@@ -175,17 +175,70 @@ export default function Page() {
 
           {/* About text container */}
           <div
-            className="rounded-xl mt-2 w-full sm:w-fit max-w-full p-4 sm:p-6"
+            className="rounded-xl mt-2 w-full sm:w-fit max-w-full p-4 sm:p-6 backdrop-blur"
             style={{
             border: "2px solid var(--glow)",
             boxShadow: "0 0 8px 2px var(--glow), 0 0 4px 1px var(--glow)",
-            background: "transparent",
+            background: "rgba(255, 255, 255, 0.05)",
             }}
           >
-            <p className="text-gray-800 dark:text-violet-100">
-            Throughout my coding journey, I&apos;ve demonstrated rigorous problem‑solving acumen by completing over 750+ algorithmic challenges across diverse platforms—{loading ? "..." : `${leetCodeData?.userInfo?.totalSolved || 500}`} of which are on LeetCode using C++, Python, and SQL—and earning {loading ? "..." : leetCodeData?.userInfo?.badges?.length || 16} badges. In parallel, I&apos;ve architected and deployed full‑stack solutions with Next.js, React, Tailwind CSS, Node.js, and both MongoDB and PostgreSQL.
-            Academically, I&apos;ve consistently performed well, especially in core subjects such as Data Structures & Algorithms, Software Design Patterns, Database Systems, Operating Systems, Computer Networks, and Software Testing. I&apos;m also diving into AI and large‑language models, building a tool to generate clear, context‑aware Git commit messages using LLMs. I&apos;m looking for challenging opportunities that let me push these ideas further.
-            </p>
+            <div className="space-y-4 text-gray-800 dark:text-violet-100">
+              {/* Problem Solving */}
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-violet-400 rounded-full mt-2"></div>
+                <div>
+                  Solved 750+ algorithmic problems, including{" "}
+                  <span className="font-semibold text-[#2F4F4F] dark:text-violet-400">
+                    {loading ? "..." : `${leetCodeData?.userInfo?.totalSolved || 528}`}+
+                  </span>{" "}
+                  on LeetCode using C++, Python, and SQL, showcasing strong problem-solving skills and consistency.
+                </div>
+              </div>
+
+              {/* Badges and Streak */}
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-violet-400 rounded-full mt-2"></div>
+                <div>
+                  Earned{" "}
+                  <span className="font-semibold text-[#2F4F4F] dark:text-violet-400">
+                    {loading ? "..." : `${leetCodeData?.userInfo?.badges?.length || 19}`}
+                  </span>{" "}
+                  LeetCode badges and maintained a 355+ day streak, reflecting dedication and growth mindset.
+                </div>
+              </div>
+
+              {/* Full-Stack Development */}
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-violet-400 rounded-full mt-2"></div>
+                <div>
+                  Built and deployed full-stack web applications using Next.js, React, Tailwind CSS, Node.js, MongoDB, and PostgreSQL.
+                </div>
+              </div>
+
+              {/* Academic Background */}
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-violet-400 rounded-full mt-2"></div>
+                <div>
+                  Strong academic background in core CS subjects: DSA, Software Design Patterns, OS, DBMS, Computer Networks, and Software Testing.
+                </div>
+              </div>
+
+              {/* LLM Research */}
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-violet-400 rounded-full mt-2"></div>
+                <div>
+                  Conducting LLM-based research on automated Git commit message generation, evaluated through human benchmarks and expert review.
+                </div>
+              </div>
+
+              {/* Personal Qualities */}
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-violet-400 rounded-full mt-2"></div>
+                <div>
+                  Quick learner, passionate about technology, and a collaborative team player always seeking intellectually challenging environments.
+                </div>
+              </div>
+            </div>
           </div>
           </div>
 

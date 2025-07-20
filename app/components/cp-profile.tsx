@@ -5,6 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { glowingCardStyle } from '../utils/styles'
 import { LeetCodeData } from '@/types/leetcode'
 import { LeetCodeHeatmap } from "./leetcode-heatmap"
+import LeetCodeBadges from "./leetcode-badges"
 import { ChevronDown, ChevronUp } from "lucide-react"
 
 export default function CPProfile() {
@@ -106,10 +107,10 @@ export default function CPProfile() {
         </h3>
         
         <div
-          className="rounded-xl shadow-lg flex flex-col justify-between bg-transparent p-4 sm:p-6 md:p-8 w-full"
+          className="rounded-xl shadow-lg flex flex-col justify-between backdrop-blur p-4 sm:p-6 md:p-8 w-full"
           style={{
             ...boxStyle,
-            background: "transparent", 
+            background: "rgba(255, 255, 255, 0.05)", 
           }}
         >
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 w-full">
@@ -183,6 +184,13 @@ export default function CPProfile() {
             }
           />
         )}
+      </div>
+
+      {/* LeetCode Badges */}
+      <div className="w-full mt-8 flex justify-center">
+        <div className="w-full max-w-[920px]">
+          <LeetCodeBadges badges={data?.userInfo?.badges || []} />
+        </div>
       </div>
     </div>
   )

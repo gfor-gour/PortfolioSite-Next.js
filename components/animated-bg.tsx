@@ -34,7 +34,7 @@ export default function AnimatedBg() {
       constructor() {
         this.x = Math.random() * canvas.width
         this.y = Math.random() * canvas.height
-        this.size = Math.random() * 2 + 0.1
+        this.size = Math.random() * 3 + 0.5 // Increased from 2 + 0.1 to 3 + 0.5
         this.speedX = Math.random() * 2 - 1
         this.speedY = Math.random() * 2 - 1
       }
@@ -53,7 +53,7 @@ export default function AnimatedBg() {
         if (!ctx) return
         ctx.fillStyle =
           theme === "dark"
-            ? "rgba(235, 232, 239, 0.5)"
+            ? "rgba(255, 255, 255, 0.8)" // Changed from rgba(235, 232, 239, 0.5) to pure white with higher opacity
             : "#000"
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)

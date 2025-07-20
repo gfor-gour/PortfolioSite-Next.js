@@ -27,7 +27,6 @@ export const LeetCodeDataSchema = z.object({
     rating: z.number(),
     topPercentage: z.number()
   }),
-  lastUpdated: z.string(),
   calendar: LeetCodeCalendarSchema
 })
 
