@@ -21,8 +21,8 @@ export default function AnimatedBg() {
 
     setCanvasSize()
 
-    const particles: Particle[] = []
-    const particleCount = 100
+  const particles: Particle[] = []
+  const particleCount = 220 // Increased density
 
     class Particle {
       x: number
@@ -34,9 +34,9 @@ export default function AnimatedBg() {
       constructor() {
         this.x = Math.random() * canvas.width
         this.y = Math.random() * canvas.height
-        this.size = Math.random() * 3 + 0.5 // Increased from 2 + 0.1 to 3 + 0.5
-        this.speedX = Math.random() * 2 - 1
-        this.speedY = Math.random() * 2 - 1
+        this.size = Math.random() * 1.2 + 0.3 // Tiny bubbles (0.3 to 1.5)
+        this.speedX = Math.random() * 1.2 - 0.6 // Slightly slower movement
+        this.speedY = Math.random() * 1.2 - 0.6
       }
 
       update() {
@@ -51,13 +51,28 @@ export default function AnimatedBg() {
 
       draw() {
         if (!ctx) return
-        ctx.fillStyle =
-          theme === "dark"
-            ? "rgba(255, 255, 255, 0.8)" // Changed from rgba(235, 232, 239, 0.5) to pure white with higher opacity
-            : "#000"
+        let colorList: string[]
+        if (theme === "dark") {
+          colorList = [
+            "rgba(255,255,255,0.96)",
+            "rgba(255,255,255,0.82)",
+            "rgba(255,255,255,0.68)"
+          ]
+        } else {
+          colorList = [
+            "rgba(14, 13, 13, 0.84)",
+            "rgba(41, 39, 39, 0.92)",
+            "rgba(44, 44, 44, 0.93)"
+          ]
+        }
+        // Pick a random color for each bubble
+        ctx.shadowColor = colorList[Math.floor(Math.random() * colorList.length)]
+        ctx.shadowBlur = 10 // Slightly more shine
+        ctx.fillStyle = colorList[Math.floor(Math.random() * colorList.length)]
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
         ctx.fill()
+        ctx.shadowBlur = 0 // Reset shadow
       }
     }
 

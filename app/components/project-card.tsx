@@ -18,7 +18,7 @@ export default function ProjectCard({ title, description, link, tags }: ProjectC
         border: "2px solid var(--glow)",
         boxShadow:
           "0 0 8px 2px var(--glow), 0 0 4px 1px var(--glow)",
-        background: "rgba(255, 255, 255, 0.05)",
+        background: "transparent",
         borderRadius: "0.75rem",
         margin: "0 auto",
       }}

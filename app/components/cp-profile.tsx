@@ -110,7 +110,7 @@ export default function CPProfile() {
           className="rounded-xl shadow-lg flex flex-col justify-between backdrop-blur p-4 sm:p-6 md:p-8 w-full"
           style={{
             ...boxStyle,
-            background: "rgba(255, 255, 255, 0.05)", 
+            background: "transparent", 
           }}
         >
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 w-full">
