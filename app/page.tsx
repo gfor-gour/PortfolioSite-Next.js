@@ -332,17 +332,34 @@ export default function Page() {
           <span className="text-[#2F4F4F] dark:text-violet-400">Archive</span>
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+          
+          <ProjectCard
+            title="Personality Detection Using Machine Learning"
+            description="Developed a machine learning system using Random Forest to predict personality traits from behavioral data with 91% accuracy. Improved feature engineering and data preprocessing, enhancing the F1 score by 20% for reliable real-time predictions."
+            link="https://github.com/Amitsharma2468/personalitydetection"
+            liveLink="https://personalitydetection.vercel.app/"
+            tags={["Python", " scikit-learn", " Flask", "Next.js", "Pandas", "NumPy", "joblib"]} />
 
           <ProjectCard
             title="Local Household Service Provider"
             description="Designed and developed a full-stack Local Household Service Provider platform with booking flows, API integration, payment gateway, Nodemailer notifications, and AI chatbot support."
             link="https://github.com/gfor-gour/AI-Integrated-Local-Service-Provider-Platform-Project_350"
+            liveLink="https://service-connect-350.vercel.app/"
             tags={["Next.js", "Express.js", "MongoDB", "TypeScript", "TailwindCSS"]} />
           <ProjectCard
             title="IICT Library Management"
             description="Developed a full-stack IICT Library Management system with catalog search, lending history, authentication, and real-time book tracking using React, TypeScript, Node.js, and Express."
             link="https://github.com/mehedi-hasan-2302/IICT-Library-Management"
+            liveLink="https://iict-library.vercel.app/"
             tags={["React", "Node.js", "Express.js", "MongoDB", "TypeScript"]} />
+
+          <ProjectCard
+            title="Financial Document Analysis using RAG"
+            description="Built a RAG pipeline combining text and structured financial data, achieving 100% retrieval relevance and query responses under 2 seconds using FAISS-based similarity search and hybrid retrieval. Implemented smart chunking, embedding generation, and hybrid query answering, ensuring 100% accuracy in financial metric extraction and precise year-over-year comparisons."
+            link="https://github.com/gfor-gour/RAG-pipeline"
+            tags={[ "Python", "pdfplumber", "all-MiniLM-L6-v2", "DistilBERT-base-cased-distilled-SQuAD", "FAISS", "pandas", "NLTK", "NumPy"]} />
+
+
           <ProjectCard
             title="Green Mind App"
             description="Independently developed a Flutter-based mobile app for SUST psychiatric appointments with secure Firebase authentication, replacing manual booking with an intuitive scheduling system."
