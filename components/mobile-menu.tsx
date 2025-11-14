@@ -10,8 +10,6 @@ export function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false)
 
   const menuItems = [
-    { href: "#cp-profile", label: "CP Profile" },
-    { href: "#projects", label: "Projects" },
     { href: "#contact", label: "Contact" },
     { href: "/resume.pdf", label: "Resume", isExternal: true },
   ]

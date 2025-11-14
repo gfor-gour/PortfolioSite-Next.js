@@ -19,6 +19,7 @@ import AnimatedBg from "@/components/animated-bg"
 import { MobileMenu } from "@/components/mobile-menu"
 import Image from "next/image" 
 import CPProfile from './components/cp-profile'
+import AchievementSection from './components/achievement-section'
 import { LeetCodeData } from '@/types/leetcode'
 
 export default function Page() {
@@ -88,8 +89,6 @@ export default function Page() {
           <nav className="hidden sm:flex items-center">
             <div className="flex items-center gap-4 overflow-x-auto scrollbar-hide py-2 px-2">
               {[
-                { href: "#cp-profile", label: "CP Profile" },
-                { href: "#projects", label: "Projects" },
                 { href: "#contact", label: "Contact" },
                 { href: "/resume.pdf", label: "Resume", external: true },
               ].map(({ href, label, external }) => (
@@ -183,59 +182,52 @@ export default function Page() {
             }}
           >
             <div className="space-y-4 text-gray-800 dark:text-violet-100">
-              {/* Problem Solving */}
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-violet-400 rounded-full mt-2"></div>
                 <div>
-                  Solved 750+ algorithmic problems, including{" "}
-                  <span className="font-semibold text-[#2F4F4F] dark:text-violet-400">
-                    {loading ? "..." : `${leetCodeData?.userInfo?.totalSolved || 528}`}+
-                  </span>{" "}
-                  on LeetCode using C++, Python, and SQL, showcasing strong problem-solving skills and consistency.
+                  Problem-solving driven developer with 750+ algorithmic problems solved across LeetCode, Codeforces, UVA & VJudge; 23 badges, 433 day max streak, and peak rating 1622 on LeetCode.
                 </div>
               </div>
 
-              {/* Badges and Streak */}
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-violet-400 rounded-full mt-2"></div>
                 <div>
-                  Earned{" "}
-                  <span className="font-semibold text-[#2F4F4F] dark:text-violet-400">
-                    {loading ? "..." : `${leetCodeData?.userInfo?.badges?.length || 19}`}
-                  </span>{" "}
-                  LeetCode badges and maintained a 355+ day streak, reflecting dedication and growth mindset.
+                  Full-stack engineer experienced in building and deploying scalable applications using Next.js, React, Node.js, Express.js, MongoDB, and PostgreSQL.
                 </div>
               </div>
 
-              {/* Full-Stack Development */}
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-violet-400 rounded-full mt-2"></div>
                 <div>
-                  Built and deployed full-stack web applications using Next.js, React, Tailwind CSS, Node.js, MongoDB, and PostgreSQL.
+                  Developed ML systems including a 91% accurate personality detection model using Random Forest with optimized feature engineering.
                 </div>
               </div>
 
-              {/* Academic Background */}
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-violet-400 rounded-full mt-2"></div>
                 <div>
-                  Strong academic background in core CS subjects: DSA, Software Design Patterns, OS, DBMS, Computer Networks, and Software Testing.
+                  Built real-world impactful systems: digital library management, AI-assisted service platform, and a Flutter app used in SUST’s psychiatry department, reducing manual workload by 80%.
                 </div>
               </div>
 
-              {/* LLM Research */}
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-violet-400 rounded-full mt-2"></div>
                 <div>
-                  Conducting LLM-based research on automated Git commit message generation, evaluated through human benchmarks and expert review.
+                  Strong foundation in CS fundamentals: DSA, OOP, Operating Systems, Networking, DBMS, AI, ML, Deep Learning.
                 </div>
               </div>
 
-              {/* Personal Qualities */}
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-violet-400 rounded-full mt-2"></div>
                 <div>
-                  Quick learner, passionate about technology, and a collaborative team player always seeking intellectually challenging environments.
+                  Hands-on experience with LLM research, currently working on automated Git commit message generation using LLM's & human evaluation.
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-violet-400 rounded-full mt-2"></div>
+                <div>
+                  Team-oriented, fast learner, and highly consistent with a strong growth mindset — always eager to take on technically challenging projects.
                 </div>
               </div>
             </div>
@@ -322,6 +314,16 @@ export default function Page() {
             </Button>
           </div>
           </div>
+        </div>
+        </section>
+
+        <section id="achievements" className="py-8 sm:py-12 md:py-24 lg:py-32">
+        <div className="container px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter text-center mb-8 sm:mb-12">
+          <span className="text-[#2F4F4F] dark:text-white">Hackathon </span>
+          <span className="text-[#2F4F4F] dark:text-violet-400">Achievements</span>
+          </h2>
+          <AchievementSection />
         </div>
         </section>
 
