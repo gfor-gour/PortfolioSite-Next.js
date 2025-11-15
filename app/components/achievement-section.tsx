@@ -106,10 +106,12 @@ function NaturalSizeImage({
           </div>
         </div>
       )}
-      {/* Use regular img tag to preserve natural image dimensions */}
-      <img
+      {/* Use Image component for optimization */}
+      <Image
         src={src}
         alt={alt}
+        width={800}
+        height={600}
         className="w-full h-auto object-contain rounded-lg"
         onLoad={() => setImageLoaded(true)}
         onError={() => setImageError(true)}

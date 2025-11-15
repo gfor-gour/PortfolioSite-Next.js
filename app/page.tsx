@@ -220,7 +220,7 @@ export default function Page() {
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-violet-400 rounded-full mt-2"></div>
                 <div>
-                  Hands-on experience with LLM research, currently working on automated Git commit message generation using LLM's & human evaluation.
+                  Hands-on experience with LLM research, currently working on automated Git commit message generation using LLM&apos;s & human evaluation.
                 </div>
               </div>
 

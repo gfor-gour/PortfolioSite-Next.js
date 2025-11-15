@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { Trophy, Award, Star, Target } from 'lucide-react'
 
 interface Badge {
@@ -20,9 +21,11 @@ export default function LeetCodeBadges({ badges }: LeetCodeBadgesProps) {
       // If the icon is a URL, use it directly
       if (badge.icon.startsWith('http')) {
         return (
-          <img 
+          <Image 
             src={badge.icon} 
             alt={badge.displayName}
+            width={32}
+            height={32}
             className="w-8 h-8 object-contain"
             onError={(e) => {
               // Fallback to generic icon if image fails to load
