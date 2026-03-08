@@ -6,26 +6,22 @@ import { Button } from "./ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet"
 import Link from "next/link"
 
+const menuItems = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/projects", label: "Projects" },
+  { href: "/problem-solving", label: "Problem Solving" },
+  { href: "/achievements", label: "Achievements" },
+  { href: "/skills", label: "Skills" },
+  { href: "/contact", label: "Contact" },
+  { href: "/resume.pdf", label: "Resume", isExternal: true },
+]
+
 export function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false)
 
-  const menuItems = [
-    { href: "#contact", label: "Contact" },
-    { href: "/resume.pdf", label: "Resume", isExternal: true },
-  ]
-
-  const handleLinkClick = (href: string, isExternal?: boolean) => {
+  const handleLinkClick = () => {
     setIsOpen(false)
-
-    if (!isExternal && href.startsWith("#")) {
-      // Small delay to allow sheet to close first
-      setTimeout(() => {
-        const element = document.querySelector(href)
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" })
-        }
-      }, 100)
-    }
   }
 
   return (
@@ -54,7 +50,7 @@ export function MobileMenu() {
                     href={href}
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noopener noreferrer" : undefined}
-                    onClick={() => handleLinkClick(href, isExternal)}
+                    onClick={handleLinkClick}
                     className="block w-full rounded-lg border-2 bg-background/50 px-4 py-3 text-left text-lg font-medium text-foreground transition-all duration-200 active:scale-95 dark:border-violet-500/50 dark:hover:border-violet-500 dark:hover:bg-violet-500/10 dark:hover:shadow-lg dark:hover:shadow-violet-500/20 border-[#2F4F4F]/50 hover:border-[#2F4F4F] hover:bg-[#2F4F4F]/10 hover:shadow-lg hover:shadow-[#2F4F4F]/20"
                     style={{
                       boxShadow: "0 0 8px 1px var(--glow)",

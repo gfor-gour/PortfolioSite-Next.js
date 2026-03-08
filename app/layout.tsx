@@ -6,6 +6,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { useState } from "react"
+import SiteLayout from "./components/site-layout"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -26,7 +27,7 @@ export default function RootLayout({
             enableSystem={false}
             disableTransitionOnChange
           >
-            {children}
+            <SiteLayout>{children}</SiteLayout>
           </ThemeProvider>
         </QueryClientProvider>
       </body>
