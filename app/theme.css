@@ -1,0 +1,114 @@
+:root {
+  --radius: 0.5rem;
+
+  /* Light theme: white background, black text */
+  --background: #ffffff;
+  --foreground: #000000;
+
+  --card: rgba(255, 255, 255, 0.9);
+  --card-foreground: var(--foreground);
+
+  --popover: #ffffff;
+  --popover-foreground: var(--foreground);
+
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+
+  --secondary: #f3f4f6;
+  --secondary-foreground: var(--foreground);
+
+  --muted: #f3f4f6;
+  --muted-foreground: #4b5563;
+
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+
+  /* Glow accent for light mode (black) */
+  --glow: #000000;
+
+  /* Charts / sidebar (kept for existing components) */
+  --ring: #1d3557;
+  --chart-1: #0f766e;
+  --chart-2: #2563eb;
+  --chart-3: #7c3aed;
+  --chart-4: #ea580c;
+  --chart-5: #16a34a;
+
+  --sidebar: #ffffff;
+  --sidebar-foreground: #111827;
+  --sidebar-primary: #e5e7eb;
+  --sidebar-primary-foreground: #111827;
+  --sidebar-accent: #f3f4f6;
+  --sidebar-accent-foreground: #111827;
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: #1d3557;
+}
+
+.dark {
+  /* Dark theme: black background, white text */
+  --background: #000000;
+  --foreground: #ffffff;
+
+  --card: rgba(0, 0, 0, 0.9);
+  --card-foreground: var(--foreground);
+
+  --popover: #020617;
+  --popover-foreground: var(--foreground);
+
+  --primary: #ffffff;
+  --primary-foreground: #000000;
+
+  --secondary: #111827;
+  --secondary-foreground: var(--foreground);
+
+  --muted: #111827;
+  --muted-foreground: #9ca3af;
+
+  --border: #1f2937;
+  --input: #1f2937;
+
+  /* Glow accent for dark mode (white) */
+  --glow: #ffffff;
+
+  --ring: #8b5cf6;
+
+  --sidebar: #020617;
+  --sidebar-foreground: #e5e7eb;
+  --sidebar-primary: #111827;
+  --sidebar-primary-foreground: #e5e7eb;
+  --sidebar-accent: #111827;
+  --sidebar-accent-foreground: #e5e7eb;
+  --sidebar-border: #1f2937;
+  --sidebar-ring: #8b5cf6;
+}
+
+@layer components {
+  /* Generic glowing transparent surface used across the app */
+  .glow-surface {
+    border: 2px solid var(--glow);
+    box-shadow: 0 0 8px 2px var(--glow), 0 0 4px 1px var(--glow);
+    background: transparent;
+  }
+
+  /* Slightly softer glow variant for pills / small elements */
+  .glow-pill {
+    border: 2px solid var(--glow);
+    box-shadow: 0 0 6px 1.6px var(--glow), 0 0 3.2px 0.8px var(--glow);
+    background: var(--card);
+  }
+
+  /* Thin glowing divider line */
+  .glow-divider {
+    width: 100%;
+    height: 1px;
+    border-radius: 0.5px;
+    background: var(--glow);
+    box-shadow: 0 0 8px 2px var(--glow), 0 0 4px 1px var(--glow);
+  }
+
+  /* Dashed placeholder border that follows theme glow */
+  .glow-dashed {
+    border: 2px dashed color-mix(in srgb, var(--glow) 30%, transparent);
+  }
+}
+

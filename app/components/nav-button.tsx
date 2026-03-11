@@ -27,14 +27,14 @@ export default function NavButton({ href, label, external }: NavButtonProps) {
         asChild
         size="sm"
         variant="outline"
-        className="border-none bg-transparent shadow-none px-0 h-auto min-h-0 text-[#2F4F4F] dark:text-white"
+        className="border-none bg-transparent shadow-none px-0 h-auto min-h-0 text-foreground"
       >
         <Link
           href={href}
           target={external ? "_blank" : undefined}
           rel={external ? "noopener noreferrer" : undefined}
         >
-          <span className="text-[#2F4F4F] dark:text-white">{label}</span>
+          <span className="text-foreground">{label}</span>
         </Link>
       </Button>
     </span>

@@ -11,36 +11,29 @@ import {
   FacebookIcon,
 } from "lucide-react"
 
-const glowingCardStyle = {
-  border: "2px solid var(--glow)",
-  boxShadow: "0 0 8px 2px var(--glow), 0 0 4px 1px var(--glow)",
-  background: "transparent",
-}
-
 export default function ContactPage() {
   return (
     <main className="container px-4 sm:px-6 lg:px-8">
-      <section className="py-12 md:py-24 lg:py-32">
+      <section className="py-8 md:py-16 lg:py-20">
         <div className="mx-auto max-w-3xl">
-          <h2 className="text-3xl font-bold tracking-tighter text-black dark:text-primary sm:text-4xl md:text-5xl mb-12 text-center">
-            <span className="text-[#2F4F4F] dark:text-violet-400">
+          <h2 className="text-3xl font-bold tracking-tighter text-foreground dark:text-foreground sm:text-4xl md:text-5xl mb-8 text-center">
+            <span className="text-foreground dark:text-foreground">
               Let&apos;s Connect
             </span>
           </h2>
 
-          <div className="flex flex-col items-center space-y-8">
+          <div className="flex flex-col items-center space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
               <div
-                className="p-6 rounded-xl backdrop-blur transition-all duration-300 hover:scale-105"
-                style={{ ...glowingCardStyle }}
+                className="p-6 rounded-xl backdrop-blur transition-all duration-300 hover:scale-105 glow-surface"
               >
                 <div className="flex items-center gap-4">
-                  <MapPinIcon className="w-6 h-6 text-[#2F4F4F] dark:text-violet-400" />
+                  <MapPinIcon className="w-6 h-6 text-foreground dark:text-foreground" />
                   <div>
-                    <h3 className="font-semibold text-[#2F4F4F] dark:text-primary">
+                    <h3 className="font-semibold text-foreground dark:text-foreground">
                       Location
                     </h3>
-                    <p className="text-[#2F4F4F] dark:text-gray-300">
+                    <p className="text-foreground dark:text-foreground/80">
                       Sylhet, Bangladesh
                     </p>
                   </div>
@@ -48,17 +41,16 @@ export default function ContactPage() {
               </div>
 
               <a
-                href="tel:+8801746244930"
-                className="p-6 rounded-xl backdrop-blur transition-all duration-300 hover:scale-105"
-                style={{ ...glowingCardStyle }}
+                href="tel:+8801636022762"
+                className="p-6 rounded-xl backdrop-blur transition-all duration-300 hover:scale-105 glow-surface"
               >
                 <div className="flex items-center gap-4">
-                  <PhoneIcon className="w-6 h-6 text-[#2F4F4F] dark:text-violet-400" />
+                  <PhoneIcon className="w-6 h-6 text-foreground dark:text-foreground" />
                   <div>
-                    <h3 className="font-semibold text-[#2F4F4F] dark:text-primary">
+                    <h3 className="font-semibold text-foreground dark:text-foreground">
                       Phone
                     </h3>
-                    <p className="text-[#2F4F4F] dark:text-gray-300">
+                    <p className="text-foreground dark:text-foreground/80">
                       +880 1746-244930
                     </p>
                   </div>
@@ -66,19 +58,18 @@ export default function ContactPage() {
               </a>
             </div>
 
-            <div className="w-full space-y-4">
+            <div className="w-full space-y-3">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <a
                   href="mailto:gourgupaltalukder@gmail.com"
-                  className="flex items-center gap-4 p-6 rounded-xl backdrop-blur transition-all duration-300 hover:scale-105"
-                  style={{ ...glowingCardStyle }}
+                  className="flex items-center gap-4 p-6 rounded-xl backdrop-blur transition-all duration-300 hover:scale-105 glow-surface"
                 >
-                  <MailIcon className="w-6 h-6 text-[#2F4F4F] dark:text-violet-400" />
+                  <MailIcon className="w-6 h-6 text-foreground dark:text-foreground" />
                   <div>
-                    <h3 className="font-semibold text-[#2F4F4F] dark:text-primary">
+                    <h3 className="font-semibold text-foreground dark:text-foreground">
                       Email
                     </h3>
-                    <p className="text-[#2F4F4F] dark:text-gray-300">
+                    <p className="text-foreground dark:text-foreground/80">
                       gourgupaltalukder@gmail.com
                     </p>
                   </div>
@@ -86,15 +77,14 @@ export default function ContactPage() {
 
                 <a
                   href="https://github.com/gfor-gour"
-                  className="flex items-center gap-4 p-6 rounded-xl backdrop-blur transition-all duration-300 hover:scale-105"
-                  style={{ ...glowingCardStyle }}
+                  className="flex items-center gap-4 p-6 rounded-xl backdrop-blur transition-all duration-300 hover:scale-105 glow-surface"
                 >
-                  <GithubIcon className="w-6 h-6 text-[#2F4F4F] dark:text-violet-400" />
+                  <GithubIcon className="w-6 h-6 text-foreground dark:text-foreground" />
                   <div>
-                    <h3 className="font-semibold text-[#2F4F4F] dark:text-primary">
+                    <h3 className="font-semibold text-foreground dark:text-foreground">
                       GitHub
                     </h3>
-                    <p className="text-[#2F4F4F] dark:text-gray-300">
+                    <p className="text-foreground dark:text-foreground/80">
                       gfor-gour
                     </p>
                   </div>
@@ -141,28 +131,22 @@ export default function ContactPage() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`flex items-center justify-center gap-3 p-4 rounded-xl backdrop-blur transition-all duration-300 hover:scale-105 ${social.color}`}
-                    style={{ ...glowingCardStyle }}
+                    className={`flex items-center justify-center gap-3 p-4 rounded-xl backdrop-blur transition-all duration-300 hover:scale-105 glow-surface ${social.color}`}
                   >
                     {social.icon}
-                    <span className="font-medium text-[#2F4F4F] dark:text-primary">
+                    <span className="font-medium text-foreground dark:text-foreground">
                       {social.name}
                     </span>
                   </a>
                 ))}
               </div>
 
-              <div
-                className="mt-8 p-6 rounded-xl backdrop-blur"
-                style={{ ...glowingCardStyle }}
-              >
-                <p className="text-center text-lg md:text-xl font-medium text-[#2F4F4F] dark:text-violet-700">
+              <div className="mt-6 text-center">
+                <p className="text-lg md:text-xl font-medium text-foreground dark:text-foreground">
                   Feel free to reach out for collaborations or just to say hi!
-                  <br />
-                  <span className="text-base md:text-lg text-[#2F4F4F] dark:text-violet-400/90">
-                    I&apos;m always open to discussing new projects and
-                    opportunities.
-                  </span>
+                </p>
+                <p className="text-base md:text-lg text-foreground/90 dark:text-foreground/90 mt-2">
+                  I&apos;m always open to discussing new projects and opportunities.
                 </p>
               </div>
             </div>

@@ -65,7 +65,7 @@ export default function LeetCodeBadges({ badges }: LeetCodeBadgesProps) {
       return <Award className="w-8 h-8 text-purple-500" />
     }
     
-    return <Award className="w-8 h-8 text-[#2F4F4F] dark:text-violet-400" />
+    return <Award className="w-8 h-8 text-foreground" />
   }
 
   if (!badges || badges.length === 0) {
@@ -77,7 +77,7 @@ export default function LeetCodeBadges({ badges }: LeetCodeBadgesProps) {
           background: "transparent",
         }}
       >
-        <div className="text-center text-[#2F4F4F] dark:text-violet-400">
+        <div className="text-center text-foreground">
           <Award className="w-8 h-8 mx-auto mb-2" />
           <p className="text-sm">No badges available</p>
         </div>
@@ -93,7 +93,7 @@ export default function LeetCodeBadges({ badges }: LeetCodeBadgesProps) {
         background: "transparent",
       }}
     >
-      <h3 className="text-lg font-semibold text-[#2F4F4F] dark:text-violet-400 mb-6 text-center">
+      <h3 className="text-lg font-semibold text-foreground mb-6 text-center">
         LeetCode Badges ({badges.length})
       </h3>
       
@@ -102,7 +102,7 @@ export default function LeetCodeBadges({ badges }: LeetCodeBadgesProps) {
         {badges.map((badge) => (
           <div
             key={badge.id}
-            className="flex flex-col items-center gap-2 p-4 rounded-lg border border-[#2F4F4F]/20 dark:border-violet-500/20 hover:border-[#2F4F4F]/40 dark:hover:border-violet-500/40 transition-all duration-200 hover:scale-105 group"
+            className="flex flex-col items-center gap-2 p-4 rounded-lg border border-[color-mix(in_srgb,var(--glow)_20%,transparent)] hover:border-[color-mix(in_srgb,var(--glow)_40%,transparent)] transition-all duration-200 hover:scale-105 group"
             style={{
               background: "rgba(255, 255, 255, 0.05)",
               backdropFilter: "blur(10px)",
@@ -113,12 +113,12 @@ export default function LeetCodeBadges({ badges }: LeetCodeBadgesProps) {
               {/* Fallback icon (hidden by default) */}
               <div className="hidden">
                 {badge.icon && badge.icon.startsWith('http') && (
-                  <Award className="w-8 h-8 text-[#2F4F4F] dark:text-violet-400" />
+                  <Award className="w-8 h-8 text-foreground" />
                 )}
               </div>
             </div>
             <div className="text-center">
-              <p className="text-xs font-medium text-[#2F4F4F] dark:text-violet-300 truncate max-w-[80px] group-hover:max-w-none transition-all duration-200">
+              <p className="text-xs font-medium text-foreground truncate max-w-[80px] group-hover:max-w-none transition-all duration-200">
                 {badge.displayName}
               </p>
             </div>
@@ -128,14 +128,14 @@ export default function LeetCodeBadges({ badges }: LeetCodeBadgesProps) {
 
       {/* Badge Details List (Collapsible) */}
       <details className="mt-4">
-        <summary className="cursor-pointer text-sm font-medium text-[#2F4F4F] dark:text-violet-400 hover:text-[#2F4F4F]/80 dark:hover:text-violet-400/80 transition-colors">
+        <summary className="cursor-pointer text-sm font-medium text-foreground hover:text-foreground/80 transition-colors">
           View Badge Details
         </summary>
         <div className="mt-3 space-y-2">
           {badges.map((badge) => (
             <div
               key={badge.id}
-              className="flex items-center gap-3 p-3 rounded-lg border border-[#2F4F4F]/10 dark:border-violet-500/10"
+              className="flex items-center gap-3 p-3 rounded-lg border border-[color-mix(in_srgb,var(--glow)_10%,transparent)]"
               style={{
                 background: "rgba(255, 255, 255, 0.02)",
               }}
@@ -144,10 +144,10 @@ export default function LeetCodeBadges({ badges }: LeetCodeBadgesProps) {
                 {getBadgeIcon(badge)}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-[#2F4F4F] dark:text-violet-300 truncate">
+                <p className="text-sm font-medium text-foreground truncate">
                   {badge.displayName}
                 </p>
-                <p className="text-xs text-[#2F4F4F]/70 dark:text-violet-400/70 capitalize">
+                <p className="text-xs text-foreground/70 capitalize">
                   {badge.category}
                 </p>
               </div>

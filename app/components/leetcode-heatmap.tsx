@@ -172,8 +172,8 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
       className="backdrop-blur-sm border text-foreground p-3 sm:p-4 md:p-6 rounded-lg mx-auto w-full overflow-x-auto"
       style={{
         width: "min(100%, 920px)",
-        border: "2px solid var(--glow)",
-        boxShadow: "0 0 16px 2px var(--glow), 0 0 8px 2px var(--glow)",
+        border: "1.2px solid var(--glow)",
+        boxShadow: "0 0 9.6px 1.2px var(--glow), 0 0 4.8px 1.2px var(--glow)",
         background: "transparent",
       }}
     >
@@ -217,7 +217,7 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
         <div className="flex gap-2"> 
           {monthGroups.map((monthGroup, monthIndex) => (
             <div key={monthIndex} className="flex flex-col">
-              <div className="text-xs text-gray-800 dark:text-violet-400/80 mb-1 text-center">
+              <div className="text-xs text-gray-800 dark:text-black mb-1 text-center">
                 {monthGroup.month}
               </div>
               <div className="flex gap-[2px]"> 
@@ -252,7 +252,7 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
 
       {/* Legend */}
       <div className="flex items-center justify-end mt-4"> 
-        <div className="flex items-center gap-2 text-xs text-gray-800 dark:text-violet-300/80">
+        <div className="flex items-center gap-2 text-xs text-gray-800 dark:text-black">
           <span>Less</span>
           <div className="flex gap-[2px]"> 
             {[0, 1, 2, 3, 4].map((level: number) => (

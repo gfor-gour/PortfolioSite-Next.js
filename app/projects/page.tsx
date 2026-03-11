@@ -86,10 +86,10 @@ export default function ProjectsPage() {
     <main className="container px-4 sm:px-6 lg:px-8">
       <section className="py-8 sm:py-12 md:py-24 lg:py-32">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter text-center mb-8 sm:mb-12">
-          <span className="text-[#2F4F4F] dark:text-white">
+          <span className="text-foreground">
             Development{" "}
           </span>
-          <span className="text-[#2F4F4F] dark:text-violet-400">Archive</span>
+          <span className="text-foreground">Archive</span>
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {projects.map((p) => (

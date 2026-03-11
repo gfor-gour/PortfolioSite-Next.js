@@ -40,7 +40,7 @@ export default function ProjectCard({ title, description, link, tags, liveLink }
         >
           <CardContent className="p-4 sm:p-6 flex flex-col h-full">
             {/* Title - Centered and Larger */}
-            <h3 className="font-bold text-xl sm:text-2xl mb-4 text-center text-[#2F4F4F] dark:text-violet-600">
+            <h3 className="font-bold text-xl sm:text-2xl mb-4 text-center text-foreground">
               {title}
             </h3>
 
@@ -49,7 +49,7 @@ export default function ProjectCard({ title, description, link, tags, liveLink }
               {tags.map((tag) => (
                 <span
                   key={tag}
-                  className="border rounded-full px-3 py-1 text-xs sm:text-sm font-semibold bg-transparent border-[#2F4F4F] text-[#2F4F4F] shadow-[0_0_8px_2px_#2F4F4F] dark:border-violet-500/50 dark:text-violet-400 dark:shadow-[0_0_8px_2px_rgba(139,92,246,0.5)]"
+                  className="border rounded-full px-3 py-1 text-xs sm:text-sm font-semibold bg-transparent border-[var(--glow)] text-foreground shadow-[0_0_4.8px_1.2px_var(--glow)]"
                 >
                   {tag}
                 </span>
@@ -64,7 +64,7 @@ export default function ProjectCard({ title, description, link, tags, liveLink }
               {/* Details Button */}
               <button
                 onClick={toggleFlip}
-                className="w-full inline-flex items-center justify-center gap-2 text-sm border rounded-md px-4 py-2.5 font-bold transition-colors border-[#2F4F4F] text-[#2F4F4F] shadow-[0_0_8px_2px_#2F4F4F] hover:bg-[#bfc7b9] dark:border-violet-500/50 dark:text-violet-400 dark:shadow-[0_0_8px_2px_rgba(139,92,246,0.5)] dark:hover:bg-violet-900/30"
+                className="w-full inline-flex items-center justify-center gap-2 text-sm border rounded-md px-4 py-2.5 font-bold transition-colors border-[var(--glow)] text-foreground shadow-[0_0_4.8px_1.2px_var(--glow)] hover:bg-muted"
               >
                 <RotateCcw className="h-4 w-4" />
                 Details
@@ -74,9 +74,9 @@ export default function ProjectCard({ title, description, link, tags, liveLink }
               <Link
                 href={link}
                 target="_blank"
-                className="w-full inline-flex items-center justify-center gap-2 text-sm border rounded-md px-4 py-2.5 font-bold transition-colors border-[#2F4F4F] text-[#2F4F4F] shadow-[0_0_8px_2px_#2F4F4F] hover:bg-[#bfc7b9] dark:border-violet-500/50 dark:text-violet-400 dark:shadow-[0_0_8px_2px_rgba(139,92,246,0.5)] dark:hover:bg-violet-900/30"
+                className="w-full inline-flex items-center justify-center gap-2 text-sm border rounded-md px-4 py-2.5 font-bold transition-colors border-[var(--glow)] text-foreground shadow-[0_0_4.8px_1.2px_var(--glow)] hover:bg-muted"
               >
-                <Github className="h-4 w-4 text-[#2F4F4F] dark:text-violet-400" />
+                <Github className="h-4 w-4 text-foreground" />
                 Repository
               </Link>
 
@@ -85,7 +85,7 @@ export default function ProjectCard({ title, description, link, tags, liveLink }
                 <Link
                   href={liveLink}
                   target="_blank"
-                  className="w-full inline-flex items-center justify-center gap-2 text-sm border rounded-md px-4 py-2.5 font-bold transition-colors border-[#2F4F4F] text-[#2F4F4F] shadow-[0_0_8px_2px_#2F4F4F] hover:bg-[#bfc7b9] dark:border-violet-500/50 dark:text-violet-400 dark:shadow-[0_0_8px_2px_rgba(139,92,246,0.5)] dark:hover:bg-violet-900/30"
+                  className="w-full inline-flex items-center justify-center gap-2 text-sm border rounded-md px-4 py-2.5 font-bold transition-colors border-[var(--glow)] text-foreground shadow-[0_0_4.8px_1.2px_var(--glow)] hover:bg-muted"
                 >
                   <ExternalLink className="h-4 w-4 text-red-600 dark:text-red-400" />
                   <span className="border-b-2 border-red-600 dark:border-red-400">Live Project</span>
@@ -108,13 +108,13 @@ export default function ProjectCard({ title, description, link, tags, liveLink }
         >
           <CardContent className="p-4 sm:p-6 flex flex-col h-full">
             {/* Title on Back */}
-            <h3 className="font-bold text-xl sm:text-2xl mb-4 text-center text-[#2F4F4F] dark:text-violet-600">
+            <h3 className="font-bold text-xl sm:text-2xl mb-4 text-center text-foreground">
               {title}
             </h3>
 
             {/* Description */}
             <div className="flex-1 mb-4">
-              <p className="text-sm font-medium text-[#2F4F4F] dark:text-gray-200 leading-relaxed">
+              <p className="text-sm font-medium text-foreground/80 dark:text-foreground/80 leading-relaxed">
                 {description}
               </p>
             </div>
@@ -122,7 +122,7 @@ export default function ProjectCard({ title, description, link, tags, liveLink }
             {/* Flip Button */}
             <button
               onClick={toggleFlip}
-              className="mt-auto inline-flex items-center justify-center gap-2 text-sm border rounded-md px-4 py-2.5 font-bold transition-colors border-[#2F4F4F] text-[#2F4F4F] shadow-[0_0_8px_2px_#2F4F4F] hover:bg-[#bfc7b9] dark:border-violet-500/50 dark:text-violet-400 dark:shadow-[0_0_8px_2px_rgba(139,92,246,0.5)] dark:hover:bg-violet-900/30"
+              className="mt-auto inline-flex items-center justify-center gap-2 text-sm border rounded-md px-4 py-2.5 font-bold transition-colors border-[var(--glow)] text-foreground shadow-[0_0_4.8px_1.2px_var(--glow)] hover:bg-muted"
             >
               <RotateCcw className="h-4 w-4" />
               Flip

@@ -1,87 +1,151 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { ThemeToggle } from "@/components/theme-toggle"
 import AnimatedBg from "@/components/animated-bg"
+import {
+  User,
+  FolderGit2,
+  Code2,
+  Trophy,
+  Wrench,
+  Mail,
+} from "lucide-react"
+
+const navTabs = [
+  {
+    href: "/",
+    label: "Home",
+    icon: User,
+  },
+  {
+    href: "/projects",
+    label: "Projects",
+    icon: FolderGit2,
+  },
+  {
+    href: "/problem-solving",
+    label: "Problem Solving",
+    icon: Code2,
+  },
+  {
+    href: "/achievements",
+    label: "Achievements",
+    icon: Trophy,
+  },
+  {
+    href: "/skills",
+    label: "Skills",
+    icon: Wrench,
+  },
+  {
+    href: "/contact",
+    label: "Contact",
+    icon: Mail,
+  },
+]
 
 export default function SiteLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return (
-    <div className="relative min-h-screen text-black dark:text-foreground flex justify-center">
-      <AnimatedBg />
-      <div className="w-full max-w-[1440px] px-4 sm:px-6 lg:px-8">
-        <header className="w-full border-b border-[var(--glow)] bg-[#A6B0A6] dark:bg-background/95 backdrop-blur sticky top-0 z-50">
-          <div className="container flex h-14 items-center justify-between px-4 sm:px-6 lg:px-8">
-            <Link
-              href="/"
-              className="flex-shrink-0 flex items-center font-bold text-lg ml-2 sm:ml-4 text-[#2F4F4F] dark:text-white"
-              style={{
-                minWidth: "max-content",
-                border: "2px solid var(--glow)",
-                boxShadow: "0 0 8px 2px var(--glow), 0 0 4px 1px var(--glow)",
-                background: "var(--card)",
-                borderRadius: "0.75rem",
-                padding: "0.1rem 1rem",
-              }}
-            >
-              G_for_Gour
-            </Link>
+  const pathname = usePathname()
 
+  const isTabActive = (href: string) => {
+    if (href === "/") return pathname === "/"
+    return pathname.startsWith(href)
+  }
+
+  return (
+    <div className="relative min-h-screen bg-background text-foreground flex flex-col overflow-hidden">
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <AnimatedBg />
+      </div>
+      
+      {/* Fixed Header */}
+      <header className="fixed top-0 left-0 right-0 border-b border-[var(--glow)] bg-background/80 dark:bg-background/95 backdrop-blur z-50">
+        <div className="flex h-14 items-center justify-between px-4 sm:px-6 lg:px-8 max-w-full">
+          <Link
+            href="/"
+            className="flex-shrink-0 flex items-center font-bold text-lg ml-2 sm:ml-4 text-foreground dark:text-foreground"
+            style={{
+              minWidth: "max-content",
+              border: "1.2px solid var(--glow)",
+              boxShadow: "0 0 4.8px 1.2px var(--glow), 0 0 2.4px 0.6px var(--glow)",
+              background: "var(--card)",
+              borderRadius: "0.75rem",
+              padding: "0.1rem 1rem",
+            }}
+          >
+            g_for_gour
+          </Link>
+
+          <div className="flex items-center gap-2">
             <div className="flex items-center gap-2">
-              <div className="flex items-center gap-2">
-                <span
-                  className="rounded-xl flex items-center flex-shrink-0"
-                  style={{
-                    border: "2px solid var(--glow)",
-                    boxShadow: "0 0 6px 1.6px var(--glow), 0 0 3.2px 0.8px var(--glow)",
-                    background: "var(--card)",
-                    padding: "0.1rem 0.5rem",
-                    height: "1.8rem",
-                    minHeight: "unset",
-                  }}
+              <span
+                className="rounded-xl flex items-center flex-shrink-0 glow-pill"
+                style={{
+                  padding: "0.1rem 0.5rem",
+                  height: "1.8rem",
+                  minHeight: "unset",
+                }}
+              >
+                <Link
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground dark:text-foreground text-xs sm:text-sm font-semibold dark:font-medium hover:no-underline hover:text-foreground dark:hover:text-foreground transition-none"
                 >
-                  <Link
-                    href="/resume.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#2F4F4F] dark:text-white text-xs sm:text-sm font-semibold dark:font-medium hover:no-underline hover:text-[#2F4F4F] dark:hover:text-white transition-none"
-                  >
-                    Resume
-                  </Link>
-                </span>
-                <ThemeToggle className="flex-shrink-0 h-7 w-7 sm:h-9 sm:w-9" />
-              </div>
+                  Resume
+                </Link>
+              </span>
+              <ThemeToggle className="flex-shrink-0 h-7 w-7 sm:h-9 sm:w-9" />
             </div>
           </div>
-        </header>
+        </div>
+      </header>
 
-        {children}
+      {/* Main Content (scrollable) */}
+      <main className="flex-1 overflow-y-auto mt-14 mb-16 w-full relative z-10">
+        <div className="w-full flex justify-center">
+          {children}
+        </div>
+      </main>
 
-        <footer className="border-t border-[var(--glow)] bg-[#A6B0A6] dark:bg-background">
-          <div className="container flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6">
-            <p className="text-xs text-gray-500 dark:text-muted-foreground">
-              © 2024 g_for_gour.dev. All rights reserved.
-            </p>
-            <nav className="sm:ml-auto flex gap-4 sm:gap-6">
+      {/* Fixed Bottom Tab Bar */}
+      <nav className="fixed bottom-0 left-0 right-0 border-t border-[var(--glow)] bg-background/80 dark:bg-background/95 backdrop-blur z-50">
+        <div className="flex h-16 items-center justify-around px-4 sm:px-6 lg:px-8 max-w-full">
+          {navTabs.map(({ href, label, icon: Icon }) => {
+            const isActive = isTabActive(href)
+            return (
               <Link
-                className="text-xs text-gray-500 dark:text-muted-foreground hover:text-black dark:hover:text-primary hover:underline underline-offset-4"
-                href="#"
+                key={href}
+                href={href}
+                className="flex flex-col items-center justify-center gap-1 px-3 py-2 transition-all duration-200 ease-out"
               >
-                Terms of Service
+                <Icon 
+                  className={`w-6 h-6 transition-all duration-200 ${
+                    isActive 
+                      ? "text-foreground dark:text-white" 
+                      : "text-foreground/40 dark:text-white/40"
+                  }`}
+                />
+                <span 
+                  className={`text-xs sm:text-sm font-medium transition-all duration-200 ${
+                    isActive 
+                      ? "text-foreground dark:text-white" 
+                      : "text-foreground/40 dark:text-white/40"
+                  }`}
+                >
+                  {label}
+                </span>
               </Link>
-              <Link
-                className="text-xs text-gray-500 dark:text-muted-foreground hover:text-black dark:hover:text-primary hover:underline underline-offset-4"
-                href="#"
-              >
-                Privacy
-              </Link>
-            </nav>
-          </div>
-        </footer>
-      </div>
+            )
+          })}
+        </div>
+      </nav>
     </div>
   )
 }

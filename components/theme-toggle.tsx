@@ -19,7 +19,7 @@ export function ThemeToggle({ className, ...props }: ThemeToggleProps) {
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
       className={`transition-colors ${
       theme === "dark"
-        ? "bg-violet-700 text-white hover:bg-violet-800"
+        ? "bg-black text-white hover:bg-gray-900"
         : "bg-background text-foreground hover:bg-muted"
       } ${className}`}
       {...props}

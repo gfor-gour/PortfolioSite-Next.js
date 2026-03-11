@@ -16,11 +16,11 @@ export default function AboutPage() {
       <section className="pt-4 sm:pt-8 md:pt-10 lg:pt-12 pb-8 sm:pb-12 md:pb-24 lg:pb-32">
         <div className="flex flex-col md:flex-row items-start gap-8 w-full">
           <div className="w-full md:w-[60%] flex flex-col items-start justify-center space-y-4 sm:space-y-6">
-            <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#2F4F4F] dark:text-white">
+            <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground dark:text-foreground">
               Hi, I&apos;m
             </span>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-[#2F4F4F] dark:text-primary break-words sm:whitespace-nowrap">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-foreground dark:text-foreground break-words sm:whitespace-nowrap">
               <span className="inline-block animate-name delay-1">Gour</span>{" "}
               <span className="inline-block animate-name delay-2">Gupal</span>{" "}
               <span className="inline-block animate-name delay-3">Talukder</span>{" "}
@@ -29,36 +29,20 @@ export default function AboutPage() {
 
             <div className="w-full md:w-auto flex flex-col items-start">
               <span className="flex flex-col items-start gap-1">
-                <span className="text-base md:text-lg font-semibold text-[#2F4F4F] dark:text-violet-200">
+                <span className="text-base md:text-lg font-semibold text-foreground dark:text-violet-200">
                   A Software Engineering student{" "}
                   <span className="font-normal">7th semester, Final Year</span>
                 </span>
-                <span className="text-lg md:text-xl font-semibold text-[#2F4F4F] dark:text-violet-300">
+                <span className="text-lg md:text-xl font-semibold text-foreground dark:text-violet-300">
                   Shahjalal University of Science and Technology, Sylhet,
                   Bangladesh
                 </span>
               </span>
-              <span
-                className="block mt-2"
-                style={{
-                  width: "100%",
-                  height: "1px",
-                  borderRadius: "0.5px",
-                  background: "var(--glow)",
-                  boxShadow:
-                    "0 0 8px 2px var(--glow), 0 0 4px 1px var(--glow)",
-                }}
-              />
+              <span className="block mt-2 glow-divider" />
             </div>
 
             <div
-              className="rounded-xl mt-2 w-full sm:w-fit max-w-full p-4 sm:p-6 backdrop-blur"
-              style={{
-                border: "2px solid var(--glow)",
-                boxShadow:
-                  "0 0 8px 2px var(--glow), 0 0 4px 1px var(--glow)",
-                background: "transparent",
-              }}
+              className="rounded-xl mt-2 w-full sm:w-fit max-w-full p-4 sm:p-6 backdrop-blur glow-surface"
             >
               <div className="space-y-4 text-gray-800 dark:text-violet-100">
                 {[
@@ -106,18 +90,12 @@ export default function AboutPage() {
             </div>
 
             <div
-              className="flex w-[280px] sm:w-[320px] md:w-[360px] lg:w-[400px] justify-between gap-2 rounded-xl p-4"
-              style={{
-                border: "2px solid var(--glow)",
-                boxShadow:
-                  "0 0 8px 2px var(--glow), 0 0 4px 1px var(--glow)",
-                background: "transparent",
-              }}
+              className="flex w-[280px] sm:w-[320px] md:w-[360px] lg:w-[400px] justify-between gap-2 rounded-xl p-4 glow-surface"
             >
               <Button
                 variant="outline"
                 size="lg"
-                className="flex-1 text-[#2F4F4F] dark:text-primary border-none bg-transparent shadow-none flex items-center justify-center"
+                className="flex-1 text-foreground dark:text-primary border-none bg-transparent shadow-none flex items-center justify-center"
                 asChild
               >
                 <Link href="https://github.com/gfor-gour" target="_blank">
@@ -128,7 +106,7 @@ export default function AboutPage() {
               <Button
                 variant="outline"
                 size="lg"
-                className="flex-1 text-[#2F4F4F] dark:text-primary border-none bg-transparent shadow-none flex items-center justify-center"
+                className="flex-1 text-foreground dark:text-primary border-none bg-transparent shadow-none flex items-center justify-center"
                 asChild
               >
                 <Link
@@ -142,7 +120,7 @@ export default function AboutPage() {
               <Button
                 variant="outline"
                 size="lg"
-                className="flex-1 text-[#2F4F4F] dark:text-primary border-none bg-transparent shadow-none flex items-center justify-center"
+                className="flex-1 text-foreground dark:text-primary border-none bg-transparent shadow-none flex items-center justify-center"
                 asChild
               >
                 <Link href="https://x.com/this_is_Gour" target="_blank">
@@ -153,7 +131,7 @@ export default function AboutPage() {
               <Button
                 variant="outline"
                 size="lg"
-                className="flex-1 text-[#2F4F4F] dark:text-primary border-none bg-transparent shadow-none flex items-center justify-center"
+                className="flex-1 text-foreground dark:text-primary border-none bg-transparent shadow-none flex items-center justify-center"
                 asChild
               >
                 <Link href="mailto:gourgupaltalukder@gmail.com">

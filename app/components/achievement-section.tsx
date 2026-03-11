@@ -26,10 +26,10 @@ function ImageWithFallback({
 
   if (!src || imageError) {
     return (
-      <div className="w-full aspect-[4/3] flex items-center justify-center bg-gray-100 dark:bg-gray-800/50 border-2 border-dashed border-[#2F4F4F]/30 dark:border-violet-400/30">
+      <div className="w-full aspect-[4/3] flex items-center justify-center bg-gray-100 dark:bg-gray-800/50 glow-dashed">
         <div className="text-center px-4">
-          <FallbackIcon className="w-12 h-12 mx-auto mb-3 text-[#2F4F4F]/30 dark:text-violet-400/30" />
-          <p className="text-sm font-medium text-[#2F4F4F] dark:text-violet-300">
+          <FallbackIcon className="w-12 h-12 mx-auto mb-3 text-foreground/30 dark:text-foreground/30" />
+          <p className="text-sm font-medium text-foreground dark:text-foreground">
             {fallbackText}
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -45,7 +45,7 @@ function ImageWithFallback({
       {!imageLoaded && (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800/50">
           <div className="text-center px-4">
-            <FallbackIcon className="w-8 h-8 mx-auto mb-2 text-[#2F4F4F]/20 dark:text-violet-400/20 animate-pulse" />
+            <FallbackIcon className="w-8 h-8 mx-auto mb-2 text-foreground/20 dark:text-foreground/20 animate-pulse" />
             <p className="text-xs text-gray-400 dark:text-gray-500">Loading...</p>
           </div>
         </div>
@@ -82,10 +82,10 @@ function NaturalSizeImage({
 
   if (!src || imageError) {
     return (
-      <div className={`w-full ${maxWidth} flex items-center justify-center bg-gray-100 dark:bg-gray-800/50 border-2 border-dashed border-[#2F4F4F]/30 dark:border-violet-400/30 rounded-lg min-h-[200px]`}>
+      <div className={`w-full ${maxWidth} flex items-center justify-center bg-gray-100 dark:bg-gray-800/50 rounded-lg min-h-[200px] glow-dashed`}>
         <div className="text-center px-4 py-8">
-          <FallbackIcon className="w-12 h-12 mx-auto mb-3 text-[#2F4F4F]/30 dark:text-violet-400/30" />
-          <p className="text-sm font-medium text-[#2F4F4F] dark:text-violet-300">
+          <FallbackIcon className="w-12 h-12 mx-auto mb-3 text-foreground/30 dark:text-foreground/30" />
+          <p className="text-sm font-medium text-foreground dark:text-foreground">
             {fallbackText}
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -101,7 +101,7 @@ function NaturalSizeImage({
       {!imageLoaded && (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800/50 min-h-[200px] rounded-lg z-10">
           <div className="text-center px-4">
-            <FallbackIcon className="w-8 h-8 mx-auto mb-2 text-[#2F4F4F]/20 dark:text-violet-400/20 animate-pulse" />
+            <FallbackIcon className="w-8 h-8 mx-auto mb-2 text-foreground/20 dark:text-foreground/20 animate-pulse" />
             <p className="text-xs text-gray-400 dark:text-gray-500">Loading...</p>
           </div>
         </div>
@@ -157,30 +157,23 @@ export default function AchievementSection({ achievements }: AchievementSectionP
 
   const displayAchievements = achievements || defaultAchievements
 
-  const glowingCardStyle = {
-    border: "2px solid var(--glow)",
-    boxShadow: "0 0 8px 2px var(--glow), 0 0 4px 1px var(--glow)",
-    background: "transparent",
-  }
-
   return (
     <div className="w-full space-y-8 sm:space-y-12">
       {displayAchievements.map((achievement, index) => (
         <div
           key={index}
-          className="w-full rounded-xl backdrop-blur p-6 sm:p-8 md:p-10"
-          style={glowingCardStyle}
+          className="w-full rounded-xl backdrop-blur p-6 sm:p-8 md:p-10 glow-surface"
         >
           {/* Achievement Header */}
           <div className="mb-6 sm:mb-8">
             <div className="flex items-start gap-3 mb-6">
-              <Trophy className="w-6 h-6 sm:w-7 sm:h-7 text-[#2F4F4F] dark:text-violet-400 flex-shrink-0 mt-1" />
+              <Trophy className="w-6 h-6 sm:w-7 sm:h-7 text-foreground flex-shrink-0 mt-1" />
               <div className="flex-1">
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#2F4F4F] dark:text-white mb-3">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-3">
                   {achievement.title}
                 </h3>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#2F4F4F]/10 dark:bg-violet-400/20 border border-[#2F4F4F]/30 dark:border-violet-400/30">
-                  <span className="text-base sm:text-lg font-semibold text-[#2F4F4F] dark:text-violet-400">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-foreground/5 border border-[color-mix(in_srgb,var(--glow)_30%,transparent)]">
+                  <span className="text-base sm:text-lg font-semibold text-foreground">
                     {achievement.position}
                   </span>
                 </div>
@@ -192,12 +185,12 @@ export default function AchievementSection({ achievements }: AchievementSectionP
               {/* Left Column: Event Details */}
               <div className="flex flex-col gap-4 sm:gap-5">
                 <div className="flex items-start gap-3">
-                  <Building2 className="w-5 h-5 text-[#2F4F4F] dark:text-violet-400 flex-shrink-0 mt-0.5" />
+                  <Building2 className="w-5 h-5 text-foreground flex-shrink-0 mt-0.5" />
                   <div className="flex-1">
-                    <p className="text-sm font-semibold text-[#2F4F4F] dark:text-violet-300 mb-1">
+                    <p className="text-sm font-semibold text-foreground mb-1">
                       Organized by
                     </p>
-                    <p className="text-sm text-[#2F4F4F] dark:text-gray-300">
+                    <p className="text-sm text-foreground/80">
                       {achievement.organizer}
                     </p>
                   </div>
@@ -205,12 +198,12 @@ export default function AchievementSection({ achievements }: AchievementSectionP
 
                 {achievement.coHost && (
                   <div className="flex items-start gap-3">
-                    <Building2 className="w-5 h-5 text-[#2F4F4F] dark:text-violet-400 flex-shrink-0 mt-0.5" />
+                    <Building2 className="w-5 h-5 text-foreground flex-shrink-0 mt-0.5" />
                     <div className="flex-1">
-                      <p className="text-sm font-semibold text-[#2F4F4F] dark:text-violet-300 mb-1">
+                      <p className="text-sm font-semibold text-foreground mb-1">
                         Co-hosted by
                       </p>
-                      <p className="text-sm text-[#2F4F4F] dark:text-gray-300">
+                      <p className="text-sm text-foreground/80">
                         {achievement.coHost}
                       </p>
                     </div>
@@ -219,12 +212,12 @@ export default function AchievementSection({ achievements }: AchievementSectionP
 
                 {achievement.teamSize && (
                   <div className="flex items-start gap-3">
-                    <Users className="w-5 h-5 text-[#2F4F4F] dark:text-violet-400 flex-shrink-0 mt-0.5" />
+                    <Users className="w-5 h-5 text-foreground flex-shrink-0 mt-0.5" />
                     <div className="flex-1">
-                      <p className="text-sm font-semibold text-[#2F4F4F] dark:text-violet-300 mb-1">
+                      <p className="text-sm font-semibold text-foreground mb-1">
                         Team Size
                       </p>
-                      <p className="text-sm text-[#2F4F4F] dark:text-gray-300">
+                      <p className="text-sm text-foreground/80">
                         {achievement.teamSize}
                       </p>
                     </div>
@@ -236,8 +229,8 @@ export default function AchievementSection({ achievements }: AchievementSectionP
               <div className="flex flex-col gap-4 sm:gap-5 md:gap-6">
                 {/* Description */}
                 <div className="flex items-start gap-2 sm:gap-3">
-                  <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-violet-400 rounded-full mt-2"></div>
-                  <p className="text-sm sm:text-base md:text-lg text-[#2F4F4F] dark:text-violet-100 leading-relaxed">
+                  <div className="flex-shrink-0 w-2 h-2 bg-foreground dark:bg-foreground rounded-full mt-2"></div>
+                  <p className="text-sm sm:text-base md:text-lg text-foreground leading-relaxed">
                     {achievement.description}
                   </p>
                 </div>
@@ -250,11 +243,11 @@ export default function AchievementSection({ achievements }: AchievementSectionP
                     target={achievement.githubLink ? "_blank" : undefined}
                     rel={achievement.githubLink ? "noopener noreferrer" : undefined}
                     onClick={!achievement.githubLink ? (e) => e.preventDefault() : undefined}
-                    className={`flex-1 w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs sm:text-sm border rounded-md px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 font-bold transition-all duration-200 border-[#2F4F4F] text-[#2F4F4F] shadow-[0_0_8px_2px_#2F4F4F] hover:bg-[#bfc7b9] hover:shadow-[0_0_12px_3px_#2F4F4F] dark:border-violet-500/50 dark:text-violet-400 dark:shadow-[0_0_8px_2px_rgba(139,92,246,0.5)] dark:hover:bg-violet-900/30 dark:hover:shadow-[0_0_12px_3px_rgba(139,92,246,0.7)] ${
-                      !achievement.githubLink ? "opacity-60 cursor-not-allowed hover:bg-transparent hover:shadow-[0_0_8px_2px_#2F4F4F] dark:hover:bg-transparent dark:hover:shadow-[0_0_8px_2px_rgba(139,92,246,0.5)]" : "cursor-pointer"
+                    className={`flex-1 w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs sm:text-sm border rounded-md px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 font-bold transition-all duration-200 border-[var(--glow)] text-foreground shadow-[0_0_8px_2px_var(--glow)] hover:bg-muted hover:shadow-[0_0_12px_3px_var(--glow)] ${
+                      !achievement.githubLink ? "opacity-60 cursor-not-allowed hover:bg-transparent hover:shadow-[0_0_8px_2px_var(--glow)]" : "cursor-pointer"
                     }`}
                   >
-                    <Github className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#2F4F4F] dark:text-violet-400 flex-shrink-0" />
+                    <Github className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-foreground flex-shrink-0" />
                     <span className="whitespace-nowrap">GitHub</span>
                   </Link>
 
@@ -264,8 +257,8 @@ export default function AchievementSection({ achievements }: AchievementSectionP
                     target={achievement.liveLink ? "_blank" : undefined}
                     rel={achievement.liveLink ? "noopener noreferrer" : undefined}
                     onClick={!achievement.liveLink ? (e) => e.preventDefault() : undefined}
-                    className={`flex-1 w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs sm:text-sm border rounded-md px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 font-bold transition-all duration-200 border-[#2F4F4F] text-[#2F4F4F] shadow-[0_0_8px_2px_#2F4F4F] hover:bg-[#bfc7b9] hover:shadow-[0_0_12px_3px_#2F4F4F] dark:border-violet-500/50 dark:text-violet-400 dark:shadow-[0_0_8px_2px_rgba(139,92,246,0.5)] dark:hover:bg-violet-900/30 dark:hover:shadow-[0_0_12px_3px_rgba(139,92,246,0.7)] ${
-                      !achievement.liveLink ? "opacity-60 cursor-not-allowed hover:bg-transparent hover:shadow-[0_0_8px_2px_#2F4F4F] dark:hover:bg-transparent dark:hover:shadow-[0_0_8px_2px_rgba(139,92,246,0.5)]" : "cursor-pointer"
+                    className={`flex-1 w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs sm:text-sm border rounded-md px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 font-bold transition-all duration-200 border-[var(--glow)] text-foreground shadow-[0_0_8px_2px_var(--glow)] hover:bg-muted hover:shadow-[0_0_12px_3px_var(--glow)] ${
+                      !achievement.liveLink ? "opacity-60 cursor-not-allowed hover:bg-transparent hover:shadow-[0_0_8px_2px_var(--glow)]" : "cursor-pointer"
                     }`}
                   >
                     <ExternalLink className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-red-600 dark:text-red-400 flex-shrink-0" />
@@ -289,12 +282,11 @@ export default function AchievementSection({ achievements }: AchievementSectionP
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             {/* Certificate Image */}
             <div className="flex flex-col items-center">
-              <h4 className="text-lg sm:text-xl font-semibold text-[#2F4F4F] dark:text-violet-300 mb-4 text-center">
+              <h4 className="text-lg sm:text-xl font-semibold text-foreground dark:text-foreground mb-4 text-center">
                 Certificate
               </h4>
               <div
-                className="relative w-full max-w-md rounded-lg overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
-                style={glowingCardStyle}
+                className="relative w-full max-w-md rounded-lg overflow-hidden transition-transform duration-300 hover:scale-[1.02] glow-surface"
               >
                 <ImageWithFallback
                   src={achievement.certificateImage}
@@ -308,12 +300,11 @@ export default function AchievementSection({ achievements }: AchievementSectionP
 
             {/* Event Image */}
             <div className="flex flex-col items-center">
-              <h4 className="text-lg sm:text-xl font-semibold text-[#2F4F4F] dark:text-violet-300 mb-4 text-center">
+              <h4 className="text-lg sm:text-xl font-semibold text-foreground dark:text-foreground mb-4 text-center">
                 Event Photo
               </h4>
               <div
-                className="w-full transition-transform duration-300 hover:scale-[1.02]"
-                style={glowingCardStyle}
+                className="w-full transition-transform duration-300 hover:scale-[1.02] glow-surface"
               >
                 <NaturalSizeImage
                   src={achievement.eventImage}

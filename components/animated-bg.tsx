@@ -104,7 +104,8 @@ export default function AnimatedBg() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-[-1] h-full w-full pointer-events-none"
+      className="fixed inset-0 z-0 h-full w-full pointer-events-none"
+      style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}
       aria-hidden="true"
     />
   )

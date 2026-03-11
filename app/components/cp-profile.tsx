@@ -77,32 +77,32 @@ export default function CPProfile() {
               overflow: "hidden",
             }}
           >
-            <p className="w-full text-[1.18rem] sm:text-lg md:text-xl text-[#2F4F4F] dark:text-gray-100 text-center font-medium leading-relaxed transition-all duration-500">
+            <p className="w-full text-[1.18rem] sm:text-lg md:text-xl text-foreground dark:text-foreground text-center font-medium leading-relaxed transition-all duration-500">
               {paragraph}
             </p>
             {!expanded && (
-              <div className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-[#2F4F4F] dark:from-[#18102b] to-transparent pointer-events-none transition-all duration-500" />
+              <div className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-foreground dark:from-foreground to-transparent pointer-events-none transition-all duration-500" />
             )}
           </div>
           <button
-            className="flex items-center gap-1 mt-2 text-[#2F4F4F] dark:text-violet-300 font-bold hover:underline focus:outline-none transition-colors"
+            className="flex items-center gap-1 mt-2 text-foreground dark:text-foreground font-bold hover:underline focus:outline-none transition-colors"
             onClick={() => setExpanded((v) => !v)}
             aria-expanded={expanded}
           >
             {expanded ? "Show less" : "Read more"}
             {expanded ? (
-              <ChevronUp className="w-5 h-5 text-[#2F4F4F] dark:text-violet-300" />
+              <ChevronUp className="w-5 h-5 text-foreground dark:text-foreground" />
             ) : (
-              <ChevronDown className="w-5 h-5 text-[#2F4F4F] dark:text-violet-300" />
+              <ChevronDown className="w-5 h-5 text-foreground dark:text-foreground" />
             )}
           </button>
           <div className="w-full flex justify-center mt-6">
-            <hr className="w-full h-1 rounded border-0 bg-[#2F4F4F] dark:bg-violet-400 shadow-[0_0_16px_2px_#2F4F4F] dark:shadow-[0_0_16px_2px_rgba(139,92,246,0.7)]" />
+            <hr className="w-full h-1 rounded border-0 bg-[var(--glow)] shadow-[0_0_16px_2px_var(--glow)]" />
           </div>
         </div>
 
         {/* LeetCode Data Title */}
-        <h3 className="text-xl sm:text-2xl font-bold mb-4 text-[#2F4F4F] dark:text-violet-400 text-left">
+        <h3 className="text-xl sm:text-2xl font-bold mb-4 text-foreground dark:text-foreground text-left">
           LeetCode Statistics:
         </h3>
         
@@ -117,27 +117,27 @@ export default function CPProfile() {
             {/* Problem Solved & Contest Rating */}
             <div className="flex-1 flex flex-col items-center gap-8 w-full max-w-xs">
               <div className="w-full flex flex-col items-center">
-                <span className="text-lg font-semibold text-[#2F4F4F] dark:text-violet-300">
+                <span className="text-lg font-semibold text-foreground dark:text-foreground">
                   Problem Solved
                 </span>
                 <div className="flex items-end gap-2 mt-1">
-                  <span className="text-4xl font-extrabold text-[#2F4F4F] dark:text-violet-400">
+                  <span className="text-4xl font-extrabold text-foreground dark:text-foreground">
                     {data?.userInfo?.totalSolved || 0}
                   </span>
-                  <span className="text-base text-[#2F4F4F] dark:text-gray-400 mb-1">
+                  <span className="text-base text-foreground/70 dark:text-foreground/70 mb-1">
                     / {data?.userInfo?.totalQuestions || 0}
                   </span>
                 </div>
               </div>
               <div className="w-full flex flex-col items-center mt-2">
-                <span className="text-lg font-bold text-[#2F4F4F] dark:text-violet-300">
+                <span className="text-lg font-bold text-foreground dark:text-foreground">
                   Contest Rating
                 </span>
                 <div className="flex flex-col mt-1 items-center">
-                  <span className="text-3xl font-semibold text-[#2F4F4F] dark:text-violet-400">
+                  <span className="text-3xl font-semibold text-foreground dark:text-foreground">
                     {Math.round(data?.contestInfo?.rating || 0)}
                   </span>
-                  <span className="text-sm text-[#2F4F4F] dark:text-gray-400">
+                  <span className="text-sm text-foreground/70 dark:text-foreground/70">
                     Top {(data?.contestInfo?.topPercentage || 0).toFixed(1)}%
                   </span>
                 </div>
@@ -145,7 +145,7 @@ export default function CPProfile() {
             </div>
             {/* Problem Solving Distribution */}
             <div className="flex-1 flex flex-col items-center gap-4 w-full max-w-xs">
-              <h3 className="text-lg font-semibold text-[#2F4F4F] dark:text-violet-300 mb-2 text-center">
+              <h3 className="text-lg font-semibold text-foreground dark:text-foreground mb-2 text-center">
                 Problem Solving Distribution
               </h3>
               <div className="w-full min-w-[220px] max-w-xs space-y-3">
@@ -212,7 +212,7 @@ function LoadingSkeleton() {
 
 function ErrorState({ error, retry }: { error: string; retry: () => void }) {
   return (
-    <div className="w-full p-8 text-center rounded-xl backdrop-blur" style={glowingCardStyle}>
+    <div className="w-full p-8 text-center rounded-xl backdrop-blur glow-surface" style={{ ...glowingCardStyle }}>
       <p className="text-lg text-red-600 dark:text-red-400 mb-4">{error}</p>
       <button
         onClick={retry}
