@@ -42,6 +42,14 @@
   --sidebar-accent-foreground: #111827;
   --sidebar-border: #e5e7eb;
   --sidebar-ring: #1d3557;
+
+  /* LightLines background (portfolio) — follows html.dark, no JS theme branch */
+  --light-lines-from: #ffffff;
+  --light-lines-to: #ffffff;
+  --light-lines-line: #090d14;
+  --light-lines-light: #090d14;
+  --light-lines-lines-opacity: 0.1;
+  --light-lines-lights-opacity: 0.75;
 }
 
 .dark {
@@ -80,6 +88,13 @@
   --sidebar-accent-foreground: #e5e7eb;
   --sidebar-border: #1f2937;
   --sidebar-ring: #8b5cf6;
+
+  --light-lines-from: #000000;
+  --light-lines-to: #000000;
+  --light-lines-line: #2aeb70;
+  --light-lines-light: #2aeb70;
+  --light-lines-lines-opacity: 0.1;
+  --light-lines-lights-opacity: 0.85;
 }
 
 @layer components {

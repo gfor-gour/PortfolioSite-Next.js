@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ThemeToggle } from "@/components/theme-toggle"
-import AnimatedBg from "@/components/animated-bg"
+import { LightLines } from "@/components/ui/light-lines"
 import {
   User,
   FolderGit2,
@@ -59,9 +59,14 @@ export default function SiteLayout({
   }
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground flex flex-col overflow-hidden">
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <AnimatedBg />
+    <div className="relative flex h-[100dvh] min-h-0 flex-col overflow-hidden bg-background text-foreground">
+      {/* Fixed to viewport so line art scales consistently; flex parent height no longer stretches with tall pages */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <LightLines
+          className="h-full min-h-0"
+          usePortfolioTheme
+          speedMultiplier={1.5}
+        />
       </div>
       
       {/* Fixed Header */}
@@ -108,7 +113,7 @@ export default function SiteLayout({
       </header>
 
       {/* Main Content (scrollable) */}
-      <main className="flex-1 overflow-y-auto mt-14 mb-16 w-full relative z-10">
+      <main className="flex-1 min-h-0 overflow-y-auto mt-14 mb-16 w-full relative z-10">
         <div className="w-full flex justify-center">
           {children}
         </div>
