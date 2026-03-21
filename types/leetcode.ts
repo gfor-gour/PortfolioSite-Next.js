@@ -18,6 +18,7 @@ export const LeetCodeUserSchema = z.object({
 })
 
 export const LeetCodeCalendarSchema = z.object({
+  activeYears: z.array(z.number()).optional(),
   submissionCalendar: z.record(z.number())
 })
 

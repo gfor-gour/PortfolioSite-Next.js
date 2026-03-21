@@ -3,22 +3,22 @@ import Image from 'next/image'
 export default function TechStack() {
   const technologies = [
     // First Row - Frontend & Core
-    [
-      { name: 'React', src: '/react.svg', darkMode: true },
+    [ 
+      { name: 'Expo', src: '/expo.svg', darkMode: true},
+      { name: 'React Native', src: '/react.svg', darkMode: true },
       { name: 'Next.js', src: '/next.svg', darkMode: true },
-      { name: 'TypeScript', src: '/typescript.svg', darkMode: true },
-      { name: 'TailwindCSS', src: '/tailwind.svg' },
-      { name: 'Git', src: '/git.svg', darkMode: true },
-      { name: 'Node.js', src: '/node.svg', darkMode: true }
+      { name: 'JavaScript', src: '/javascript.svg', darkMode: true },
+      { name: 'TailwindCSS', src: '/tailwind.svg', darkMode: true },
+      { name: 'Git', src: '/git.svg', darkMode: true }
     ],
     // Second Row - Backend & Languages
     [
-      { name: 'MongoDB', src: '/mongodb.svg' },
-      { name: 'PostgreSQL', src: '/postgresql.svg' },
-      { name: 'Express.js', src: '/express.svg' },
-      { name: 'C++', src: '/cpp.svg' },
-      { name: 'Python', src: '/python.svg' },
-      { name: 'Firebase', src: '/firebase.svg' }
+      { name: 'Node.js', src: '/node.svg', darkMode: true },
+      { name: 'Express.js', src: '/express.svg', darkMode: true },
+      { name: 'MongoDB', src: '/mongodb.svg', darkMode: true },
+      { name: 'Firebase', src: '/firebase.svg', darkMode: true },
+      { name: 'C++', src: '/cpp.svg', darkMode: true },
+      { name: 'Python', src: '/python.svg', darkMode: true },
     ]
   ]
 

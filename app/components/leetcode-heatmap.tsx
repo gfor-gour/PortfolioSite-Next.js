@@ -16,44 +16,93 @@ interface ContributionDay {
 }
 
 interface LeetCodeHeatmapProps {
+  activeYears?: number[]
   submissionCalendar: Record<string, number>
 }
 
-export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
+export function LeetCodeHeatmap({ activeYears = [], submissionCalendar }: LeetCodeHeatmapProps) {
   const [isLoading, setIsLoading] = useState(true)
+  const [selectedRange, setSelectedRange] = useState<string>("current")
+  const [calendarByRange, setCalendarByRange] = useState<Record<string, Record<string, number>>>({})
 
   useEffect(() => {
     if (submissionCalendar) {
       setIsLoading(false)
+      setCalendarByRange((prev) => ({
+        ...prev,
+        current: submissionCalendar,
+      }))
     }
   }, [submissionCalendar])
 
+  useEffect(() => {
+    const fetchYearCalendar = async () => {
+      if (selectedRange === "current" || calendarByRange[selectedRange]) return
+      try {
+        const response = await fetch(`/api/leetcode?year=${selectedRange}`, {
+          method: "GET",
+          headers: { Accept: "application/json" },
+        })
+        if (!response.ok) return
+        const data = await response.json()
+        const yearlyCalendar =
+          typeof data?.calendar?.submissionCalendar === "string"
+            ? JSON.parse(data.calendar.submissionCalendar)
+            : data?.calendar?.submissionCalendar || {}
+
+        setCalendarByRange((prev) => ({
+          ...prev,
+          [selectedRange]: yearlyCalendar,
+        }))
+      } catch {
+        // Keep UI stable; existing data remains visible.
+      }
+    }
+
+    fetchYearCalendar()
+  }, [selectedRange, calendarByRange])
+
   const getContributionData = (): ContributionDay[][] => {
     try {
-      if (!submissionCalendar) return []
+      const selectedCalendar =
+        selectedRange === "current"
+          ? submissionCalendar
+          : calendarByRange[selectedRange] || {}
+      if (!selectedCalendar) return []
 
       // Parse if string, otherwise use as is
       const calendar =
-        typeof submissionCalendar === "string"
-          ? JSON.parse(submissionCalendar)
-          : submissionCalendar
-
-      console.log("Calendar data:", calendar) // Debug log
+        typeof selectedCalendar === "string"
+          ? JSON.parse(selectedCalendar)
+          : selectedCalendar
 
       const weeks: ContributionDay[][] = []
       let currentWeek: ContributionDay[] = []
       const today = new Date()
-      const oneYearAgo = new Date()
-      oneYearAgo.setFullYear(today.getFullYear() - 1)
+      let rangeStart: Date
+      let rangeEnd: Date
 
-      // Create date range for last 12 months
+      if (selectedRange === "current") {
+        // Current = rolling last 12 months (default)
+        rangeEnd = new Date(today)
+        rangeStart = new Date(today)
+        rangeStart.setFullYear(rangeStart.getFullYear() - 1)
+      } else {
+        // Specific year view = Jan 1 to Dec 31 for selected year
+        const year = Number(selectedRange)
+        rangeStart = new Date(Date.UTC(year, 0, 1))
+        rangeEnd = new Date(Date.UTC(year, 11, 31))
+      }
+
+      // Create date range for selected period
       for (
-        let d = new Date(oneYearAgo);
-        d <= today;
-        d.setDate(d.getDate() + 1)
+        let d = new Date(rangeStart);
+        d <= rangeEnd;
+        d.setUTCDate(d.getUTCDate() + 1)
       ) {
-
-        const timestamp = Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 1000).toString()
+        const timestamp = Math.floor(
+          Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) / 1000
+        ).toString()
         const count = calendar[timestamp] || 0
 
         const level =
@@ -95,6 +144,16 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
   }
 
   const contributionWeeks = getContributionData()
+
+  const availableYears = (() => {
+    const years = new Set<number>(activeYears)
+    const currentYear = new Date().getUTCFullYear()
+    years.add(currentYear)
+    years.add(2025)
+    years.add(2024)
+    years.add(2023)
+    return Array.from(years).sort((a, b) => b - a)
+  })()
 
   // Group weeks by month
   const getMonthGroups = () => {
@@ -159,8 +218,6 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
       { totalSubmissions: 0, activeDays: 0 }
     )
 
-  console.log("Submission Calendar:", submissionCalendar)
-
   if (isLoading) {
     return (
       <div className="w-full h-64 bg-gray-900/50 animate-pulse rounded-lg" />
@@ -184,7 +241,9 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
             {stats.totalSubmissions}
           </span>
           <span className="text-lg text-foreground">
-            submissions in the past one year
+            {selectedRange === "current"
+              ? "submissions in the past one year"
+              : `submissions in ${selectedRange}`}
           </span>
           <TooltipProvider>
             <Tooltip>
@@ -203,12 +262,18 @@ export function LeetCodeHeatmap({ submissionCalendar }: LeetCodeHeatmapProps) {
           <span className="text-lg font-semibold text-foreground">
             Total active days: <span className="font-extrabold text-foreground">{stats.activeDays}</span>
           </span>
-          <button
-            className="px-4 py-2 rounded-md border border-[var(--glow)] shadow-[0_0_8px_2px_var(--glow)] text-foreground font-bold bg-transparent cursor-default"
-            disabled
+          <select
+            value={selectedRange}
+            onChange={(e) => setSelectedRange(e.target.value)}
+            className="px-3 py-2 rounded-md border border-[var(--glow)] shadow-[0_0_8px_2px_var(--glow)] text-foreground font-bold bg-transparent"
           >
-            Current
-          </button>
+            <option value="current">Current</option>
+            {availableYears.map((year) => (
+              <option key={year} value={String(year)}>
+                {year}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 

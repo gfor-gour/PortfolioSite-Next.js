@@ -177,6 +177,7 @@ export default function CPProfile() {
       <div className="w-full mt-8 flex justify-center">
         {data?.calendar?.submissionCalendar && (
           <LeetCodeHeatmap 
+            activeYears={data?.calendar?.activeYears || []}
             submissionCalendar={
               typeof data.calendar.submissionCalendar === "string"
                 ? JSON.parse(data.calendar.submissionCalendar)

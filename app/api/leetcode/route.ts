@@ -1,8 +1,15 @@
 import { NextResponse } from "next/server"
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
     const username = process.env.LEETCODE_USERNAME
+    const { searchParams } = new URL(request.url)
+    const yearParam = searchParams.get("year")
+    const parsedYear = yearParam ? Number(yearParam) : NaN
+    const yearArg =
+      Number.isInteger(parsedYear) && parsedYear >= 2000 && parsedYear <= 2100
+        ? `(year: ${parsedYear})`
+        : ""
     
     if (!username || username === "your_leetcode_username") {
       return NextResponse.json(
@@ -24,6 +31,7 @@ export async function GET() {
             topPercentage: 15.5,
           },
           calendar: {
+            activeYears: [2023, 2024, 2025],
             submissionCalendar: "{}",
           },
         },
@@ -34,7 +42,7 @@ export async function GET() {
     const query = `
       {
         userInfo: matchedUser(username: "${username}") {
-          userCalendar {
+          userCalendar${yearArg} {
             activeYears
             submissionCalendar
             totalActiveDays
@@ -123,6 +131,7 @@ export async function GET() {
         topPercentage: data.data.contestInfo?.topPercentage || 0,
       },
       calendar: {
+        activeYears: data.data.userInfo?.userCalendar?.activeYears || [],
         submissionCalendar: data.data.userInfo?.userCalendar?.submissionCalendar || "{}",
       },
     })
