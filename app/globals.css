@@ -263,3 +263,34 @@
 .backface-hidden {
   backface-visibility: hidden;
 }
+
+/* ============================================
+   Spotlight Navbar Styles
+   ============================================ */
+
+/* Glass Component Borders */
+.glass-border {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.dark .glass-border {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Spotlight Navigation Background */
+.spotlight-nav-bg {
+  background-color: rgb(250, 250, 250);
+}
+
+.dark .spotlight-nav-bg {
+  background-color: rgb(10, 10, 10);
+}
+
+/* Spotlight Navigation Shadow */
+.spotlight-nav-shadow {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.dark .spotlight-nav-shadow {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+}

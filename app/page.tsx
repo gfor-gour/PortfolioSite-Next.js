@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link"
 import Image from "next/image"
 
 export default function HomePage() {
@@ -44,15 +43,6 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* Intern Research Assistant row */}
-              <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3">
-                <p className="flex-1 text-base sm:text-lg md:text-xl font-semibold text-foreground dark:text-white">
-                  Intern Research Assistant at AMIR Lab
-                </p>
-                <p className="text-sm sm:text-base text-foreground/80 dark:text-gray-400 sm:text-right">
-                  Feb 2026 – Present
-                </p>
-              </div>
             </div>
 
             <span
@@ -65,49 +55,6 @@ export default function HomePage() {
                 boxShadow: "0 0 4.8px 1.2px var(--glow), 0 0 2.4px 0.6px var(--glow)",
               }}
             />
-
-            {/* <div className="space-y-4 w-full">
-              <p className="text-base sm:text-lg text-foreground/80 dark:text-gray-300 leading-relaxed">
-                A passionate full-stack developer and competitive programmer with a strong foundation in computer science fundamentals. I love building scalable applications and solving complex problems.
-              </p> 
-
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-black rounded-full mt-2"></div>
-                  <div>
-                    <strong>Full-stack Development</strong>: Building modern web applications with Next.js, React, TypeScript, and various backend technologies.
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-black rounded-full mt-2"></div>
-                  <div>
-                    <strong>Competitive Programming</strong>: Active on LeetCode with strong problem-solving skills across multiple domains.
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-black rounded-full mt-2"></div>
-                  <div>
-                    Strong foundation in CS fundamentals: DSA, OOP, Operating Systems, Networking, DBMS, AI, ML, Deep Learning.
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-black rounded-full mt-2"></div>
-                  <div>
-                    Hands-on experience with LLM research, currently working on automated Git commit message generation using LLM&apos;s & human evaluation.
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-2 h-2 bg-[#2F4F4F] dark:bg-black rounded-full mt-2"></div>
-                  <div>
-                    Team-oriented, fast learner, and highly consistent with a strong growth mindset — always eager to take on technically challenging projects.
-                  </div>
-                </div>
-              </div>
-            </div> */}
           </div>
 
           {/* Right Content */}

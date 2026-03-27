@@ -78,7 +78,6 @@ function NaturalSizeImage({
   maxWidth?: string
 }) {
   const [imageError, setImageError] = useState(false)
-  const [imageLoaded, setImageLoaded] = useState(false)
 
   if (!src || imageError) {
     return (
@@ -97,25 +96,14 @@ function NaturalSizeImage({
   }
 
   return (
-    <div className={`relative w-full ${maxWidth} bg-transparent rounded-lg overflow-hidden`}>
-      {!imageLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800/50 min-h-[200px] rounded-lg z-10">
-          <div className="text-center px-4">
-            <FallbackIcon className="w-8 h-8 mx-auto mb-2 text-foreground/20 dark:text-foreground/20 animate-pulse" />
-            <p className="text-xs text-gray-400 dark:text-gray-500">Loading...</p>
-          </div>
-        </div>
-      )}
-      {/* Use Image component for optimization */}
+    <div className={`relative w-full ${maxWidth} aspect-video bg-gray-50 dark:bg-gray-900 rounded-lg overflow-hidden`}>
       <Image
         src={src}
         alt={alt}
-        width={800}
-        height={600}
-        className="w-full h-auto object-contain rounded-lg"
-        onLoad={() => setImageLoaded(true)}
+        fill
+        sizes="(max-width: 768px) 100vw, 50vw"
+        className="object-contain"
         onError={() => setImageError(true)}
-        style={{ display: imageLoaded ? 'block' : 'none' }}
       />
     </div>
   )
@@ -158,12 +146,13 @@ export default function AchievementSection({ achievements }: AchievementSectionP
   const displayAchievements = achievements || defaultAchievements
 
   return (
-    <div className="w-full space-y-8 sm:space-y-12">
-      {displayAchievements.map((achievement, index) => (
-        <div
-          key={index}
-          className="w-full rounded-xl backdrop-blur p-6 sm:p-8 md:p-10 glow-surface"
-        >
+    <div className="w-full flex justify-center">
+      <div className="w-full max-w-4xl space-y-8 sm:space-y-12 px-4">
+        {displayAchievements.map((achievement, index) => (
+          <div
+            key={index}
+            className="w-full rounded-xl backdrop-blur p-6 sm:p-8 md:p-10 glow-surface"
+          >
           {/* Achievement Header */}
           <div className="mb-6 sm:mb-8">
             <div className="flex items-start gap-3 mb-6">
@@ -316,8 +305,9 @@ export default function AchievementSection({ achievements }: AchievementSectionP
               </div>
             </div>
           </div>
-        </div>
-      ))}
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

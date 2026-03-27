@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { LightLines } from "@/components/ui/light-lines"
+import { SpotlightNavbar } from "@/components/ui/spotlight-navbar"
 import {
   User,
   FolderGit2,
@@ -13,36 +14,30 @@ import {
   Mail,
 } from "lucide-react"
 
-const navTabs = [
+const navItems = [
   {
     href: "/",
     label: "Home",
-    icon: User,
   },
   {
     href: "/projects",
     label: "Projects",
-    icon: FolderGit2,
   },
   {
     href: "/problem-solving",
     label: "Problem Solving",
-    icon: Code2,
   },
   {
     href: "/achievements",
     label: "Achievements",
-    icon: Trophy,
   },
   {
     href: "/skills",
     label: "Skills",
-    icon: Wrench,
   },
   {
     href: "/contact",
     label: "Contact",
-    icon: Mail,
   },
 ]
 
@@ -53,14 +48,17 @@ export default function SiteLayout({
 }) {
   const pathname = usePathname()
 
-  const isTabActive = (href: string) => {
-    if (href === "/") return pathname === "/"
-    return pathname.startsWith(href)
+  const getActiveIndex = () => {
+    const index = navItems.findIndex((item) => {
+      if (item.href === "/") return pathname === "/"
+      return pathname.startsWith(item.href)
+    })
+    return index >= 0 ? index : 0
   }
 
   return (
     <div className="relative flex h-[100dvh] min-h-0 flex-col overflow-hidden bg-background text-foreground">
-      {/* Fixed to viewport so line art scales consistently; flex parent height no longer stretches with tall pages */}
+      {/* Fixed Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <LightLines
           className="h-full min-h-0"
@@ -112,43 +110,24 @@ export default function SiteLayout({
         </div>
       </header>
 
-      {/* Main Content (scrollable) */}
-      <main className="flex-1 min-h-0 overflow-y-auto mt-14 mb-16 w-full relative z-10">
+      {/* Main Content (scrollable) - fills entire remaining space */}
+      <main className="flex-1 min-h-0 overflow-y-auto mt-14 w-full relative z-10">
         <div className="w-full flex justify-center">
           {children}
         </div>
       </main>
 
-      {/* Fixed Bottom Tab Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 border-t border-[var(--glow)] bg-background/80 dark:bg-background/95 backdrop-blur z-50">
-        <div className="flex h-16 items-center justify-around px-4 sm:px-6 lg:px-8 max-w-full">
-          {navTabs.map(({ href, label, icon: Icon }) => {
-            const isActive = isTabActive(href)
-            return (
-              <Link
-                key={href}
-                href={href}
-                className="flex flex-col items-center justify-center gap-1 px-3 py-2 transition-all duration-200 ease-out"
-              >
-                <Icon 
-                  className={`w-6 h-6 transition-all duration-200 ${
-                    isActive 
-                      ? "text-foreground dark:text-white" 
-                      : "text-foreground/40 dark:text-white/40"
-                  }`}
-                />
-                <span 
-                  className={`text-xs sm:text-sm font-medium transition-all duration-200 ${
-                    isActive 
-                      ? "text-foreground dark:text-white" 
-                      : "text-foreground/40 dark:text-white/40"
-                  }`}
-                >
-                  {label}
-                </span>
-              </Link>
-            )
-          })}
+      {/* Floating Spotlight Navbar (no background/border, truly transparent float) */}
+      <nav className="fixed bottom-0 left-0 right-0 z-40 pointer-events-none mb-2 sm:mb-3 md:mb-4 lg:mb-6">
+        <div className="flex justify-center w-full px-4 pointer-events-auto">
+          <SpotlightNavbar
+            items={navItems}
+            onItemClick={(item) => {
+              // Navigation is handled via link wrapper in SpotlightNavbar
+            }}
+            defaultActiveIndex={getActiveIndex()}
+            className="w-full"
+          />
         </div>
       </nav>
     </div>
