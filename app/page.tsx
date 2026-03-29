@@ -1,6 +1,8 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
+import { CyberGlitchText } from "@/components/ui/cyber-glitch-text"
 
 export default function HomePage() {
   return (
@@ -16,10 +18,13 @@ export default function HomePage() {
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-foreground break-words sm:whitespace-nowrap">
-              <span className="inline-block animate-name delay-1">Gour</span>{" "}
-              <span className="inline-block animate-name delay-2">Gupal</span>{" "}
-              <span className="inline-block animate-name delay-3">Talukder</span>{" "}
-              <span className="inline-block animate-name delay-4">Shawon</span>
+              <span className="inline-block">Gour</span>{" "}
+              <CyberGlitchText 
+                text="Gupal Talukder Shawon" 
+                className="text-foreground dark:text-white"
+                scrambleOnMount={true}
+                scrambleDuration={40}
+              />
             </h1>
 
             <div className="space-y-2 sm:space-y-3 w-full">
@@ -35,9 +40,12 @@ export default function HomePage() {
 
               {/* Intern Software Engineer row */}
               <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3">
-                <p className="flex-1 text-base sm:text-lg md:text-xl font-semibold text-foreground dark:text-white">
+                <Link
+                  href="/experiences"
+                  className="flex-1 text-base sm:text-lg md:text-xl font-semibold text-foreground dark:text-white hover:opacity-80 transition-opacity"
+                >
                   Intern Software Engineer at Shellbeehaken Ltd.
-                </p>
+                </Link>
                 <p className="text-sm sm:text-base text-foreground/80 dark:text-gray-400 sm:text-right">
                   Dec 2025 – May 2026
                 </p>

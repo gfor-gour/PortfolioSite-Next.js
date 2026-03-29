@@ -20,6 +20,10 @@ const navItems = [
     label: "Home",
   },
   {
+    href: "/experiences",
+    label: "Experiences",
+  },
+  {
     href: "/projects",
     label: "Projects",
   },
