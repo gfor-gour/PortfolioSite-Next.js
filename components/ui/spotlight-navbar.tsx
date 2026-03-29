@@ -133,9 +133,9 @@ export function SpotlightNavbar({
                 )}
             >
                 {/* Content */}
-                <ul className="relative flex items-center h-full px-2 gap-0 z-[10]">
+                <ul className="relative flex items-center h-full px-2 gap-0 z-[10] overflow-x-auto sm:overflow-x-hidden scroll-smooth hide-scrollbar">
                     {items.map((item, idx) => (
-                        <li key={idx} className="relative h-full flex items-center justify-center">
+                        <li key={idx} className="relative h-full flex items-center justify-center flex-shrink-0">
                             <Link
                                 href={item.href}
                                 data-index={idx}
@@ -143,7 +143,7 @@ export function SpotlightNavbar({
                                     handleItemClick(item, idx);
                                 }}
                                 className={cn(
-                                    "px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-full",
+                                    "px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-colors duration-200 rounded-full whitespace-nowrap",
                                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 dark:focus-visible:ring-white/30",
                                     // Active vs Inactive Text
                                     activeIndex === idx
@@ -206,6 +206,15 @@ export function SpotlightNavbar({
           /* Dark Mode Colors: White lights */
           --spotlight-color: rgba(255,255,255,0.15);
           --ambience-color: rgba(255,255,255,1);
+        }
+        
+        /* Hide scrollbar while keeping scroll functionality */
+        .hide-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;  /* Chrome, Safari and Opera */
         }
       `}</style>
         </div>
