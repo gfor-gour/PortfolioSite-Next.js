@@ -63,6 +63,16 @@ export default function HomePage() {
                 boxShadow: "0 0 4.8px 1.2px var(--glow), 0 0 2.4px 0.6px var(--glow)",
               }}
             />
+
+            <p 
+              className="text-base sm:text-lg md:text-xl text-foreground/70 dark:text-gray-300 italic leading-relaxed w-full mt-6 sm:mt-8"
+              style={{
+                textAlign: "center",
+                textShadow: "0 0 8px rgba(var(--glow-rgb), 0.15)",
+              }}
+            >
+              &quot;Full-Stack Developer &amp; AI-First Engineer building the next generation of digital products. Leveraging serverless infrastructure and AI-assisted workflows to turn complex architectural challenges into seamless, production-ready solutions.&quot;
+            </p>
           </div>
 
           {/* Right Content */}
