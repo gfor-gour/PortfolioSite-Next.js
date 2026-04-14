@@ -6,13 +6,11 @@ import { glowingCardStyle } from '../utils/styles'
 import { LeetCodeData } from '@/types/leetcode'
 import { LeetCodeHeatmap } from "./leetcode-heatmap"
 import LeetCodeBadges from "./leetcode-badges"
-import { ChevronDown, ChevronUp } from "lucide-react"
 
 export default function CPProfile() {
   const [data, setData] = useState<LeetCodeData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [expanded, setExpanded] = useState(false)
  
   const fetchLeetCodeData = async () => { 
     try {
@@ -61,43 +59,47 @@ export default function CPProfile() {
     margin: "0 auto",
   }
 
-  // The full paragraph text
-  const paragraph = `I embarked on my coding journey in 2022, initially honing my problem-solving skills on platforms such as Codeforces, CodeChef, UVA, and v.judge. For a significant period now, I've dedicated myself to consistent practice on LeetCode, actively participating in live contests to further refine my abilities. This consistent engagement has been instrumental in overcoming past challenges with inconsistency and self-doubt, transforming my approach to complex problems.
-  This portfolio goes beyond a traditional static display. I've integrated API routes to fetch real-time data from LeetCode using its GraphQL API. This dynamic approach allowed me to develop a data-driven heatmap, providing a live and visual representation of my coding activity and progress.`
-
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-[60vh] px-4 sm:px-6">
       <div className="w-full flex flex-col items-start max-w-[920px] mx-auto">
-        {/* CP Profile Description with dropdown */}
-        <div className="w-full flex flex-col items-center mb-8">
-          <div
-            className={`w-full relative transition-all duration-500`}
-            style={{
-              maxHeight: expanded ? 500 : 64, 
-              overflow: "hidden",
-            }}
-          >
-            <p className="w-full text-[1.18rem] sm:text-lg md:text-xl text-foreground dark:text-foreground text-center font-medium leading-relaxed transition-all duration-500">
-              {paragraph}
-            </p>
-            {!expanded && (
-              <div className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-foreground dark:from-foreground to-transparent pointer-events-none transition-all duration-500" />
-            )}
-          </div>
-          <button
-            className="flex items-center gap-1 mt-2 text-foreground dark:text-foreground font-bold hover:underline focus:outline-none transition-colors"
-            onClick={() => setExpanded((v) => !v)}
-            aria-expanded={expanded}
-          >
-            {expanded ? "Show less" : "Read more"}
-            {expanded ? (
-              <ChevronUp className="w-5 h-5 text-foreground dark:text-foreground" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-foreground dark:text-foreground" />
-            )}
-          </button>
-          <div className="w-full flex justify-center mt-6">
-            <hr className="w-full h-1 rounded border-0 bg-[var(--glow)] shadow-[0_0_16px_2px_var(--glow)]" />
+        {/* CP Profile Description - Elegant Section */}
+        <div className="w-full mb-8">
+          <div className="relative group">
+            {/* Animated gradient border background */}
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-black via-black to-black dark:from-white dark:via-white dark:to-white rounded-2xl opacity-25 group-hover:opacity-35 blur transition duration-500" />
+            
+            {/* Main content card */}
+            <div className="relative bg-background dark:bg-background backdrop-blur-md border border-black/80 dark:border-white/80 rounded-2xl p-8 sm:p-10 md:p-12">
+              {/* Decorative quote mark */}
+              <div className="absolute -top-2 -left-2 text-6xl text-black/20 dark:text-white/20 font-serif">
+                "
+              </div>
+
+              {/* Content sections */}
+              <div className="space-y-6">
+                {/* First paragraph */}
+                <p className="text-base sm:text-lg md:text-lg text-black dark:text-white leading-relaxed font-light">
+                  I embarked on my coding journey in <span className="font-bold">2022</span>, initially honing my problem-solving skills on platforms such as <span className="font-bold">Codeforces</span>, <span className="font-bold">CodeChef</span>, <span className="font-bold">UVA</span>, and <span className="font-bold">v.judge</span>. For a significant period now, I've dedicated myself to consistent practice on <span className="font-bold">LeetCode</span>, actively participating in live contests to further refine my abilities.
+                </p>
+
+                {/* Divider */}
+                <div className="flex items-center gap-3">
+                  <div className="flex-1 h-px bg-gradient-to-r from-black/0 via-black/40 to-black/0 dark:from-white/0 dark:via-white/40 dark:to-white/0" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-black/60 dark:bg-white/60" />
+                  <div className="flex-1 h-px bg-gradient-to-r from-black/0 via-black/40 to-black/0 dark:from-white/0 dark:via-white/40 dark:to-white/0" />
+                </div>
+
+                {/* Second paragraph */}
+                <p className="text-base sm:text-lg md:text-lg text-black dark:text-white leading-relaxed font-light">
+                  This consistent engagement has been instrumental in overcoming past challenges with inconsistency and self-doubt, transforming my approach to complex problems. This portfolio goes beyond a traditional static display—I've integrated <span className="font-bold">API routes</span> to fetch real-time data from LeetCode using its <span className="font-bold">GraphQL API</span>, developing a dynamic, data-driven heatmap that provides a live visual representation of my coding activity and progress.
+                </p>
+              </div>
+
+              {/* Decorative quote mark */}
+              <div className="absolute -bottom-2 -right-4 text-6xl text-black/20 dark:text-white/20 font-serif">
+                "
+              </div>
+            </div>
           </div>
         </div>
 
