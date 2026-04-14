@@ -101,14 +101,14 @@
   /* Generic glowing transparent surface used across the app */
   .glow-surface {
     border: 2px solid var(--glow);
-    box-shadow: 0 0 8px 2px var(--glow), 0 0 4px 1px var(--glow);
+    box-shadow: 0 0 4.8px 1.2px var(--glow), 0 0 2.4px 0.6px var(--glow);
     background: transparent;
   }
 
   /* Slightly softer glow variant for pills / small elements */
   .glow-pill {
     border: 2px solid var(--glow);
-    box-shadow: 0 0 6px 1.6px var(--glow), 0 0 3.2px 0.8px var(--glow);
+    box-shadow: 0 0 3.6px 0.96px var(--glow), 0 0 1.92px 0.48px var(--glow);
     background: var(--card);
   }
 
@@ -118,7 +118,7 @@
     height: 1px;
     border-radius: 0.5px;
     background: var(--glow);
-    box-shadow: 0 0 8px 2px var(--glow), 0 0 4px 1px var(--glow);
+    box-shadow: 0 0 4.8px 1.2px var(--glow), 0 0 2.4px 0.6px var(--glow);
   }
 
   /* Dashed placeholder border that follows theme glow */

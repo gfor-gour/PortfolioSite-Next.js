@@ -60,7 +60,7 @@ export default function HomePage() {
                 height: "1px",
                 borderRadius: "0.5px",
                 background: "var(--glow)",
-                boxShadow: "0 0 4.8px 1.2px var(--glow), 0 0 2.4px 0.6px var(--glow)",
+                boxShadow: "0 0 2.9px 0.72px var(--glow), 0 0 1.4px 0.36px var(--glow)",
               }}
             />
 
@@ -68,7 +68,7 @@ export default function HomePage() {
               className="text-base sm:text-lg md:text-xl text-foreground/70 dark:text-gray-300 italic leading-relaxed w-full mt-6 sm:mt-8"
               style={{
                 textAlign: "center",
-                textShadow: "0 0 8px rgba(var(--glow-rgb), 0.15)",
+                textShadow: "0 0 4.8px rgba(var(--glow-rgb), 0.09)",
               }}
             >
               &quot;Full-Stack Developer &amp; AI-First Engineer building the next generation of digital products. Leveraging serverless infrastructure and AI-assisted workflows to turn complex architectural challenges into seamless, production-ready solutions.&quot;
@@ -94,7 +94,7 @@ export default function HomePage() {
                 priority
                 className="relative z-10 rounded-2xl object-cover w-full h-full"
                 style={{
-                  boxShadow: "0 0 12px 2.4px var(--glow), 0 0 24px 4.8px var(--glow)",
+                  boxShadow: "0 0 7.2px 1.44px var(--glow), 0 0 14.4px 2.88px var(--glow)",
                   objectPosition: "center 15%",
                 }}
               />

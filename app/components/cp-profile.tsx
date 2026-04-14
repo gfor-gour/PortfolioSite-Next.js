@@ -72,14 +72,14 @@ export default function CPProfile() {
             <div className="relative bg-background dark:bg-background backdrop-blur-md border border-black/80 dark:border-white/80 rounded-2xl p-8 sm:p-10 md:p-12">
               {/* Decorative quote mark */}
               <div className="absolute -top-2 -left-2 text-6xl text-black/20 dark:text-white/20 font-serif">
-                "
+                &ldquo;
               </div>
 
               {/* Content sections */}
               <div className="space-y-6">
                 {/* First paragraph */}
                 <p className="text-base sm:text-lg md:text-lg text-black dark:text-white leading-relaxed font-light">
-                  I embarked on my coding journey in <span className="font-bold">2022</span>, initially honing my problem-solving skills on platforms such as <span className="font-bold">Codeforces</span>, <span className="font-bold">CodeChef</span>, <span className="font-bold">UVA</span>, and <span className="font-bold">v.judge</span>. For a significant period now, I've dedicated myself to consistent practice on <span className="font-bold">LeetCode</span>, actively participating in live contests to further refine my abilities.
+                  I embarked on my coding journey in <span className="font-bold">2022</span>, initially honing my problem-solving skills on platforms such as <span className="font-bold">Codeforces</span>, <span className="font-bold">CodeChef</span>, <span className="font-bold">UVA</span>, and <span className="font-bold">v.judge</span>. For a significant period now, I&apos;ve dedicated myself to consistent practice on <span className="font-bold">LeetCode</span>, actively participating in live contests to further refine my abilities.
                 </p>
 
                 {/* Divider */}
@@ -91,13 +91,13 @@ export default function CPProfile() {
 
                 {/* Second paragraph */}
                 <p className="text-base sm:text-lg md:text-lg text-black dark:text-white leading-relaxed font-light">
-                  This consistent engagement has been instrumental in overcoming past challenges with inconsistency and self-doubt, transforming my approach to complex problems. This portfolio goes beyond a traditional static display—I've integrated <span className="font-bold">API routes</span> to fetch real-time data from LeetCode using its <span className="font-bold">GraphQL API</span>, developing a dynamic, data-driven heatmap that provides a live visual representation of my coding activity and progress.
+                  This consistent engagement has been instrumental in overcoming past challenges with inconsistency and self-doubt, transforming my approach to complex problems. This portfolio goes beyond a traditional static display—I&apos;ve integrated <span className="font-bold">API routes</span> to fetch real-time data from LeetCode using its <span className="font-bold">GraphQL API</span>, developing a dynamic, data-driven heatmap that provides a live visual representation of my coding activity and progress.
                 </p>
               </div>
 
               {/* Decorative quote mark */}
               <div className="absolute -bottom-2 -right-4 text-6xl text-black/20 dark:text-white/20 font-serif">
-                "
+                &rdquo;
               </div>
             </div>
           </div>
