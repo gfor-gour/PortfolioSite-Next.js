@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -45,20 +46,109 @@ const navItems = [
   },
 ]
 
+const sectionToPath: Record<string, string> = {
+  home: "/",
+  experiences: "/experiences",
+  projects: "/projects",
+  "problem-solving": "/problem-solving",
+  achievements: "/achievements",
+  skills: "/skills",
+  contact: "/contact",
+}
+
+const pathToSection: Record<string, string> = {
+  "/": "home",
+  "/experiences": "experiences",
+  "/projects": "projects",
+  "/problem-solving": "problem-solving",
+  "/achievements": "achievements",
+  "/skills": "skills",
+  "/contact": "contact",
+}
+
 export default function SiteLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   const pathname = usePathname()
+  const [activeIndex, setActiveIndex] = useState(0)
+  const isProgrammaticScrollRef = useRef(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const isFirstMount = useRef(true)
 
-  const getActiveIndex = () => {
+  const getIndexFromPath = (path: string) => {
     const index = navItems.findIndex((item) => {
-      if (item.href === "/") return pathname === "/"
-      return pathname.startsWith(item.href)
+      if (item.href === "/") return path === "/"
+      return path.startsWith(item.href)
     })
     return index >= 0 ? index : 0
   }
+
+  const scrollToSection = (id: string, smooth = true) => {
+    const element = document.getElementById(id)
+    if (element && containerRef.current) {
+      isProgrammaticScrollRef.current = true
+      element.scrollIntoView({ behavior: smooth ? "smooth" : "auto" })
+
+      // Re-enable scroll listener after scroll completes
+      setTimeout(() => {
+        isProgrammaticScrollRef.current = false
+      }, 800)
+    }
+  }
+
+  // Handle route navigation changes (e.g. when navbar link is clicked)
+  useEffect(() => {
+    const targetSection = pathToSection[pathname]
+    if (targetSection) {
+      const idx = getIndexFromPath(pathname)
+      setActiveIndex(idx)
+      if (!isProgrammaticScrollRef.current) {
+        scrollToSection(targetSection, !isFirstMount.current)
+      }
+    }
+    isFirstMount.current = false
+  }, [pathname])
+
+  // Setup IntersectionObserver for scroll spying
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
+    const observerOptions = {
+      root: container,
+      rootMargin: "-25% 0px -55% 0px", // triggers when section is in the middle of viewport
+      threshold: 0,
+    }
+
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      if (isProgrammaticScrollRef.current) return
+
+      const visibleEntry = entries.find((entry) => entry.isIntersecting)
+      if (visibleEntry) {
+        const id = visibleEntry.target.id
+        const path = sectionToPath[id]
+        if (path) {
+          const idx = getIndexFromPath(path)
+          setActiveIndex(idx)
+          // Update URL in address bar without route reload
+          window.history.replaceState(null, "", path)
+        }
+      }
+    }
+
+    const observer = new IntersectionObserver(handleIntersection, observerOptions)
+
+    Object.keys(sectionToPath).forEach((id) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
 
   return (
     <div className="relative flex h-[100dvh] min-h-0 flex-col overflow-hidden bg-background text-foreground">
@@ -115,7 +205,7 @@ export default function SiteLayout({
       </header>
 
       {/* Main Content (scrollable) - fills entire remaining space */}
-      <main className="flex-1 min-h-0 overflow-y-auto mt-14 w-full relative z-10">
+      <main ref={containerRef} className="flex-1 min-h-0 overflow-y-auto mt-14 w-full relative z-10 scroll-smooth">
         <div className="w-full flex justify-center">
           {children}
         </div>
@@ -126,10 +216,13 @@ export default function SiteLayout({
         <div className="flex justify-center w-full px-4 pointer-events-auto">
           <SpotlightNavbar
             items={navItems}
-            onItemClick={(item) => {
-              // Navigation is handled via link wrapper in SpotlightNavbar
+            onItemClick={(item, index) => {
+              const targetSection = pathToSection[item.href]
+              if (targetSection) {
+                scrollToSection(targetSection, true)
+              }
             }}
-            defaultActiveIndex={getActiveIndex()}
+            defaultActiveIndex={activeIndex}
             className="w-full"
           />
         </div>
